@@ -1,8 +1,22 @@
 #root {
-  max-width: 1280px;
+  width: 100%;
+  display: flex;
+  justify-content: center;
+  background-color: #f0f0f0;
+  /* Optional: grey background for desktop view outside app */
+}
+
+.mobile-wrapper {
+  width: 100%;
+  max-width: 480px;
+  min-height: 100vh;
   margin: 0 auto;
-  padding: 2rem;
-  text-align: center;
+  background-color: #F8FDF9;
+  /* Global app background */
+  position: relative;
+  overflow-x: hidden;
+  box-shadow: 0 0 20px rgba(0, 0, 0, 0.1);
+  /* Nice shadow on desktop */
 }
 
 .logo {
@@ -11,9 +25,11 @@
   will-change: filter;
   transition: filter 300ms;
 }
+
 .logo:hover {
   filter: drop-shadow(0 0 2em #646cffaa);
 }
+
 .logo.react:hover {
   filter: drop-shadow(0 0 2em #61dafbaa);
 }
@@ -22,6 +38,7 @@
   from {
     transform: rotate(0deg);
   }
+
   to {
     transform: rotate(360deg);
   }

@@ -1,0 +1,126 @@
+/* ProfilePetugas.css */
+.profile-container {
+    font-family: 'Inter', sans-serif;
+    /* Background and dimensions handled by global .mobile-wrapper */
+    padding: 20px;
+    padding-bottom: 80px;
+    display: flex;
+    flex-direction: column;
+}
+
+.profile-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    position: relative;
+    width: 100%;
+}
+
+.back-button {
+    background-color: var(--primary-dark, #012E34);
+    color: white;
+    width: 44px;
+    /* Increased from 36px */
+    height: 44px;
+    /* Increased from 36px */
+    border-radius: 12px;
+    /* Increased from 8px for softer look */
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    /* Subtle shadow like design */
+    transition: transform 0.1s;
+}
+
+.back-button:active {
+    transform: scale(0.95);
+}
+
+.header-title {
+    font-size: 20px;
+    font-weight: 800;
+    color: black;
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+}
+
+.profile-avatar-section {
+    display: flex;
+    justify-content: center;
+    margin-bottom: 30px;
+}
+
+.avatar-circle {
+    width: 180px;
+    height: 180px;
+    border-radius: 50%;
+    overflow: hidden;
+    background-color: #EAEAEA;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.profile-form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.label {
+    font-size: 14px;
+    font-weight: 700;
+    color: black;
+}
+
+.value-box {
+    background-color: var(--primary-dark, #012E34);
+    color: white;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+}
+
+.edit-button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
+}
+
+.edit-button {
+    background-color: #4CAF50;
+    /* Green color from design */
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 6px;
+    font-size: 14px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    cursor: pointer;
+}
+
+.edit-icon {
+    width: 16px;
+    height: 16px;
+}
