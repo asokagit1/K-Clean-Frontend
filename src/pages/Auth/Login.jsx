@@ -22,16 +22,16 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
-        
+
         try {
             const user = await login(formData.email, formData.password);
-            
+
             // Role-based Redirection
             const roles = user.roles || []; // Assuming roles is an array
             if (roles.includes('super-admin')) {
                 navigate('/admin-dashboard');
             } else if (roles.includes('petugas')) {
-                navigate('/depo-dashboard'); // Transfer Depo
+                navigate('/petugas-dashboard'); // Transfer Depo
             } else if (roles.includes('umkm')) {
                 navigate('/umkm-dashboard');
             } else {
@@ -40,7 +40,7 @@ const Login = () => {
 
         } catch (err) {
             setError(err.response?.data?.message || 'Invalid Credentials');
-        } 
+        }
     };
 
     return (
@@ -48,7 +48,7 @@ const Login = () => {
             <div className="w-full max-w-md space-y-8 mt-10">
                 <div className="text-center space-y-4">
                     <h1 className="text-2xl font-bold text-primary">K-CLEAN</h1>
-                    
+
                     <div className="flex justify-center py-6">
                         <img src="/kclean-logo.png" alt="K-Clean Logo" className="w-40 h-40 object-contain" />
                     </div>
@@ -63,26 +63,26 @@ const Login = () => {
                         </div>
                     )}
 
-                    <Input 
+                    <Input
                         name="email"
-                        type="email" 
-                        placeholder="Email" 
+                        type="email"
+                        placeholder="Email"
                         value={formData.email}
                         onChange={handleChange}
                         required
                     />
-                    <Input 
+                    <Input
                         name="password"
-                        type="password" 
-                        placeholder="Password" 
+                        type="password"
+                        placeholder="Password"
                         value={formData.password}
                         onChange={handleChange}
                         required
                     />
 
                     <div className="pt-4">
-                        <Button 
-                            type="submit" 
+                        <Button
+                            type="submit"
                             className="w-full rounded-md bg-primary py-6"
                             isLoading={isLoading}
                         >

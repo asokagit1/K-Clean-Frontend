@@ -5,7 +5,11 @@ import Onboarding from './pages/Auth/Onboarding';
 import Register from './pages/Auth/Register';
 import Login from './pages/Auth/Login';
 import EmailVerification from './pages/Auth/EmailVerification';
-import { UserDashboard, DepoDashboard, UmkmDashboard, AdminDashboard } from './pages/Dashboard/Dashboards';
+import { UserDashboard, UmkmDashboard } from './pages/Dashboard/Dashboards';
+import AdminDashboard from './pages/Dashboard/Admin';
+import PetugasDashboard from './pages/Dashboard/Petugas';
+import PetugasProfile from './pages/Profile/Petugas';
+import CreatePetugas from './pages/CreatePetugas&UMKM/CreatePetugas';
 
 // Protected Route Component
 const ProtectedRoute = () => {
@@ -18,12 +22,12 @@ const ProtectedRoute = () => {
 
 // Public Route (redirect to dashboard if already logged in)
 const PublicRoute = () => {
-    const { token } = useAuth();
-    // Ideally we should know which dashboard to redirect to, 
-    // but for now let's just let the Login page handle standard redirection
-    // or if we really want to prevent access to login when auth, we can implement that.
-    // For simplicity, we allow access but Onboarding usually shouldn't show if logged in.
-    return <Outlet />;
+  const { token } = useAuth();
+  // Ideally we should know which dashboard to redirect to, 
+  // but for now let's just let the Login page handle standard redirection
+  // or if we really want to prevent access to login when auth, we can implement that.
+  // For simplicity, we allow access but Onboarding usually shouldn't show if logged in.
+  return <Outlet />;
 }
 
 
@@ -36,14 +40,16 @@ function App() {
           <Route path="/" element={<Onboarding />} />
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
-          
+
           {/* Protected Routes */}
           <Route element={<ProtectedRoute />}>
-              <Route path="/email-verify" element={<EmailVerification />} />
-              <Route path="/dashboard" element={<UserDashboard />} />
-              <Route path="/depo-dashboard" element={<DepoDashboard />} />
-              <Route path="/umkm-dashboard" element={<UmkmDashboard />} />
-              <Route path="/admin-dashboard" element={<AdminDashboard />} />
+            <Route path="/email-verify" element={<EmailVerification />} />
+            <Route path="/dashboard" element={<UserDashboard />} />
+            <Route path="/petugas-dashboard" element={<PetugasDashboard />} />
+            <Route path="/umkm-dashboard" element={<UmkmDashboard />} />
+            <Route path="/admin-dashboard" element={<AdminDashboard />} />
+            <Route path="/create-petugas" element={<CreatePetugas />} />
+            <Route path="/petugas-profile" element={<PetugasProfile />} />
           </Route>
 
           {/* Fallback */}

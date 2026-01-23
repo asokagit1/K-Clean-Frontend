@@ -1,9 +1,9 @@
 import React from 'react';
 import { Trash2, User, Coins, Home, Scan, Volume2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import './DashboardPetugas.css';
+import './Petugas.css';
 
-const DashboardPetugas = () => {
+const Petugas = () => {
     const navigate = useNavigate();
 
     // Mock data based on the design
@@ -91,7 +91,7 @@ const DashboardPetugas = () => {
                 <div className="nav-item">
                     <Scan className="nav-icon" />
                 </div>
-                <div className="nav-item" onClick={() => navigate('/profile')}>
+                <div className="nav-item" onClick={() => navigate('/petugas-profile')}>
                     <User className="nav-icon" />
                 </div>
             </nav>
@@ -99,4 +99,4 @@ const DashboardPetugas = () => {
     );
 };
 
-export default DashboardPetugas;
+export default Petugas;

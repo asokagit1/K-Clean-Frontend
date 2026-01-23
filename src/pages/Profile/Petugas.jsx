@@ -1,10 +1,9 @@
 import React from 'react';
 import { ChevronLeft, Pencil, Home, Scan, User } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
-import './ProfilePetugas.css';
-import '../petugas/DashboardPetugas.css'; // Import shared nav styles if needed, or duplicate
+import './Petugas.css';
 
-const ProfilePetugas = () => {
+const Petugas = () => {
     const navigate = useNavigate();
 
     // Mock data
@@ -20,7 +19,7 @@ const ProfilePetugas = () => {
             {/* Header */}
             <div className="profile-header">
                 <button className="back-button" onClick={() => navigate(-1)}>
-                    <ChevronLeft size={28} strokeWidth={3} />
+                    <ChevronLeft size={28} color="white" strokeWidth={3} />
                 </button>
                 <div className="header-title">K-CLEAN</div>
                 <div style={{ width: 44 }}></div> {/* Spacer matching button width for true centering */}
@@ -75,4 +74,4 @@ const ProfilePetugas = () => {
     );
 };
 
-export default ProfilePetugas;
+export default Petugas;
