@@ -1,5 +1,5 @@
-/* CreatePetugas.css */
-.create-petugas-container {
+/* CreateUMKM.css */
+.create-umkm-container {
     padding: 24px;
     font-family: 'Inter', sans-serif;
     min-height: 100vh;
@@ -67,7 +67,6 @@
     font-size: 14px;
     background-color: #f9f9f9;
     width: 100%;
-    /* Ensure full width */
     box-sizing: border-box;
 }
 
@@ -76,7 +75,6 @@
     border-color: var(--primary-dark, #012E34);
     background-color: white;
 }
-
 
 /* Password Field Specifics */
 .password-input-container {
@@ -101,7 +99,6 @@
     align-items: center;
     justify-content: center;
 }
-
 
 .submit-button {
     background-color: var(--primary-dark, #012E34);

@@ -14,11 +14,28 @@
 
 /* Header */
 .admin-header {
-    display: flex;
-    flex-direction: column;
-    align-items: center;
     margin-bottom: 30px;
     margin-top: 20px;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.logout-button {
+    background-color: #E53935;
+    /* Red for logout */
+    color: white;
+    border: none;
+    padding: 8px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 700;
+    cursor: pointer;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 .app-title {
@@ -155,4 +172,110 @@
 
 .detail-button:hover {
     opacity: 0.9;
+}
+
+/* MODAL STYLES */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: white;
+    width: 85%;
+    max-width: 320px;
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.modal-avatar-large {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 20px;
+    border: 4px solid var(--primary-dark);
+}
+
+.modal-user-info {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.modal-name {
+    font-size: 20px;
+    font-weight: 800;
+    color: black;
+    margin-bottom: 4px;
+}
+
+.modal-role {
+    font-size: 14px;
+    color: #666;
+    font-weight: 600;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    background-color: #eee;
+    padding: 2px 8px;
+    border-radius: 12px;
+    display: inline-block;
+}
+
+.modal-email {
+    font-size: 14px;
+    color: #444;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+}
+
+.btn-edit {
+    flex: 1;
+    background-color: var(--accent-yellow);
+    color: black;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+}
+
+.btn-delete {
+    flex: 1;
+    background-color: #E53935;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+}
+
+.close-modal-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    color: #aaa;
+    cursor: pointer;
+    background: none;
+    border: none;
 }

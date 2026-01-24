@@ -3,7 +3,8 @@
     font-family: 'Inter', sans-serif;
     /* Background and dimensions handled by global .mobile-wrapper */
     padding: 20px;
-    padding-bottom: 80px;
+    padding-bottom: 120px;
+    /* Increased bottom padding to prevent content being hidden behind navbar */
     display: flex;
     flex-direction: column;
 }
@@ -21,18 +22,14 @@
     background-color: var(--primary-dark, #012E34);
     color: white;
     width: 44px;
-    /* Increased from 36px */
     height: 44px;
-    /* Increased from 36px */
     border-radius: 12px;
-    /* Increased from 8px for softer look */
     display: flex;
     align-items: center;
     justify-content: center;
     cursor: pointer;
     border: none;
     box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
-    /* Subtle shadow like design */
     transition: transform 0.1s;
 }
 
@@ -50,14 +47,23 @@
 }
 
 .profile-avatar-section {
+    position: relative;
     display: flex;
     justify-content: center;
+    align-items: center;
     margin-bottom: 30px;
+    flex-direction: column;
+}
+
+.avatar-wrapper {
+    position: relative;
+    width: 180px;
+    height: 180px;
 }
 
 .avatar-circle {
-    width: 180px;
-    height: 180px;
+    width: 100%;
+    height: 100%;
     border-radius: 50%;
     overflow: hidden;
     background-color: #EAEAEA;
@@ -70,6 +76,30 @@
     width: 100%;
     height: 100%;
     object-fit: cover;
+}
+
+/* Avatar Edit Overlay - Only visible in Edit Mode */
+.avatar-edit-overlay {
+    position: absolute;
+    bottom: 5px;
+    right: 5px;
+    /* Tucked closer to the circle */
+    background-color: #012E34;
+    width: 40px;
+    height: 40px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: 2px solid white;
+    z-index: 10;
+    /* Ensure it floats mainly on top of the circle edge */
+}
+
+/* Trigger Button ("Ubah") - Visible in View Mode */
+.edit-trigger-button {
+    display: none;
 }
 
 .profile-form {
@@ -99,6 +129,22 @@
     font-weight: 600;
 }
 
+.input-field {
+    background-color: var(--primary-dark, #012E34);
+    color: white;
+    padding: 12px 16px;
+    border-radius: 8px;
+    font-size: 14px;
+    font-weight: 600;
+    border: none;
+    outline: none;
+    width: 100%;
+}
+
+.input-field:focus {
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.5);
+}
+
 .edit-button-container {
     display: flex;
     justify-content: flex-end;
@@ -107,20 +153,167 @@
 
 .edit-button {
     background-color: #4CAF50;
-    /* Green color from design */
+    /* Green from design */
     color: white;
     border: none;
-    padding: 8px 16px;
-    border-radius: 6px;
-    font-size: 14px;
+    padding: 10px 20px;
+    border-radius: 8px;
+    font-size: 16px;
     font-weight: 700;
     display: flex;
     align-items: center;
     gap: 8px;
     cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
 }
 
 .edit-icon {
-    width: 16px;
-    height: 16px;
+    width: 18px;
+    height: 18px;
+}
+
+.action-buttons {
+    display: flex;
+    gap: 12px;
+    margin-top: 24px;
+}
+
+.save-button {
+    flex: 1;
+    background-color: #4CAF50;
+    color: white;
+    padding: 14px;
+    border-radius: 12px;
+    border: none;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+}
+
+.cancel-button {
+    flex: 1;
+    background-color: #E53935;
+    color: white;
+    padding: 14px;
+    border-radius: 12px;
+    border: none;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+}
+
+/* Navbar Styles Restored and Fixed */
+.bottom-nav {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 16px 0;
+    background-color: #012E34;
+    position: fixed;
+    bottom: 20px;
+    /* Center fixed element reliably */
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 40px);
+    /* Full width minus margins */
+    max-width: 480px;
+    border-radius: 12px;
+    z-index: 100;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.nav-item {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: white;
+    cursor: pointer;
+}
+
+.nav-icon {
+    width: 28px;
+    height: 28px;
+}
+
+/* MODAL STYLES */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: white;
+    width: 85%;
+    max-width: 320px;
+    border-radius: 16px;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.modal-icon-container {
+    margin-bottom: 20px;
+}
+
+.delete-circle-red {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #E53935;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.modal-title {
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.text-green {
+    color: #4CAF50;
+}
+
+.text-red {
+    color: #E53935;
+}
+
+.modal-subtitle {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 24px;
+    font-weight: 500;
+}
+
+.modal-button {
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    border: none;
+    font-size: 16px;
+    font-weight: 700;
+    color: white;
+    cursor: pointer;
+}
+
+.btn-green {
+    background-color: #4CAF50;
+}
+
+.btn-red {
+    background-color: #E53935;
 }

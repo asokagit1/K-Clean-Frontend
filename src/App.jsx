@@ -10,6 +10,7 @@ import AdminDashboard from './pages/Dashboard/Admin';
 import PetugasDashboard from './pages/Dashboard/Petugas';
 import PetugasProfile from './pages/Profile/Petugas';
 import CreatePetugas from './pages/CreatePetugas&UMKM/CreatePetugas';
+import CreateUMKM from './pages/CreatePetugas&UMKM/CreateUMKM';
 
 // Protected Route Component
 const ProtectedRoute = () => {
@@ -45,10 +46,12 @@ function App() {
           <Route element={<ProtectedRoute />}>
             <Route path="/email-verify" element={<EmailVerification />} />
             <Route path="/dashboard" element={<UserDashboard />} />
-            <Route path="/petugas-dashboard" element={<PetugasDashboard />} />
             <Route path="/umkm-dashboard" element={<UmkmDashboard />} />
+
+            <Route path="/petugas-dashboard" element={<PetugasDashboard />} />
             <Route path="/admin-dashboard" element={<AdminDashboard />} />
             <Route path="/create-petugas" element={<CreatePetugas />} />
+            <Route path="/create-umkm" element={<CreateUMKM />} />
             <Route path="/petugas-profile" element={<PetugasProfile />} />
           </Route>
 

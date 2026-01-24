@@ -23,7 +23,7 @@ const Petugas = () => {
                 <h1 className="app-title">K-CLEAN</h1>
             </header>
 
-            <div className="greeting">Halo, selamat datang pekerja!</div>
+            <div className="greeting">Halo, selamat datang Petugas!</div>
 
             {/* Stats Cards */}
             <div className="stats-grid">

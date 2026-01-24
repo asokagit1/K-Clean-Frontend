@@ -2,9 +2,9 @@ import React, { useState } from 'react';
 import { ChevronLeft, Check, Eye, EyeOff } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import api from '../../api/axios';
-import './CreatePetugas.css';
+import './CreateUMKM.css';
 
-const CreatePetugas = () => {
+const CreateUMKM = () => {
     const navigate = useNavigate();
     const [formData, setFormData] = useState({
         name: '',
@@ -27,30 +27,29 @@ const CreatePetugas = () => {
         setLoading(true);
 
         try {
-            // Note: Adjust the endpoint if it expects a specific body structure.
-            // Assuming the simple POST endpoint creates the user with provided details.
-            const response = await api.post('/createuser/petugas', formData);
+            // Endpoint updated for UMKM creation
+            const response = await api.post('/createuser/umkm', formData);
 
-            // alert('Petugas berhasil ditambahkan!'); // Removed alert
+            // alert('UMKM berhasil ditambahkan!'); // Removed alert
             setShowSuccessModal(true);
             setTimeout(() => {
                 navigate('/admin-dashboard');
             }, 2000);
         } catch (error) {
-            console.error('Error creating petugas:', error);
-            alert('Gagal menambahkan petugas. ' + (error.response?.data?.message || 'Terjadi kesalahan.'));
+            console.error('Error creating UMKM:', error);
+            alert('Gagal menambahkan UMKM. ' + (error.response?.data?.message || 'Terjadi kesalahan.'));
         } finally {
             setLoading(false);
         }
     };
 
     return (
-        <div className="create-petugas-container">
+        <div className="create-umkm-container">
             <div className="header-section">
                 <button className="back-button" onClick={() => navigate(-1)}>
                     <ChevronLeft size={28} />
                 </button>
-                <h1 className="page-title">Tambah Petugas</h1>
+                <h1 className="page-title">Tambah UMKM</h1>
             </div>
 
             <form className="form-card" onSubmit={handleSubmit}>
@@ -60,7 +59,7 @@ const CreatePetugas = () => {
                         type="text"
                         name="name"
                         className="form-input"
-                        placeholder="Masukkan nama petugas"
+                        placeholder="Masukkan nama UMKM"
                         value={formData.name}
                         onChange={handleChange}
                         required
@@ -73,7 +72,7 @@ const CreatePetugas = () => {
                         type="email"
                         name="email"
                         className="form-input"
-                        placeholder="Masukkan email petugas"
+                        placeholder="Masukkan email UMKM"
                         value={formData.email}
                         onChange={handleChange}
                         required
@@ -123,4 +122,4 @@ const CreatePetugas = () => {
     );
 };
 
-export default CreatePetugas;
+export default CreateUMKM;
