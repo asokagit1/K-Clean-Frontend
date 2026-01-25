@@ -5,7 +5,7 @@ import Onboarding from './pages/Auth/Onboarding';
 import Register from './pages/Auth/Register';
 import Login from './pages/Auth/Login';
 import EmailVerification from './pages/Auth/EmailVerification';
-import { UserDashboard, UmkmDashboard } from './pages/Dashboard/Dashboards';
+import { UserDashboard } from './pages/Dashboard/Dashboards';
 import AdminDashboard from './pages/Dashboard/Admin';
 import PetugasDashboard from './pages/Dashboard/Petugas';
 import PetugasProfile from './pages/Profile/Petugas';
@@ -14,6 +14,7 @@ import CreateUMKM from './pages/CreatePetugas&UMKM/CreateUMKM';
 import EditDataPetugas from './pages/EditPengguna/EditDataPetugas';
 import EditDataUMKM from './pages/EditPengguna/EditDataUMKM';
 import EditDataUser from './pages/EditPengguna/EditDataUser';
+import DashboardUMKM from './pages/Dashboard/Umkm';
 
 // Protected Route Component
 const ProtectedRoute = () => {
@@ -49,8 +50,7 @@ function App() {
           <Route element={<ProtectedRoute />}>
             <Route path="/email-verify" element={<EmailVerification />} />
             <Route path="/dashboard" element={<UserDashboard />} />
-            <Route path="/umkm-dashboard" element={<UmkmDashboard />} />
-
+            {/* <Route path="/umkm-dashboard" element={<UmkmDashboard />} /> */}
             <Route path="/petugas-dashboard" element={<PetugasDashboard />} />
             <Route path="/admin-dashboard" element={<AdminDashboard />} />
             <Route path="/create-petugas" element={<CreatePetugas />} />
@@ -59,6 +59,7 @@ function App() {
             <Route path="/edit-data-petugas" element={<EditDataPetugas />} />
             <Route path="/edit-data-umkm" element={<EditDataUMKM />} />
             <Route path="/edit-data-user" element={<EditDataUser />} />
+            <Route path="/umkm-dashboard" element={<DashboardUMKM />} />
           </Route>
 
           {/* Fallback */}

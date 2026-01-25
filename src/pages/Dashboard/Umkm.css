@@ -1,0 +1,170 @@
+/* --- RESET & VARIABLES --- */
+:root {
+    --primary-dark: #003B46;
+    --primary-yellow: #FFC700;
+    --bg-white: #FFFFFF;
+    --bg-page: #F5F7FA;
+}
+
+* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
+body { background-color: var(--bg-page); }
+
+/* --- RESPONSIVE CONTAINER --- */
+.responsive-container {
+    width: 100%;
+    min-height: 100vh;
+    padding: 20px;
+    padding-bottom: 120px; /* Ruang lebih besar di bawah agar konten tidak tertutup nav */
+    margin: 0 auto;
+}
+
+/* Limit lebar konten utama di PC agar enak dibaca */
+@media (min-width: 1024px) {
+    .responsive-container {
+        max-width: 1200px;
+    }
+}
+
+/* --- HEADER SECTION --- */
+.header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 10px 0;
+}
+
+/* Logo & Notif di Header */
+.header-left { display: flex; align-items: center; gap: 15px; }
+.logo-text { font-size: 24px; font-weight: 900; letter-spacing: 1px; color: #000; }
+.notif-icon { width: 28px; height: 28px; cursor: pointer; transition: 0.2s; }
+.notif-icon:hover { transform: scale(1.1); }
+
+/* User Profile (Pengganti Navbar Desktop) */
+.user-profile-corner {
+    display: flex; align-items: center; gap: 10px;
+}
+.user-text { text-align: right; }
+.user-name { font-weight: bold; font-size: 14px; color: var(--primary-dark); }
+.user-role { font-size: 11px; color: #666; }
+.user-avatar {
+    width: 40px; height: 40px; background: #eee; border-radius: 50%;
+    display: flex; align-items: center; justify-content: center;
+}
+
+/* Greeting */
+.greeting { font-size: 20px; font-weight: 700; margin-bottom: 25px; color: #000; }
+
+/* --- DASHBOARD GRID LAYOUT --- */
+.dashboard-grid {
+    display: grid;
+    gap: 20px;
+    grid-template-columns: 1fr; /* Default Mobile: 1 Kolom */
+}
+
+/* Tablet (2 Kolom) */
+@media (min-width: 600px) {
+    .dashboard-grid { grid-template-columns: repeat(2, 1fr); }
+    .chart-card-wrapper { grid-column: span 2; }
+    .top-voucher-wrapper { grid-column: span 2; }
+}
+
+/* PC / Desktop (Layout Asimetris 4 Kolom) */
+@media (min-width: 1024px) {
+    .dashboard-grid {
+        grid-template-columns: repeat(4, 1fr);
+        grid-template-rows: auto auto;
+    }
+    .stat-card-wrapper { grid-column: span 1; }
+    .total-card-wrapper { grid-column: span 1; }
+    .chart-card-wrapper { grid-column: span 2; grid-row: 2; }
+    .top-voucher-wrapper { grid-column: span 2; grid-row: 2; height: 100%; }
+}
+
+/* --- COMPONENT STYLES --- */
+.stat-card {
+    border: 1.5px solid #000; border-radius: 12px; padding: 20px;
+    background: #fff; min-height: 120px;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    transition: transform 0.2s;
+}
+.stat-card:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
+
+.card-title { font-size: 14px; font-weight: 700; color: var(--primary-dark); margin-bottom: 15px; text-align: center; }
+.card-content-row { display: flex; align-items: center; gap: 15px; }
+.big-number { font-size: 32px; font-weight: 800; color: #000; }
+.sub-text { font-size: 12px; font-weight: 600; color: var(--primary-dark); margin-top: -5px; }
+
+.icon-box-yellow {
+    color: var(--primary-yellow); display: flex; align-items: center; justify-content: center;
+}
+.stat-icon { width: 36px; height: 36px; }
+
+/* Chart Styles */
+.chart-card {
+    border: 1.5px solid #000; border-radius: 12px; padding: 20px; background: #fff; height: 100%;
+}
+.simple-bar-chart {
+    display: flex; align-items: flex-end; justify-content: space-around;
+    height: 150px; padding-bottom: 10px; border-bottom: 1px solid #eee;
+}
+.bar { width: 20px; background-color: var(--primary-yellow); border-radius: 4px 4px 0 0; transition: height 1s ease; }
+.bar-column { display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: flex-end; }
+.bar-label { margin-top: 8px; font-size: 12px; font-weight: 600; }
+
+/* Top Voucher List */
+.top-voucher-section {
+    border: 1.5px solid #000; border-radius: 12px; padding: 25px; background: #fff; height: 100%;
+}
+.section-title { font-size: 16px; font-weight: 800; text-align: center; margin-bottom: 25px; }
+.horizontal-chart-row { display: flex; align-items: center; margin-bottom: 15px; }
+.chart-label { width: 100px; font-size: 13px; font-weight: 600; }
+.chart-bar-container { flex-grow: 1; height: 16px; background: #f0f0f0; border-radius: 0 8px 8px 0; overflow: hidden; }
+.h-bar { height: 100%; background-color: var(--primary-yellow); border-radius: 0 8px 8px 0; }
+
+/* --- FLOATING ACTION BUTTON (+) --- */
+.fab-btn {
+    position: fixed;
+    /* Posisinya menyesuaikan bottom nav */
+    bottom: 100px; 
+    right: 20px;
+    width: 60px; height: 60px;
+    background-color: var(--primary-yellow); border-radius: 50%; border: none;
+    display: flex; align-items: center; justify-content: center;
+    font-size: 32px; color: #fff; box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+    cursor: pointer; z-index: 100; transition: transform 0.2s;
+}
+.fab-btn:hover { transform: scale(1.1); }
+
+/* --- UNIVERSAL BOTTOM NAV (ALL DEVICES) --- */
+.bottom-nav {
+    position: fixed;
+    /* Jarak dari bawah layar */
+    bottom: 20px; 
+    
+    /* LOGIKA CENTERING YANG KUAT */
+    left: 50%;
+    transform: translateX(-50%);
+    
+    /* Ukuran Tetap (seperti App) */
+    width: 95%; /* Di HP hampir full */
+    max-width: 480px; /* Di PC tidak melebar */
+    
+    height: 70px;
+    background-color: var(--primary-dark);
+    display: flex; justify-content: space-around; align-items: center;
+    border-radius: 20px; /* Membulat penuh semua sisi */
+    z-index: 999;
+    
+    /* Efek Shadow agar terlihat melayang di PC */
+    box-shadow: 0 10px 25px rgba(0, 59, 70, 0.3); 
+}
+
+.nav-item { opacity: 0.6; cursor: pointer; transition: 0.2s; position: relative;}
+.nav-item.active { opacity: 1; transform: translateY(-3px); }
+.nav-item.active::after {
+    /* Titik kecil di bawah icon aktif */
+    content: ''; position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%);
+    width: 4px; height: 4px; background: var(--primary-yellow); border-radius: 50%;
+}
+.nav-item svg { width: 28px; height: 28px; fill: white; }

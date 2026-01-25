@@ -4,14 +4,17 @@ import { useAuth } from '../../context/AuthContext';
 import Button from '../../components/ui/Button';
 import Input from '../../components/ui/Input';
 
-
 const Login = () => {
     const navigate = useNavigate();
     const { login } = useAuth();
+    
+    // State form
     const [formData, setFormData] = useState({
         email: '',
         password: ''
     });
+
+    // State tambahan untuk Logic
     const [error, setError] = useState('');
     const [isLoading, setIsLoading] = useState(false);
 
@@ -22,24 +25,30 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
+        setIsLoading(true); // Set loading ON
 
         try {
-            const user = await login(formData.email, formData.password);
+            const response = await login(formData.email, formData.password);
 
-            // Role-based Redirection
-            const roles = user.roles || []; // Assuming roles is an array
-            if (roles.includes('super-admin')) {
+            // LOGIC PERBAIKAN REDIRECT (Termasuk UMKM)
+            // Mengambil user dari response (antisipasi struktur response)
+            const user = response.user || response; 
+            const roles = user.roles || []; 
+
+            if (roles.includes('super-admin') || roles.includes('admin')) {
                 navigate('/admin-dashboard');
             } else if (roles.includes('petugas')) {
-                navigate('/petugas-dashboard'); // Transfer Depo
+                navigate('/petugas-dashboard'); 
             } else if (roles.includes('umkm')) {
-                navigate('/umkm-dashboard');
+                navigate('/umkm-dashboard'); // Redirect khusus UMKM
             } else {
                 navigate('/dashboard'); // Warga (Default)
             }
 
         } catch (err) {
             setError(err.response?.data?.message || 'Invalid Credentials');
+        } finally {
+            setIsLoading(false); // Set loading OFF (selesai)
         }
     };
 
@@ -70,6 +79,7 @@ const Login = () => {
                         value={formData.email}
                         onChange={handleChange}
                         required
+                        disabled={isLoading} // Input mati saat loading
                     />
                     <Input
                         name="password"
@@ -78,21 +88,25 @@ const Login = () => {
                         value={formData.password}
                         onChange={handleChange}
                         required
+                        disabled={isLoading} // Input mati saat loading
                     />
 
                     <div className="pt-4">
                         <Button
                             type="submit"
+                            // TETAP MENGGUNAKAN CLASS ASLI ANDA (bg-primary, py-6)
                             className="w-full rounded-md bg-primary py-6"
                             isLoading={isLoading}
+                            disabled={isLoading}
                         >
-                            Masuk
+                            {isLoading ? 'Memproses...' : 'Masuk'}
                         </Button>
                     </div>
                 </form>
 
                 <div className="text-center text-sm text-gray-500">
                     Belum punya akun?{' '}
+                    {/* TETAP MENGGUNAKAN CLASS ASLI ANDA (text-secondary) */}
                     <Link to="/register" className="text-secondary font-bold hover:underline">
                         Daftar
                     </Link>
