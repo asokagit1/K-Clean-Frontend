@@ -13,7 +13,7 @@ const DashboardLayout = ({ title, role }) => {
     );
 };
 
-export const UserDashboard = () => <DashboardLayout title="Warga Dashboard" role="User" />;
+export { default as UserDashboard } from './UserDashboard';
 export const DepoDashboard = () => <DashboardLayout title="Transfer Depo Dashboard" role="Petugas" />;
 export const UmkmDashboard = () => <DashboardLayout title="UMKM Dashboard" role="UMKM" />;
 export const AdminDashboard = () => <DashboardLayout title="Admin Dashboard" role="Super Admin" />;
