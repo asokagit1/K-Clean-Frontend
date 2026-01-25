@@ -127,6 +127,11 @@
     border-radius: 8px;
     font-size: 14px;
     font-weight: 600;
+    min-height: 48px;
+    /* Fixed height to match populated fields */
+    display: flex;
+    align-items: center;
+    box-sizing: border-box;
 }
 
 .input-field {
@@ -139,6 +144,9 @@
     border: none;
     outline: none;
     width: 100%;
+    min-height: 48px;
+    /* Fixed height */
+    box-sizing: border-box;
 }
 
 .input-field:focus {

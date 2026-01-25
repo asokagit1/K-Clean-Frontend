@@ -190,8 +190,9 @@
 
 .modal-content {
     background-color: white;
-    width: 85%;
-    max-width: 320px;
+    width: 90%;
+    max-width: 400px;
+    /* Increased from 320px */
     border-radius: 16px;
     padding: 24px;
     display: flex;
@@ -278,4 +279,241 @@
     cursor: pointer;
     background: none;
     border: none;
+}
+
+/* Modal Details Grid */
+.modal-details-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    margin-top: 16px;
+    background-color: #f8f9fa;
+    padding: 16px;
+    border-radius: 8px;
+    text-align: left;
+    /* Critical for rata kiri */
+    box-sizing: border-box;
+}
+
+.detail-item {
+    display: flex;
+    flex-direction: row;
+    /* Changed from column to row */
+    align-items: center;
+    /* Vertically center */
+    justify-content: flex-start;
+    /* Align to start */
+    gap: 8px;
+    /* Space between label and value */
+    border-bottom: 1px solid #eee;
+    padding-bottom: 8px;
+}
+
+.detail-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.detail-label {
+    font-size: 12px;
+    color: #666;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    min-width: 100px;
+    /* Optional: ensures labels align if desired, or remove for fluid */
+}
+
+.detail-value {
+    font-size: 14px;
+    color: #000;
+    font-weight: 500;
+    flex: 1;
+    /* Allow value to take remaining space */
+    text-align: left;
+}
+
+/* Password Reset Button */
+.password-display {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.btn-reset-password {
+    background-color: #012E34;
+    color: white;
+    border: none;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background-color 0.2s;
+}
+
+/* Inline Password Reset */
+.detail-item-column {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 8px;
+    width: 100%;
+}
+
+.detail-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+}
+
+.reset-password-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-left: 0;
+    /* Align with left */
+    width: 100%;
+}
+
+.reset-password-input {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.reset-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-save-password {
+    background-color: var(--accent-yellow);
+    color: black;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.btn-cancel-password {
+    background-color: #ddd;
+    color: #333;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Search Input */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2px;
+}
+
+.search-input {
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    width: 200px;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--primary-dark);
+}
+
+/* Delete Confirmation Modal */
+.delete-modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    width: 280px;
+    height: 320px;
+    justify-content: center;
+    position: relative;
+}
+
+.delete-icon-container {
+    width: 100px;
+    height: 100px;
+    background-color: #ffebee;
+    /* Light red background */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+
+.delete-icon-circle {
+    width: 80px;
+    height: 80px;
+    background-color: #E53935;
+    /* Red circle */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.delete-title {
+    font-size: 20px;
+    font-weight: 800;
+    color: #E53935;
+    margin-bottom: 8px;
+}
+
+.delete-subtitle {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 24px;
+}
+
+.delete-actions-row {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+}
+
+.btn-confirm-delete {
+    flex: 1;
+    background-color: #E53935;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.btn-cancel-delete {
+    flex: 1;
+    background-color: #ccc;
+    color: black;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
 }

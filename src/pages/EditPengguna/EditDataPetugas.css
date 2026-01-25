@@ -1,0 +1,149 @@
+/* EditDataPetugas.css - Matching CreatePetugas.css */
+.edit-petugas-container {
+    padding: 24px;
+    font-family: 'Inter', sans-serif;
+    min-height: 100vh;
+    background-color: #F8FDF9;
+    display: flex;
+    flex-direction: column;
+}
+
+.header-section {
+    display: flex;
+    align-items: center;
+    margin-bottom: 32px;
+}
+
+.back-button {
+    background-color: var(--primary-dark, #012E34);
+    color: white;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+}
+
+.page-title {
+    flex: 1;
+    text-align: center;
+    font-size: 20px;
+    font-weight: 800;
+    color: black;
+    margin-right: 44px;
+    /* Balance back button */
+}
+
+.form-card {
+    background-color: white;
+    border-radius: 12px;
+    padding: 24px;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.05);
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.form-group {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.form-label {
+    font-size: 14px;
+    font-weight: 700;
+    color: #000;
+}
+
+.form-input {
+    padding: 12px 16px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    background-color: #f9f9f9;
+    width: 100%;
+    /* Ensure full width */
+    box-sizing: border-box;
+}
+
+.form-input:focus {
+    outline: none;
+    border-color: var(--primary-dark, #012E34);
+    background-color: white;
+}
+
+.submit-button {
+    background-color: var(--primary-dark, #012E34);
+    color: white;
+    border: none;
+    padding: 14px;
+    border-radius: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
+    margin-top: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 8px;
+}
+
+.submit-button:hover {
+    background-color: #013e46;
+}
+
+.submit-button:disabled {
+    opacity: 0.7;
+    cursor: not-allowed;
+}
+
+/* Success Modal Styles */
+.success-modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    z-index: 2000;
+}
+
+.success-modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    width: 220px;
+    height: 220px;
+    justify-content: center;
+}
+
+.success-icon-container {
+    width: 80px;
+    height: 80px;
+    border: 6px solid #012E34;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+
+.success-text {
+    font-size: 18px;
+    font-weight: 800;
+    color: black;
+    line-height: 1.2;
+}

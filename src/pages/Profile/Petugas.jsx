@@ -1,23 +1,60 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { ChevronLeft, Pencil, Home, Scan, User, Check, Trash2 } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
+import api from '../../api/axios';
 import './Petugas.css';
 
 const Petugas = () => {
     const navigate = useNavigate();
 
-    // Mock data initial state
+    // Initial state
     const [userInfo, setUserInfo] = useState({
-        name: 'Bob',
-        email: 'bob23@gmail.com',
-        phone: '085517234102',
-        avatarUrl: 'https://api.dicebear.com/9.x/avataaars/svg?seed=Bob'
+        name: '',
+        email: '',
+        phone: '',
+        avatarUrl: ''
     });
+
+    useEffect(() => {
+        const fetchUserData = async () => {
+            try {
+                const response = await api.get('/user-data');
+                const data = response.data.Data;
+                setUserInfo({
+                    name: data.name,
+                    email: data.email,
+                    phone: data.no_telp || '',
+                    avatar: data.avatar, // Store seed if available
+                    avatarUrl: data.avatar
+                        ? `https://api.dicebear.com/9.x/avataaars/svg?seed=${data.avatar}`
+                        : (data.profile_qr_path
+                            ? `http://localhost:8000/storage/${data.profile_qr_path}`
+                            : `https://api.dicebear.com/9.x/avataaars/svg?seed=${data.name}`)
+                });
+            } catch (error) {
+                console.error('Error fetching user data:', error);
+            }
+        };
+
+        fetchUserData();
+    }, []);
+
+    // Sync tempUserInfo with userInfo when user data is fetched
+    useEffect(() => {
+        setTempUserInfo(userInfo);
+    }, [userInfo]);
 
     const [isEditing, setIsEditing] = useState(false);
     const [tempUserInfo, setTempUserInfo] = useState(userInfo);
     const [showSaveModal, setShowSaveModal] = useState(false);
     const [showDiscardModal, setShowDiscardModal] = useState(false);
+
+    const [showAvatarModal, setShowAvatarModal] = useState(false);
+
+    const avatarSeeds = [
+        'Felix', 'Aneka', 'Zoe', 'Bob',
+        'Jack', 'Ginger', 'Missy', 'Pumpkin'
+    ];
 
     const handleInputChange = (field, value) => {
         setTempUserInfo(prev => ({
@@ -26,13 +63,37 @@ const Petugas = () => {
         }));
     };
 
+    const handleAvatarSelect = (seed) => {
+        setTempUserInfo(prev => ({
+            ...prev,
+            avatar: seed, // Store seed for backend
+            avatarUrl: `https://api.dicebear.com/9.x/avataaars/svg?seed=${seed}`
+        }));
+        setShowAvatarModal(false);
+    };
+
     const handleEditClick = () => {
         setTempUserInfo(userInfo); // Reset temp to current actual info
         setIsEditing(true);
     };
 
-    const handleSaveClick = () => {
-        setShowSaveModal(true);
+    const handleSaveClick = async () => {
+        try {
+            await api.patch('/update-profile', {
+                name: tempUserInfo.name,
+                email: tempUserInfo.email,
+                no_telp: tempUserInfo.phone,
+                avatar: tempUserInfo.avatar // Send avatar seed
+            });
+
+            // On success, update local state and show success modal
+            setUserInfo(tempUserInfo);
+            setIsEditing(false);
+            setShowSaveModal(true);
+        } catch (error) {
+            console.error('Error updating profile:', error);
+            alert('Gagal memperbaharui profil. ' + (error.response?.data?.message || 'Terjadi kesalahan.'));
+        }
     };
 
     const handleDiscardClick = () => {
@@ -40,10 +101,8 @@ const Petugas = () => {
     };
 
     const confirmSave = () => {
-        setUserInfo(tempUserInfo);
-        setIsEditing(false);
+        // Just close the success modal
         setShowSaveModal(false);
-        // Additional API call logic here if needed
     };
 
     const confirmDiscard = () => {
@@ -73,7 +132,7 @@ const Petugas = () => {
                     {/* Floating Edit Button (View Mode) or Edit Icon (Edit Mode) */}
 
                     {isEditing && (
-                        <div className="avatar-edit-overlay">
+                        <div className="avatar-edit-overlay" onClick={() => setShowAvatarModal(true)}>
                             <Pencil size={20} color="white" />
                         </div>
                     )}
@@ -141,6 +200,38 @@ const Petugas = () => {
                         Ubah
                         <Pencil className="edit-icon" />
                     </button>
+                </div>
+            )}
+
+            {/* Avatar Selection Modal */}
+            {showAvatarModal && (
+                <div className="modal-overlay" onClick={() => setShowAvatarModal(false)}>
+                    <div className="modal-content" onClick={e => e.stopPropagation()} style={{ maxWidth: '340px' }}>
+                        <div className="modal-title" style={{ marginBottom: 20 }}>Pilih Avatar</div>
+                        <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '10px', marginBottom: '20px' }}>
+                            {avatarSeeds.map(seed => (
+                                <div
+                                    key={seed}
+                                    onClick={() => handleAvatarSelect(seed)}
+                                    style={{
+                                        cursor: 'pointer',
+                                        border: tempUserInfo.avatar === seed ? '3px solid #4CAF50' : '3px solid transparent',
+                                        borderRadius: '50%',
+                                        overflow: 'hidden',
+                                        width: '60px',
+                                        height: '60px'
+                                    }}
+                                >
+                                    <img
+                                        src={`https://api.dicebear.com/9.x/avataaars/svg?seed=${seed}`}
+                                        alt={seed}
+                                        style={{ width: '100%', height: '100%' }}
+                                    />
+                                </div>
+                            ))}
+                        </div>
+                        <button className="modal-button btn-red" onClick={() => setShowAvatarModal(false)}>Batal</button>
+                    </div>
                 </div>
             )}
 

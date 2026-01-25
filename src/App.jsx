@@ -11,6 +11,9 @@ import PetugasDashboard from './pages/Dashboard/Petugas';
 import PetugasProfile from './pages/Profile/Petugas';
 import CreatePetugas from './pages/CreatePetugas&UMKM/CreatePetugas';
 import CreateUMKM from './pages/CreatePetugas&UMKM/CreateUMKM';
+import EditDataPetugas from './pages/EditPengguna/EditDataPetugas';
+import EditDataUMKM from './pages/EditPengguna/EditDataUMKM';
+import EditDataUser from './pages/EditPengguna/EditDataUser';
 
 // Protected Route Component
 const ProtectedRoute = () => {
@@ -53,6 +56,9 @@ function App() {
             <Route path="/create-petugas" element={<CreatePetugas />} />
             <Route path="/create-umkm" element={<CreateUMKM />} />
             <Route path="/petugas-profile" element={<PetugasProfile />} />
+            <Route path="/edit-data-petugas" element={<EditDataPetugas />} />
+            <Route path="/edit-data-umkm" element={<EditDataUMKM />} />
+            <Route path="/edit-data-user" element={<EditDataUser />} />
           </Route>
 
           {/* Fallback */}
