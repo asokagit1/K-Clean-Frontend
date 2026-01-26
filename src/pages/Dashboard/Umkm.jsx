@@ -7,6 +7,9 @@ const DashboardUMKM = () => {
     const [vouchers, setVouchers] = useState([]);
     const [user, setUser] = useState({});
     const [loading, setLoading] = useState(true);
+    // STATE BARU UNTUK MENU FAB
+    const [isMenuOpen, setIsMenuOpen] = useState(false);
+    
     const navigate = useNavigate();
 
     useEffect(() => {
@@ -44,10 +47,9 @@ const DashboardUMKM = () => {
     if (loading) return <div className="flex justify-center items-center h-screen">Loading...</div>;
 
     return (
-        <div className="responsive-container">
+        <div className="responsive-container relative">
             {/* --- HEADER --- */}
             <header className="header-section">
-                {/* Kiri: Logo & Notif */}
                 <div className="header-left">
                     <div className="notif-icon">
                         <svg viewBox="0 0 24 24" fill="none" xmlns="http://www.w3.org/2000/svg" width="100%" height="100%">
@@ -58,7 +60,6 @@ const DashboardUMKM = () => {
                     <h1 className="logo-text">K-CLEAN</h1>
                 </div>
 
-                {/* Kanan: Profil User Saja (Navigasi Button Dihapus) */}
                 <div className="user-profile-corner">
                     <div className="user-text">
                         <div className="user-name">{user.name}</div>
@@ -72,7 +73,7 @@ const DashboardUMKM = () => {
 
             <h2 className="greeting">Hai, gimana penjualan hari ini?</h2>
 
-            {/* --- DASHBOARD CONTENT GRID --- */}
+            {/* --- DASHBOARD GRID --- */}
             <div className="dashboard-grid">
                 
                 {/* 1. Voucher Aktif */}
@@ -159,12 +160,31 @@ const DashboardUMKM = () => {
 
             </div>
 
-            {/* Floating Action Button */}
-            <button className="fab-btn" onClick={() => navigate('/create-voucher')}>
-                +
+            {/* --- FLOATING ACTION BUTTON & MENU --- */}
+            
+            {/* Menu Drop-up (Hanya muncul jika isMenuOpen true) */}
+            <div className={`fab-menu-container ${isMenuOpen ? 'open' : ''}`}>
+                <button className="fab-menu-item" onClick={() => navigate('/create-voucher')}>
+                    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round">
+                        <path d="M20 14.66V20a2 2 0 0 1-2 2H4a2 2 0 0 1-2-2V6a2 2 0 0 1 2-2h5.34"></path>
+                        <polygon points="18 2 22 6 12 16 8 16 8 12 18 2"></polygon>
+                    </svg>
+                    Buat Voucher
+                </button>
+                {/* Anda bisa menambahkan menu item lain di sini nanti */}
+            </div>
+
+            {/* Tombol Utama (+) */}
+            <button 
+                className={`fab-btn ${isMenuOpen ? 'open' : ''}`} 
+                onClick={() => setIsMenuOpen(!isMenuOpen)}
+            >
+                {/* Gunakan span agar icon bisa diputar terpisah dari background tombol */}
+                <span className="fab-icon">+</span>
             </button>
 
-            {/* UNIVERSAL BOTTOM NAV (Visible on PC too) */}
+
+            {/* UNIVERSAL BOTTOM NAV */}
             <nav className="bottom-nav">
                 <div className="nav-item active" onClick={() => navigate('/umkm-dashboard')}>
                      <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z"/></svg>

@@ -15,6 +15,7 @@ import EditDataPetugas from './pages/EditPengguna/EditDataPetugas';
 import EditDataUMKM from './pages/EditPengguna/EditDataUMKM';
 import EditDataUser from './pages/EditPengguna/EditDataUser';
 import DashboardUMKM from './pages/Dashboard/Umkm';
+import CreateVoucher from './pages/Dashboard/CreateVoucher';
 
 // Protected Route Component
 const ProtectedRoute = () => {
@@ -59,6 +60,8 @@ function App() {
             <Route path="/edit-data-umkm" element={<EditDataUMKM />} />
             <Route path="/edit-data-user" element={<EditDataUser />} />
             <Route path="/umkm-dashboard" element={<DashboardUMKM />} />
+            <Route path="/create-voucher" element={<CreateVoucher />} />
+            
           </Route>
 
           {/* Fallback */}
