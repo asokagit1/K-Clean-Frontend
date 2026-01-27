@@ -160,10 +160,14 @@ const Admin = () => {
                 </div>
             </header>
 
-            <div className="greeting-container">
+            <div className="greeting-container relative">
                 <div className="greeting">Halo, selamat datang Admin!</div>
-                <button className="logout-button" onClick={handleLogout} aria-label="Logout">
-                    <LogOut color="#E53935" size={24} />
+                <button
+                    className="absolute right-0 p-2 text-gray-500 hover:text-red-600 transition-colors"
+                    onClick={handleLogout}
+                    aria-label="Logout"
+                >
+                    <LogOut size={24} />
                 </button>
             </div>
 

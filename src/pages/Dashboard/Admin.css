@@ -131,6 +131,11 @@
     display: flex;
     flex-direction: column;
     gap: 12px;
+    overflow-y: auto;
+    max-height: 400px;
+    /* Adjust as needed */
+    padding-right: 5px;
+    /* Prevent scrollbar from overlapping content */
 }
 
 .user-card {

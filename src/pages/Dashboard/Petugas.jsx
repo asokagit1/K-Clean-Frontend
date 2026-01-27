@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useState, useEffect } from 'react';
+import api from '../../api/axios';
 import { Trash2, User, Coins, Home, Scan, Volume2, LogOut } from 'lucide-react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
@@ -9,6 +10,13 @@ const Petugas = () => {
     const location = useLocation();
     const { logout } = useAuth();
 
+    // State for dashboard data
+    const [totalWeight, setTotalWeight] = useState(0);
+    const [totalTransactions, setTotalTransactions] = useState(0);
+    const [totalPoints, setTotalPoints] = useState(0);
+    const [history, setHistory] = useState([]);
+    const [loading, setLoading] = useState(true);
+
     const handleLogout = async () => {
         await logout();
         navigate('/login');
@@ -16,15 +24,40 @@ const Petugas = () => {
 
     const isActive = (path) => location.pathname === path;
 
-    // Mock data based on the design
-    const transactions = [
-        { type: 'Sampah Organik', weight: '5 kg', id: 1 },
-        { type: 'Sampah Anorganik', weight: '15 kg', id: 2 },
-        { type: 'Sampah Organik', weight: '5 kg', id: 3 },
-        { type: 'Sampah Anorganik', weight: '10 kg', id: 4 },
-        { type: 'Sampah Anorganik', weight: '10,5 kg', id: 5 },
-        { type: 'Sampah Anorganik', weight: '15 kg', id: 6 },
-    ];
+    useEffect(() => {
+        const fetchDashboardData = async () => {
+            try {
+                setLoading(true);
+                // Fetch Total Weight
+                const weightRes = await api.get('/trash-weight-today');
+                setTotalWeight(weightRes.data['Today Total Trash Weighted'] || 0);
+
+                // Fetch Total Transactions
+                const transactionRes = await api.get('/trash-transaction-total-today');
+                setTotalTransactions(transactionRes.data['Today Total Transaction'] || 0);
+
+                // Fetch Total Points
+                const pointsRes = await api.get('/point-input-today');
+                setTotalPoints(pointsRes.data['Today Total Point Inputted'] || 0);
+
+                // Fetch Transaction History
+                const historyRes = await api.get('/trash-transaction-history');
+                setHistory(historyRes.data['Trash_Transaction'] || []);
+
+            } catch (error) {
+                console.error("Failed to fetch dashboard data", error);
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        fetchDashboardData();
+    }, []);
+
+    // Helper to format number
+    const formatNumber = (num) => {
+        return new Intl.NumberFormat('id-ID').format(num);
+    };
 
     return (
         <div className="dashboard-container">
@@ -33,10 +66,14 @@ const Petugas = () => {
                 <h1 className="app-title">K-CLEAN</h1>
             </header>
 
-            <div className="greeting-container">
+            <div className="greeting-container relative">
                 <div className="greeting">Halo, selamat datang Petugas!</div>
-                <button className="logout-button" onClick={handleLogout} aria-label="Logout">
-                    <LogOut color="#E53935" size={24} />
+                <button
+                    className="absolute right-0 p-2 text-gray-500 hover:text-red-600 transition-colors"
+                    onClick={handleLogout}
+                    aria-label="Logout"
+                >
+                    <LogOut size={24} />
                 </button>
             </div>
 
@@ -44,13 +81,11 @@ const Petugas = () => {
             <div className="stats-grid">
                 {/* Total Card */}
                 <div className="card card-total">
-                    <div className="card-title">Total</div>
+                    <div className="card-title">Total Berat</div>
                     <div className="icon-box yellow">
-                        {/* Custom Trash Bag Icon using simple shape or SVG if Lucide doesn't perfect match, 
-                 but using Trash2 or similar for now, styled to look filled/bag-like */}
                         <Trash2 className="trash-bag-icon" fill="#4A4A4A" />
                     </div>
-                    <div className="big-value">60 Kg</div>
+                    <div className="big-value">{loading ? '...' : `${formatNumber(totalWeight)} Kg`}</div>
                     <div className="sub-label">Hari ini</div>
                 </div>
 
@@ -59,7 +94,7 @@ const Petugas = () => {
                     <div className="card-title">Total Transaksi</div>
                     <div className="card-content-row">
                         <User className="icon-yellow" fill="#FFC400" />
-                        <div className="card-value">30</div>
+                        <div className="card-value">{loading ? '...' : totalTransactions}</div>
                     </div>
                 </div>
 
@@ -68,7 +103,7 @@ const Petugas = () => {
                     <div className="card-title">Poin Terkirim</div>
                     <div className="card-content-row">
                         <Coins className="icon-yellow" fill="#FFC400" />
-                        <div className="card-value">6.000</div>
+                        <div className="card-value">{loading ? '...' : formatNumber(totalPoints)}</div>
                     </div>
                 </div>
             </div>
@@ -77,19 +112,25 @@ const Petugas = () => {
             <div className="history-section">
                 <h3 className="history-title">Riwayat transaksi</h3>
                 <div className="history-card">
-                    {transactions.map((item) => (
-                        <div key={item.id} className="history-item">
-                            <div className="item-left">
-                                <div className="trash-icon-circle">
-                                    <Trash2 className="trash-icon-mini" />
+                    {loading ? (
+                        <div style={{ padding: '20px', textAlign: 'center' }}>Loading...</div>
+                    ) : history.length > 0 ? (
+                        history.map((item) => (
+                            <div key={item.trash_transaction_id} className="history-item">
+                                <div className="item-left">
+                                    <div className="trash-icon-circle">
+                                        <Trash2 className="trash-icon-mini" />
+                                    </div>
+                                    <div className="item-text">
+                                        {item.trash_type} <span className="item-weight">berat {item.trash_weight} kg</span>
+                                    </div>
                                 </div>
-                                <div className="item-text">
-                                    {item.type} <span className="item-weight">berat {item.weight}</span>
-                                </div>
+                                <Volume2 className="speaker-icon" />
                             </div>
-                            <Volume2 className="speaker-icon" />
-                        </div>
-                    ))}
+                        ))
+                    ) : (
+                        <div style={{ padding: '20px', textAlign: 'center' }}>Tidak ada transaksi hari ini</div>
+                    )}
                 </div>
             </div>
 
@@ -99,23 +140,33 @@ const Petugas = () => {
             </div>
 
             {/* Bottom Navigation */}
-            <nav className="bottom-nav">
-                <div
-                    className={`nav-item ${isActive('/petugas-dashboard') ? 'active' : ''}`}
-                    onClick={() => navigate('/petugas-dashboard')}
-                >
-                    <Home className="nav-icon" />
+            {/* Bottom Navigation */}
+            <div className="fixed bottom-5 left-1/2 -translate-x-1/2 w-[90%] max-w-[440px] bg-[#012E34] h-[60px] rounded-xl flex justify-around items-center px-4 text-white shadow-xl z-50">
+                <div onClick={() => navigate('/petugas-dashboard')} className="flex flex-col items-center gap-1 cursor-pointer">
+                    <div className={`p-2 rounded-xl transition-all duration-300 relative`}>
+                        <Home size={28} className="text-white" />
+                        {isActive('/petugas-dashboard') && (
+                            <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-white rounded-full"></div>
+                        )}
+                    </div>
                 </div>
-                <div className="nav-item">
-                    <Scan className="nav-icon" />
+
+                <div className="flex flex-col items-center gap-1 cursor-pointer">
+                    <div className={`p-2 rounded-xl transition-all duration-300 relative`}>
+                        <Scan size={28} className="text-white" />
+                        {/* No active state for scan yet unless it's a route */}
+                    </div>
                 </div>
-                <div
-                    className={`nav-item ${isActive('/petugas-profile') ? 'active' : ''}`}
-                    onClick={() => navigate('/petugas-profile')}
-                >
-                    <User className="nav-icon" />
+
+                <div onClick={() => navigate('/petugas-profile')} className="flex flex-col items-center gap-1 cursor-pointer">
+                    <div className={`p-2 rounded-xl transition-all duration-300 relative`}>
+                        <User size={28} className="text-white" />
+                        {isActive('/petugas-profile') && (
+                            <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-white rounded-full"></div>
+                        )}
+                    </div>
                 </div>
-            </nav>
+            </div>
         </div>
     );
 };

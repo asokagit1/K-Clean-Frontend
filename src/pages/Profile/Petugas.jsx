@@ -269,23 +269,33 @@ const Petugas = () => {
             )}
 
             {/* Bottom Navigation (Reusing similar structure) */}
-            <nav className="bottom-nav">
-                <div
-                    className={`nav-item ${isActive('/petugas-dashboard') ? 'active' : ''}`}
-                    onClick={() => navigate('/petugas-dashboard')}
-                >
-                    <Home className="nav-icon" />
+            {/* Bottom Navigation */}
+            <div className="fixed bottom-5 left-1/2 -translate-x-1/2 w-[90%] max-w-[440px] bg-[#012E34] h-[60px] rounded-xl flex justify-around items-center px-4 text-white shadow-xl z-50">
+                <div onClick={() => navigate('/petugas-dashboard')} className="flex flex-col items-center gap-1 cursor-pointer">
+                    <div className={`p-2 rounded-xl transition-all duration-300 relative`}>
+                        <Home size={28} className="text-white" />
+                        {isActive('/petugas-dashboard') && (
+                            <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-white rounded-full"></div>
+                        )}
+                    </div>
                 </div>
-                <div className="nav-item">
-                    <Scan className="nav-icon" />
+
+                <div className="flex flex-col items-center gap-1 cursor-pointer">
+                    <div className={`p-2 rounded-xl transition-all duration-300 relative`}>
+                        <Scan size={28} className="text-white" />
+                        {/* No active state for scan yet unless it's a route */}
+                    </div>
                 </div>
-                <div
-                    className={`nav-item ${isActive('/petugas-profile') ? 'active' : ''}`}
-                    onClick={() => navigate('/petugas-profile')}
-                >
-                    <User className="nav-icon" />
+
+                <div onClick={() => navigate('/petugas-profile')} className="flex flex-col items-center gap-1 cursor-pointer">
+                    <div className={`p-2 rounded-xl transition-all duration-300 relative`}>
+                        <User size={28} className="text-white" />
+                        {isActive('/petugas-profile') && (
+                            <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-white rounded-full"></div>
+                        )}
+                    </div>
                 </div>
-            </nav>
+            </div>
         </div>
     );
 };

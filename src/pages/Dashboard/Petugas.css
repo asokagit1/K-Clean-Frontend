@@ -187,7 +187,9 @@
     background: white;
     border: 1px solid #000;
     border-radius: 12px;
-    overflow: hidden;
+    overflow-y: auto;
+    max-height: 300px;
+    /* Adjust height as needed to show ~5-6 items */
 }
 
 .history-item {
