@@ -1,10 +1,20 @@
 import React from 'react';
-import { Trash2, User, Coins, Home, Scan, Volume2 } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { Trash2, User, Coins, Home, Scan, Volume2, LogOut } from 'lucide-react';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { useAuth } from '../../context/AuthContext';
 import './Petugas.css';
 
 const Petugas = () => {
     const navigate = useNavigate();
+    const location = useLocation();
+    const { logout } = useAuth();
+
+    const handleLogout = async () => {
+        await logout();
+        navigate('/login');
+    };
+
+    const isActive = (path) => location.pathname === path;
 
     // Mock data based on the design
     const transactions = [
@@ -23,7 +33,12 @@ const Petugas = () => {
                 <h1 className="app-title">K-CLEAN</h1>
             </header>
 
-            <div className="greeting">Halo, selamat datang Petugas!</div>
+            <div className="greeting-container">
+                <div className="greeting">Halo, selamat datang Petugas!</div>
+                <button className="logout-button" onClick={handleLogout} aria-label="Logout">
+                    <LogOut color="#E53935" size={24} />
+                </button>
+            </div>
 
             {/* Stats Cards */}
             <div className="stats-grid">
@@ -85,13 +100,19 @@ const Petugas = () => {
 
             {/* Bottom Navigation */}
             <nav className="bottom-nav">
-                <div className="nav-item">
+                <div
+                    className={`nav-item ${isActive('/petugas-dashboard') ? 'active' : ''}`}
+                    onClick={() => navigate('/petugas-dashboard')}
+                >
                     <Home className="nav-icon" />
                 </div>
                 <div className="nav-item">
                     <Scan className="nav-icon" />
                 </div>
-                <div className="nav-item" onClick={() => navigate('/petugas-profile')}>
+                <div
+                    className={`nav-item ${isActive('/petugas-profile') ? 'active' : ''}`}
+                    onClick={() => navigate('/petugas-profile')}
+                >
                     <User className="nav-icon" />
                 </div>
             </nav>

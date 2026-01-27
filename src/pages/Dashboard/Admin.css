@@ -25,17 +25,39 @@
     width: 100%;
 }
 
-.logout-button {
-    background-color: #E53935;
-    /* Red for logout */
-    color: white;
-    border: none;
-    padding: 8px 16px;
-    border-radius: 8px;
+/* Greeting Container & Logout styles (Matched with Petugas) */
+.greeting-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    width: 100%;
+}
+
+.greeting {
     font-size: 14px;
+    /* Adjusted to 14px as per Petugas/User preference */
     font-weight: 700;
+    color: #000;
+}
+
+.logout-button {
+    background: white;
+    border: 1px solid #eee;
+    border-radius: 8px;
     cursor: pointer;
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    transition: transform 0.1s;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    width: 40px;
+    height: 40px;
+}
+
+.logout-button:active {
+    transform: scale(0.95);
 }
 
 .app-title {
@@ -45,15 +67,7 @@
     letter-spacing: 1px;
 }
 
-.greeting-section {
-    margin-bottom: 24px;
-}
 
-.greeting-text {
-    font-size: 18px;
-    font-weight: 700;
-    color: #000;
-}
 
 /* Action Buttons */
 .action-buttons-grid {

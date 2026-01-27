@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { UserPlus, Store, X, Trash2, Check } from 'lucide-react';
+import { UserPlus, Store, X, Trash2, Check, LogOut } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../../context/AuthContext';
 import api from '../../api/axios'; // Adjust import based on actual file structure
@@ -153,15 +153,18 @@ const Admin = () => {
     return (
         <div className="admin-container">
             {/* Header */}
+            {/* Header */}
             <header className="admin-header">
                 <div className="header-content">
                     <h1 className="app-title">K-CLEAN</h1>
-                    <button className="logout-button" onClick={handleLogout}>Log Out</button>
                 </div>
             </header>
 
-            <div className="greeting-section">
-                <h2 className="greeting-text">Halo, selamat datang Admin!</h2>
+            <div className="greeting-container">
+                <div className="greeting">Halo, selamat datang Admin!</div>
+                <button className="logout-button" onClick={handleLogout} aria-label="Logout">
+                    <LogOut color="#E53935" size={24} />
+                </button>
             </div>
 
             {/* Action Buttons */}

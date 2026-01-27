@@ -15,7 +15,8 @@ const EditDataUMKM = () => {
         id: '',
         name: '',
         email: '',
-        no_telp: ''
+        no_telp: '',
+        avatar: ''
     });
 
     useEffect(() => {
@@ -25,7 +26,8 @@ const EditDataUMKM = () => {
                 id: user.id,
                 name: user.name || '',
                 email: user.email || '',
-                no_telp: user.phone || ''
+                no_telp: user.phone || '',
+                avatar: user.avatar || ''
             });
         }
     }, [location.state]);
@@ -45,7 +47,8 @@ const EditDataUMKM = () => {
             await api.patch(`/user/${formData.id}`, {
                 name: formData.name,
                 email: formData.email,
-                no_telp: formData.no_telp
+                no_telp: formData.no_telp,
+                avatar: formData.avatar
             });
 
             // alert('Data UMKM berhasil diperbaharui!');

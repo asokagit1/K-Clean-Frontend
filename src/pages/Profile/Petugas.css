@@ -217,7 +217,8 @@
     display: flex;
     justify-content: space-around;
     align-items: center;
-    padding: 16px 0;
+    height: 50px;
+    padding: 0;
     background-color: #012E34;
     position: fixed;
     bottom: 20px;
@@ -238,6 +239,19 @@
     justify-content: center;
     color: white;
     cursor: pointer;
+    transition: transform 0.2s;
+}
+
+.nav-item:active {
+    transform: scale(0.95);
+}
+
+.nav-item.active {
+    border-bottom: 5px solid white;
+    padding-bottom: 5px;
+    /* Adjust spacing immediately if needed, or rely on flex alignment */
+    border-radius: 5px;
+    /* Slight rounding for the line if desired, or 0 for sharp */
 }
 
 .nav-icon {

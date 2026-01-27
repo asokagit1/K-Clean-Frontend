@@ -38,12 +38,42 @@
     letter-spacing: 1px;
 }
 
-.greeting {
-    font-size: 16px;
-    font-weight: 700;
+.greeting-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
     margin-bottom: 16px;
+    width: 100%;
+}
+
+.greeting {
+    font-size: 12px;
+    font-weight: 700;
     color: #000;
-    align-self: flex-start;
+    /* Removed margin-bottom and align-self as they are handled by container */
+}
+
+.logout-button {
+    background: white;
+    border: 1px solid #eee;
+    /* Subtle border */
+    border-radius: 8px;
+    /* Rounded corners like the cards */
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 6px;
+    /* More padding for a button shape */
+    transition: transform 0.1s;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    /* Subtle shadow */
+    width: 40px;
+    height: 40px;
+}
+
+.logout-button:active {
+    transform: scale(0.95);
 }
 
 /* Specific Grid Layout from Design */
@@ -227,7 +257,7 @@
     transform: translateX(-50%);
     width: 90%;
     max-width: 440px;
-    height: 60px;
+    height: 50px;
     background-color: var(--primary-dark);
     border-radius: 12px;
     display: flex;
@@ -247,6 +277,14 @@
 
 .nav-item:active {
     transform: scale(0.95);
+}
+
+.nav-item.active {
+    border-bottom: 5px solid white;
+    padding-bottom: 5px;
+    /* Adjust spacing immediately if needed, or rely on flex alignment */
+    border-radius: 5px;
+    /* Slight rounding for the line if desired, or 0 for sharp */
 }
 
 .nav-icon {

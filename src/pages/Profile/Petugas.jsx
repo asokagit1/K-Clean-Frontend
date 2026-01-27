@@ -1,11 +1,14 @@
 import React, { useState, useEffect } from 'react';
 import { ChevronLeft, Pencil, Home, Scan, User, Check, Trash2 } from 'lucide-react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import api from '../../api/axios';
 import './Petugas.css';
 
 const Petugas = () => {
     const navigate = useNavigate();
+    const location = useLocation();
+
+    const isActive = (path) => location.pathname === path;
 
     // Initial state
     const [userInfo, setUserInfo] = useState({
@@ -267,13 +270,19 @@ const Petugas = () => {
 
             {/* Bottom Navigation (Reusing similar structure) */}
             <nav className="bottom-nav">
-                <div className="nav-item" onClick={() => navigate('/petugas-dashboard')}>
+                <div
+                    className={`nav-item ${isActive('/petugas-dashboard') ? 'active' : ''}`}
+                    onClick={() => navigate('/petugas-dashboard')}
+                >
                     <Home className="nav-icon" />
                 </div>
                 <div className="nav-item">
                     <Scan className="nav-icon" />
                 </div>
-                <div className="nav-item" style={{ color: '#FFC400' }}> {/* Active state */}
+                <div
+                    className={`nav-item ${isActive('/petugas-profile') ? 'active' : ''}`}
+                    onClick={() => navigate('/petugas-profile')}
+                >
                     <User className="nav-icon" />
                 </div>
             </nav>
