@@ -42,9 +42,6 @@ body { background-color: var(--bg-page); }
 .notif-icon { width: 28px; height: 28px; cursor: pointer; transition: 0.2s; }
 .notif-icon:hover { transform: scale(1.1); }
 
-.user-profile-corner {
-    display: flex; align-items: center; gap: 10px;
-}
 .user-text { text-align: right; }
 .user-name { font-weight: bold; font-size: 14px; color: var(--primary-dark); }
 .user-role { font-size: 11px; color: #666; }

@@ -17,6 +17,7 @@ import EditDataUser from './pages/EditPengguna/EditDataUser';
 import DashboardUMKM from './pages/Dashboard/Umkm';
 import CreateVoucher from './pages/Dashboard/CreateVoucher';
 import UserProfile from './pages/Profile/UserProfile';
+import ProfileUMKM from './pages/Profile/ProfileUMKM';
 
 // Protected Route Component
 const ProtectedRoute = () => {
@@ -63,6 +64,7 @@ function App() {
             <Route path="/umkm-dashboard" element={<DashboardUMKM />} />
             <Route path="/create-voucher" element={<CreateVoucher />} />
             <Route path="/profile" element={<UserProfile />} />
+            <Route path="/profile-umkm" element={<ProfileUMKM />} />
             
           </Route>
 
