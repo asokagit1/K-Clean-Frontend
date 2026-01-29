@@ -41,9 +41,8 @@
     font-size: 20px;
     font-weight: 800;
     color: black;
-    position: absolute;
-    left: 50%;
-    transform: translateX(-50%);
+    flex: 1;
+    text-align: center;
 }
 
 .profile-avatar-section {
