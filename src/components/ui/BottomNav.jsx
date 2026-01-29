@@ -5,7 +5,7 @@ import { cn } from '../../lib/utils';
 
 const BottomNav = () => {
     const location = useLocation();
-    
+
     // Check if we are on a path that matches the link
     const isActive = (path) => location.pathname === path;
 
@@ -16,18 +16,18 @@ const BottomNav = () => {
                     "p-2 rounded-xl transition-all duration-300 relative",
                 )}>
                     <Home size={28} className="text-white" />
-                     {isActive('/dashboard') && (
+                    {isActive('/dashboard') && (
                         <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-white rounded-full"></div>
                     )}
                 </div>
             </Link>
-            
-            <Link to="/vouchers" className="flex flex-col items-center gap-1">
+
+            <Link to="/voucher-ku" className="flex flex-col items-center gap-1">
                 <div className={cn(
                     "p-2 rounded-xl transition-all duration-300 relative",
                 )}>
                     <TicketPercent size={28} className="text-white" />
-                     {isActive('/vouchers') && (
+                    {isActive('/voucher-ku') && (
                         <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-white rounded-full"></div>
                     )}
                 </div>
@@ -38,7 +38,7 @@ const BottomNav = () => {
                     "p-2 rounded-xl transition-all duration-300 relative",
                 )}>
                     <User size={28} className="text-white" />
-                     {isActive('/profile') && (
+                    {isActive('/profile') && (
                         <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-white rounded-full"></div>
                     )}
                 </div>

@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ChevronLeft, Pencil, Check, Trash2 } from 'lucide-react';
+import { ChevronLeft, Pencil, Check, Trash2, QrCode } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import api from '../../api/axios';
 import BottomNav from '../../components/ui/BottomNav';
@@ -11,6 +11,7 @@ const UserProfile = () => {
     // Initial state
     const [userInfo, setUserInfo] = useState({
         name: '',
+        kk: '',
         email: '',
         phone: '',
         avatarUrl: ''
@@ -23,6 +24,7 @@ const UserProfile = () => {
                 const data = response.data.Data;
                 setUserInfo({
                     name: data.name,
+                    kk: data.no_kk || '',
                     email: data.email,
                     phone: data.no_telp || '',
                     avatar: data.avatar, // Store seed if available
@@ -82,6 +84,7 @@ const UserProfile = () => {
         try {
             await api.patch('/update-profile', {
                 name: tempUserInfo.name,
+                no_kk: tempUserInfo.kk,
                 email: tempUserInfo.email,
                 no_telp: tempUserInfo.phone,
                 avatar: tempUserInfo.avatar // Send avatar seed
@@ -120,7 +123,9 @@ const UserProfile = () => {
                     <ChevronLeft size={28} color="white" strokeWidth={3} />
                 </button>
                 <div className="header-title">PROFIL SAYA</div>
-                <div style={{ width: 44 }}></div> {/* Spacer matching button width for true centering */}
+                <button className="back-button" onClick={() => navigate('/QRprofileUser')}>
+                    <QrCode size={24} color="white" />
+                </button>
             </div>
 
             {/* Avatar */}
@@ -141,9 +146,9 @@ const UserProfile = () => {
             </div>
 
             {/* Info Fields */}
-            <div className="profile-form">
+            <div className="profile-form" style={{ gap: '6px' }}>
                 <div className="form-group">
-                    <label className="label">Nama Lengkap</label>
+                    <label className="label">Nama Keluarga</label>
                     {isEditing ? (
                         <input
                             type="text"
@@ -153,6 +158,20 @@ const UserProfile = () => {
                         />
                     ) : (
                         <div className="value-box">{userInfo.name}</div>
+                    )}
+                </div>
+
+                <div className="form-group">
+                    <label className="label">Nomor KK</label>
+                    {isEditing ? (
+                        <input
+                            type="text"
+                            className="input-field"
+                            value={tempUserInfo.kk}
+                            onChange={(e) => handleInputChange('kk', e.target.value)}
+                        />
+                    ) : (
+                        <div className="value-box">{userInfo.kk}</div>
                     )}
                 </div>
 

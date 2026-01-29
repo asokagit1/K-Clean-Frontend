@@ -7,7 +7,7 @@ import Input from '../../components/ui/Input';
 const Login = () => {
     const navigate = useNavigate();
     const { login } = useAuth();
-    
+
     // State form
     const [formData, setFormData] = useState({
         email: '',
@@ -32,13 +32,13 @@ const Login = () => {
 
             // LOGIC PERBAIKAN REDIRECT (Termasuk UMKM)
             // Mengambil user dari response (antisipasi struktur response)
-            const user = response.user || response; 
-            const roles = user.roles || []; 
+            const user = response.user || response;
+            const roles = user.roles || [];
 
             if (roles.includes('super-admin') || roles.includes('admin')) {
                 navigate('/admin-dashboard');
             } else if (roles.includes('petugas')) {
-                navigate('/petugas-dashboard'); 
+                navigate('/petugas-dashboard');
             } else if (roles.includes('umkm')) {
                 navigate('/umkm-dashboard'); // Redirect khusus UMKM
             } else {
@@ -62,7 +62,7 @@ const Login = () => {
                         <img src="/kclean-logo.png" alt="K-Clean Logo" className="w-40 h-40 object-contain" />
                     </div>
 
-                    <h2 className="text-sm font-semibold text-primary">Selamat datang warga!</h2>
+                    <h2 className="text-sm font-semibold text-primary">Selamat datang!</h2>
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-4">
