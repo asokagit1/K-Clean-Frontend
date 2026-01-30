@@ -108,7 +108,7 @@ const UserDashboard = () => {
 
                 {/* History Section */}
                 <div className="mb-8">
-                    <div className="border-2 border-gray-800 rounded-xl p-4 space-y-4">
+                    <div className="border-2 border-gray-800 rounded-xl p-4 space-y-4 max-h-[210px] overflow-y-auto">
                         {loading ? (
                             <div className="text-center py-4 text-gray-400">Loading...</div>
                         ) : (
