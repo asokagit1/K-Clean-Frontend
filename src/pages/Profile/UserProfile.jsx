@@ -122,9 +122,9 @@ const UserProfile = () => {
                 <button className="back-button" onClick={() => navigate(-1)}>
                     <ChevronLeft size={28} color="white" strokeWidth={3} />
                 </button>
-                <div className="header-title">PROFIL SAYA</div>
-                <button className="back-button" onClick={() => navigate('/QRprofileUser')}>
-                    <QrCode size={24} color="white" />
+                <div className="header-title">K-CLEAN</div>
+                <button onClick={() => navigate('/QRprofileUser')} style={{ background: 'transparent', border: 'none', cursor: 'pointer', padding: 0 }}>
+                    <QrCode size={32} color="black" />
                 </button>
             </div>
 
@@ -146,7 +146,7 @@ const UserProfile = () => {
             </div>
 
             {/* Info Fields */}
-            <div className="profile-form" style={{ gap: '6px' }}>
+            <div className="profile-form" style={{ gap: '0px' }}>
                 <div className="form-group">
                     <label className="label">Nama Keluarga</label>
                     {isEditing ? (

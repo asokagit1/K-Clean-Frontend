@@ -50,7 +50,7 @@
     display: flex;
     justify-content: center;
     align-items: center;
-    margin-bottom: 30px;
+    margin-bottom: 0px;
     flex-direction: column;
 }
 
@@ -80,9 +80,9 @@
 /* Avatar Edit Overlay - Only visible in Edit Mode */
 .avatar-edit-overlay {
     position: absolute;
-    bottom: 5px;
-    right: 5px;
-    /* Tucked closer to the circle */
+    bottom: 33px;
+    right: 33px;
+    /* Tucked effectively on the circle edge */
     background-color: #012E34;
     width: 40px;
     height: 40px;

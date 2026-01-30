@@ -10,7 +10,7 @@ const BottomNav = () => {
     const isActive = (path) => location.pathname === path;
 
     return (
-        <div className="fixed bottom-5 left-1/2 -translate-x-1/2 w-[90%] max-w-[440px] bg-primary h-[60px] rounded-xl flex justify-around items-center px-4 text-white shadow-xl z-50">
+        <div className="fixed bottom-5 left-1/2 -translate-x-1/2 w-[90%] max-w-[440px] bg-[#012E34] h-[60px] rounded-xl flex justify-around items-center px-4 text-white shadow-xl z-50">
             <Link to="/dashboard" className="flex flex-col items-center gap-1">
                 <div className={cn(
                     "p-2 rounded-xl transition-all duration-300 relative",

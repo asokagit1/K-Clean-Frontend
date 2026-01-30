@@ -4,6 +4,8 @@ import { useNavigate } from 'react-router-dom';
 import api from '../../api/axios';
 import BottomNav from '../../components/ui/BottomNav';
 
+import '../Profile/Petugas.css';
+
 const QRprofileUser = () => {
     const navigate = useNavigate();
     const [userData, setUserData] = useState(null);
@@ -59,7 +61,7 @@ const QRprofileUser = () => {
                 <div className="px-6 pt-8 pb-4 flex items-center justify-between">
                     <button
                         onClick={() => navigate(-1)}
-                        className="w-10 h-10 bg-[#012E34] rounded-xl flex items-center justify-center text-white shadow-sm"
+                        className="back-button"
                     >
                         <ChevronLeft size={28} color="white" strokeWidth={3} />
                     </button>

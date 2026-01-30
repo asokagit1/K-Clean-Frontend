@@ -142,7 +142,10 @@ const UserDashboard = () => {
                 <div>
                     <div className="flex justify-between items-center mb-3">
                         <h3 className="font-bold text-lg">Rekomendasi Voucher</h3>
-                        <button className="text-xs text-blue-500 hover:underline flex items-center">
+                        <button
+                            onClick={() => navigate('/tukar-poin')}
+                            className="text-xs text-blue-500 hover:underline flex items-center"
+                        >
                             Lihat semua <ChevronRight size={14} />
                         </button>
                     </div>

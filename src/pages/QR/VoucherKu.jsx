@@ -4,6 +4,8 @@ import { ChevronLeft } from 'lucide-react';
 import api from '../../api/axios';
 import BottomNav from '../../components/ui/BottomNav';
 
+import '../Profile/Petugas.css';
+
 const VoucherKu = () => {
     const navigate = useNavigate();
     const location = useLocation();
@@ -98,7 +100,7 @@ const VoucherKu = () => {
                 <div className="px-6 pt-8 pb-4 flex items-center justify-between relative">
                     <button
                         onClick={() => navigate('/dashboard')}
-                        className="w-10 h-10 bg-[#012E34] rounded-xl flex items-center justify-center text-white shadow-sm"
+                        className="back-button"
                     >
                         <ChevronLeft size={28} color="white" strokeWidth={3} />
                     </button>
@@ -116,24 +118,26 @@ const VoucherKu = () => {
                         {activeVouchers.map((voucher, index) => (
                             <div key={voucher.id} className="w-full flex-shrink-0 px-8 flex justify-center">
                                 {/* Voucher Card */}
-                                <div className="bg-[#012E34] rounded-[30px] w-full aspect-[4/6] relative flex flex-col items-center shadow-2xl overflow-hidden pt-8">
+                                <div className="bg-[#012E34] rounded-l w-full max-w-[280px] aspect-[4/6] relative flex flex-col items-center shadow-2xl overflow-hidden pt-6">
 
                                     {/* Top Section: Info */}
-                                    <div className="flex flex-col items-center text-center w-full px-6 mb-4">
-                                        <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-white/20 mb-3 bg-gray-200">
+                                    <div className="flex flex-row items-center w-full px-5 mb-4 gap-4 mt-2">
+                                        <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-white/20 flex-shrink-0 bg-gray-200">
                                             <img
                                                 src={voucher.image ? `http://localhost:8000/storage/voucher/${voucher.image}` : 'https://placehold.co/100x100?text=V'}
                                                 alt={voucher.title}
                                                 className="w-full h-full object-cover"
                                             />
                                         </div>
-                                        <h2 className="text-white text-xl font-bold">{voucher.title}</h2>
-                                        <div className="text-white text-lg font-bold">
-                                            Rp {formatPrice(voucher.discount_price)} <span className="font-normal text-sm">Diskon</span>
+                                        <div className="flex flex-col items-start text-left">
+                                            <h2 className="text-white text-lg font-bold leading-tight mb-1">{voucher.title}</h2>
+                                            <div className="text-white text-base font-bold leading-none">
+                                                Rp {formatPrice(voucher.discount_price)} <span className="font-normal text-xs text-gray-200">Diskon</span>
+                                            </div>
+                                            <p className="text-gray-300 text-[10px] mt-1">
+                                                Valid hingga {formatDate(voucher.valid_until)}
+                                            </p>
                                         </div>
-                                        <p className="text-gray-300 text-xs mt-1">
-                                            Valid hingga {formatDate(voucher.valid_until)}
-                                        </p>
                                     </div>
 
                                     {/* QR Code Section (Center) */}
@@ -157,7 +161,7 @@ const VoucherKu = () => {
 
 
                                     {/* Bottom Branding */}
-                                    <div className="mb-8 mt-auto">
+                                    <div className="mb-12 mt-auto">
                                         <span className="text-white font-black tracking-widest text-xl">K-CLEAN</span>
                                     </div>
 

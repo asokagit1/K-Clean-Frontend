@@ -143,7 +143,7 @@ const Petugas = () => {
             </div>
 
             {/* Info Fields */}
-            <div className="profile-form">
+            <div className="profile-form" style={{ gap: '0px' }}>
                 <div className="form-group">
                     <label className="label">Nama Petugas</label>
                     {isEditing ? (
