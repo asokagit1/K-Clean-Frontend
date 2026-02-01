@@ -8,15 +8,22 @@
     --text-color: #333;
 }
 
-* { box-sizing: border-box; font-family: 'Inter', sans-serif; }
-body { background-color: var(--bg-page); }
+* {
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: var(--bg-page);
+}
 
 /* --- MAIN CONTAINER --- */
 .create-voucher-container {
     width: 100%;
     min-height: 100vh;
     padding: 20px;
-    padding-bottom: 120px; /* Space agar tidak tertutup nav bawah */
+    padding-bottom: 120px;
+    /* Space agar tidak tertutup nav bawah */
     margin: 0 auto;
     background-color: var(--bg-page);
     position: relative;
@@ -29,84 +36,196 @@ body { background-color: var(--bg-page); }
         background-color: white;
         margin-top: 30px;
         border-radius: 20px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
     }
 }
 
 /* --- HEADER --- */
 .cv-header {
-    display: flex; align-items: center; justify-content: center;
-    position: relative; margin-bottom: 30px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    position: relative;
+    margin-bottom: 30px;
 }
+
 .btn-back {
-    position: absolute; left: 0; width: 40px; height: 40px;
-    background-color: var(--primary-dark); border-radius: 12px;
-    display: flex; align-items: center; justify-content: center;
-    border: none; cursor: pointer; color: white; transition: 0.2s;
+    position: absolute;
+    left: 0;
+    width: 40px;
+    height: 40px;
+    background-color: var(--primary-dark);
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: none;
+    cursor: pointer;
+    color: white;
+    transition: 0.2s;
 }
-.btn-back:hover { opacity: 0.9; }
-.cv-title { font-size: 24px; font-weight: 900; letter-spacing: 1px; color: #000; }
+
+.btn-back:hover {
+    opacity: 0.9;
+}
+
+.cv-title {
+    font-size: 24px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    color: #000;
+}
 
 /* --- FORM COMPONENTS --- */
-.page-heading { font-size: 18px; font-weight: 800; margin-bottom: 20px; color: #000; }
-.form-group { margin-bottom: 20px; }
-.form-label { display: block; font-size: 14px; font-weight: 500; margin-bottom: 8px; color: #333; }
+.page-heading {
+    font-size: 18px;
+    font-weight: 800;
+    margin-bottom: 20px;
+    color: #000;
+}
+
+.form-group {
+    margin-bottom: 20px;
+}
+
+.form-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 500;
+    margin-bottom: 8px;
+    color: #333;
+}
+
 .form-input {
-    width: 100%; padding: 12px 15px; border: 1px solid var(--primary-dark);
-    border-radius: 8px; font-size: 14px; outline: none; background: transparent;
+    width: 100%;
+    padding: 12px 15px;
+    border: 1px solid var(--primary-dark);
+    border-radius: 8px;
+    font-size: 14px;
+    outline: none;
+    background: transparent;
 }
 
 /* Toggle Buttons */
-.toggle-group { display: flex; gap: 15px; }
-.toggle-btn {
-    flex: 1; padding: 10px; border: none; border-radius: 8px;
-    font-weight: 700; font-size: 14px; cursor: pointer; transition: 0.2s;
-    background-color: #D9D9D9; color: var(--primary-dark);
+.toggle-group {
+    display: flex;
+    gap: 15px;
 }
+
+.toggle-btn {
+    flex: 1;
+    padding: 10px;
+    border: none;
+    border-radius: 8px;
+    font-weight: 700;
+    font-size: 14px;
+    cursor: pointer;
+    transition: 0.2s;
+    background-color: #D9D9D9;
+    color: var(--primary-dark);
+}
+
 .toggle-btn.selected {
-    background-color: #D1E1E3; border: 2px solid var(--primary-dark);
+    background-color: #D1E1E3;
+    border: 2px solid var(--primary-dark);
 }
 
 /* Upload Area */
 .upload-area {
-    border: 1px solid var(--primary-dark); background-color: #D9D9D9;
-    border-radius: 12px; padding: 30px 20px;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    text-align: center; cursor: pointer;
+    border: 1px solid var(--primary-dark);
+    background-color: #D9D9D9;
+    border-radius: 12px;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    text-align: center;
+    cursor: pointer;
 }
+
 .upload-icon-box {
-    width: 40px; height: 40px; background: white; border-radius: 8px;
-    display: flex; align-items: center; justify-content: center; margin-bottom: 10px;
+    width: 40px;
+    height: 40px;
+    background: white;
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 10px;
 }
-.upload-title { font-weight: 700; font-size: 12px; margin-bottom: 5px; }
-.upload-desc { font-size: 10px; color: #666; margin-bottom: 15px; }
+
+.upload-title {
+    font-weight: 700;
+    font-size: 12px;
+    margin-bottom: 5px;
+}
+
+.upload-desc {
+    font-size: 10px;
+    color: #666;
+    margin-bottom: 15px;
+}
+
 .btn-pilih-file {
-    background-color: var(--primary-dark); color: white; border: none;
-    padding: 8px 20px; border-radius: 6px; font-size: 12px; font-weight: 600;
+    background-color: var(--primary-dark);
+    color: white;
+    border: none;
+    padding: 8px 20px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
 }
-.file-preview { width: 100%; max-height: 200px; object-fit: cover; border-radius: 8px; }
+
+.file-preview {
+    width: 100%;
+    max-height: 200px;
+    object-fit: cover;
+    border-radius: 8px;
+}
 
 /* Date Picker */
-.date-input-wrapper { position: relative; }
-.date-icon { position: absolute; right: 15px; top: 50%; transform: translateY(-50%); pointer-events: none; }
+.date-input-wrapper {
+    position: relative;
+}
+
+.date-icon {
+    position: absolute;
+    right: 15px;
+    top: 50%;
+    transform: translateY(-50%);
+    pointer-events: none;
+}
 
 /* Submit Button */
 .btn-submit-create {
-    width: 100%; background-color: var(--primary-dark); color: white;
-    padding: 15px; border-radius: 10px; font-weight: 700; font-size: 16px;
-    border: none; cursor: pointer; margin-top: 10px;
+    width: 100%;
+    background-color: var(--primary-dark);
+    color: white;
+    padding: 15px;
+    border-radius: 10px;
+    font-weight: 700;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    margin-top: 10px;
 }
-.btn-submit-create:hover { opacity: 0.9; }
+
+.btn-submit-create:hover {
+    opacity: 0.9;
+}
 
 /* --- STYLE UNTUK INPUT JUMLAH VOUCHER (GLOBAL - BERLAKU UNTUK HP & PC) --- */
 .qty-row-container {
     display: flex;
     align-items: center;
-    justify-content: space-between; /* Sebar elemen: Label Kiri, Angka Tengah, Tombol Kanan */
-    
+    justify-content: space-between;
+    /* Sebar elemen: Label Kiri, Angka Tengah, Tombol Kanan */
+
     width: 100%;
     padding: 8px 15px;
-    border: 1px solid #000; /* Border hitam tipis sesuai desain */
+    border: 1px solid #000;
+    /* Border hitam tipis sesuai desain */
     border-radius: 8px;
     background-color: white;
     height: 50px;
@@ -126,8 +245,10 @@ body { background-color: var(--bg-page); }
 
 .qty-controls {
     display: flex;
-    gap: 2px; /* Jarak antar tombol + dan - rapat */
-    background-color: #E0E0E0; /* Background abu pembungkus tombol */
+    gap: 2px;
+    /* Jarak antar tombol + dan - rapat */
+    background-color: #E0E0E0;
+    /* Background abu pembungkus tombol */
     border-radius: 6px;
     overflow: hidden;
     border: 1px solid #999;
@@ -136,7 +257,8 @@ body { background-color: var(--bg-page); }
 .qty-btn-square {
     width: 35px;
     height: 35px;
-    background-color: #E0E0E0; /* Warna abu-abu */
+    background-color: #E0E0E0;
+    /* Warna abu-abu */
     border: none;
     font-size: 18px;
     font-weight: 600;
@@ -150,63 +272,76 @@ body { background-color: var(--bg-page); }
 
 /* Garis pemisah antara - dan + */
 .qty-btn-square:first-child {
-    border-right: 1px solid #999; 
+    border-right: 1px solid #999;
 }
 
 .qty-btn-square:hover {
     background-color: #D6D6D6;
 }
+
 .qty-btn-square:active {
     background-color: #999;
 }
 
-/* --- UNIVERSAL BOTTOM NAV (Tampil di HP & PC) --- */
-.bottom-nav {
-    position: fixed;
-    bottom: 20px; 
-    left: 50%;
-    transform: translateX(-50%);
-    width: 95%; max-width: 480px; height: 70px;
-    background-color: var(--primary-dark);
-    display: flex; justify-content: space-around; align-items: center;
-    border-radius: 20px; z-index: 999;
-    box-shadow: 0 10px 25px rgba(0, 59, 70, 0.3);
-}
-.nav-item { opacity: 0.6; cursor: pointer; }
-.nav-item.active { opacity: 1; }
-.nav-item svg { width: 28px; height: 28px; fill: white; }
+/* Unused styles removed */
 
 /* --- POP UP SUKSES --- */
 .success-popup {
     position: fixed;
-    top: 50%; left: 50%; transform: translate(-50%, -50%);
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
     background-color: white;
-    width: 250px; height: 250px;
+    width: 250px;
+    height: 250px;
     border-radius: 12px;
-    box-shadow: 0 0 0 1000px rgba(0,0,0,0.5); /* Overlay Gelap */
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    gap: 20px; z-index: 2000;
+    box-shadow: 0 0 0 1000px rgba(0, 0, 0, 0.5);
+    /* Overlay Gelap */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 20px;
+    z-index: 2000;
     animation: zoomIn 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
 }
 
 .popup-icon-box {
-    width: 80px; height: 80px;
-    border: 5px solid #003B46; /* Lingkaran hijau tua tebal */
+    width: 80px;
+    height: 80px;
+    border: 5px solid #003B46;
+    /* Lingkaran hijau tua tebal */
     border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.popup-text { font-weight: 700; font-size: 18px; color: #000; }
+.popup-text {
+    font-weight: 700;
+    font-size: 18px;
+    color: #000;
+}
 
 @keyframes zoomIn {
-    from { opacity: 0; transform: translate(-50%, -50%) scale(0.5); }
-    to { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+    from {
+        opacity: 0;
+        transform: translate(-50%, -50%) scale(0.5);
+    }
+
+    to {
+        opacity: 1;
+        transform: translate(-50%, -50%) scale(1);
+    }
 }
 
 /* --- PC SPECIFIC ADJUSTMENTS (Hanya berlaku untuk layar besar) --- */
 @media (min-width: 1024px) {
     .btn-submit-create {
-        width: 200px; margin-left: auto; display: block;
+        width: 200px;
+        margin-left: auto;
+        display: block;
     }
+
     /* Bottom Nav tidak di-hide, jadi tetap muncul */
 }

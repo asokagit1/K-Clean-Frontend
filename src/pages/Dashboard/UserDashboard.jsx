@@ -21,7 +21,7 @@ const UserDashboard = () => {
             // Fetch Fresh User Data (Points)
             const userResponse = await api.get('/user-data');
             if (userResponse.data && userResponse.data.Data) {
-                 setPoints(userResponse.data.Data.points);
+                setPoints(userResponse.data.Data.points);
             }
 
             // Fetch Notifications/History
@@ -67,20 +67,22 @@ const UserDashboard = () => {
         <div className="min-h-screen bg-white flex justify-center font-sans text-gray-900">
             {/* Main Container */}
             <div className="w-full max-w-md bg-white min-h-screen relative flex flex-col pb-24 px-6 md:border-x md:border-gray-100">
-                
+
                 {/* Header */}
-                <div className="pt-8 pb-6 flex flex-col items-center relative">
-                    <button 
+                <div className="pt-8 pb-6 text-center">
+                    <h1 className="text-2xl font-black tracking-wider uppercase">K-CLEAN</h1>
+                </div>
+
+                {/* Greeting & Logout */}
+                <div className="relative mb-6">
+                    <h2 className="text-lg font-bold pr-12">Sudah buang sampah hari ini ?</h2>
+                    <button
                         onClick={logout}
-                        className="absolute right-0 top-8 p-2 text-gray-500 hover:text-red-600 transition-colors"
+                        className="absolute right-0 top-0 p-2 text-gray-500 hover:text-red-600 transition-colors"
                         title="Keluar"
                     >
                         <LogOut size={24} />
                     </button>
-                    
-                    <h1 className="text-2xl font-black tracking-wider uppercase mb-6">K-CLEAN</h1>
-                    
-                    <h2 className="text-lg font-bold mb-1">Sudah buang sampah hari ini ?</h2>
                 </div>
 
 
@@ -99,77 +101,70 @@ const UserDashboard = () => {
 
                 {/* Action Buttons */}
                 <div className="grid grid-cols-2 gap-4 mb-8">
-                    <button 
+                    <button
                         onClick={() => setIsJadwalOpen(true)}
                         className="border-2 border-gray-800 rounded-xl p-4 flex flex-col items-center justify-center gap-2 hover:bg-gray-50 transition-colors"
                     >
                         <div className="text-primary mb-1">
-                             <CalendarClock size={32} strokeWidth={2.5} />
+                            <CalendarClock size={32} strokeWidth={2.5} />
                         </div>
                         <span className="font-bold text-sm">Jadwal</span>
                     </button>
 
-                    <button 
+                    <button
                         className="border-2 border-gray-800 rounded-xl p-4 flex flex-col items-center justify-center gap-2 hover:bg-gray-50 transition-colors"
                         onClick={() => navigate('/tukar-poin')}
                     >
-                         <div className="text-primary mb-1">
-                             <Repeat size={32} strokeWidth={2.5} />
+                        <div className="text-primary mb-1">
+                            <Repeat size={32} strokeWidth={2.5} />
                         </div>
                         <span className="font-bold text-sm">Tukar Poin</span>
                     </button>
                 </div>
 
                 {/* History Section */}
-                <div className="mb-8">
-                    <div className="flex justify-between items-center mb-3">
-                        <h3 className="font-bold text-lg">Riwayat Transaksi</h3>
-                    </div>
-                    <div className="border-2 border-gray-800 rounded-xl p-4 space-y-4 h-80 overflow-y-auto">
+                <h3 className="text-sm font-bold text-center mb-2 text-black">Riwayat Transaksi</h3>
+                <div className="bg-white border border-black rounded-lg p-0 mb-6 shadow-[2px_2px_0px_rgba(0,0,0,0.1)] overflow-hidden">
+                    <div className="flex flex-col">
                         {loading ? (
-                            <div className="text-center py-4 text-gray-400">Loading...</div>
+                            <div className="text-center py-4 text-xs text-gray-400">Loading...</div>
                         ) : (
                             history.length === 0 ? (
-                                <div className="text-center py-6 text-gray-500 font-medium">
-                                    <p>Belum ada riwayat transaksi</p>
-                                    <p className="text-xs mt-1">Lakukan transaksi untuk melihat riwayat</p>
+                                <div className="text-center py-6 text-gray-400 text-xs">
+                                    <p>Belum ada transaksi</p>
                                 </div>
                             ) : (
                                 history.map((item, index) => (
-                                    <div key={index} className="flex items-center justify-between">
-                                        <div className="flex items-center gap-3">
+                                    <div key={index} className="flex items-center justify-between p-3 border-b border-gray-100 last:border-0 hover:bg-gray-50 transition-colors">
+                                        <div className="flex items-center gap-3 overflow-hidden">
                                             {/* Icon based on transaction type */}
                                             <div className={cn(
                                                 "w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0",
                                                 item.is_earning ? "bg-primary" : "bg-orange-100"
                                             )}>
                                                 {item.is_earning ? (
-                                                    <Coins size={16} className="text-secondary fill-secondary" />
+                                                    <Coins size={14} className="text-secondary fill-secondary" />
                                                 ) : (
-                                                    <TicketPercent size={16} className="text-orange-600" />
+                                                    <TicketPercent size={14} className="text-orange-600" />
                                                 )}
                                             </div>
-                                            
-                                            <div>
+
+                                            <div className="flex items-center text-xs w-full">
                                                 {item.is_earning ? (
-                                                    <p className="font-bold text-sm leading-none mb-1">
-                                                        eco <span className="text-gray-500 font-normal text-xs">mendapatkan <span className="text-secondary font-bold">{item.points} poin eco</span></span>
-                                                    </p>
+                                                    <div className="flex items-center gap-1 w-full">
+                                                        <span className="font-bold text-black flex-shrink-0">eco</span>
+                                                        <span className="text-gray-500 font-normal truncate">mendapatkan</span>
+                                                        <span className="text-secondary font-bold whitespace-nowrap">{item.points} poin eco</span>
+                                                    </div>
                                                 ) : (
-                                                     <p className="font-bold text-sm leading-none mb-1">
-                                                        Tukar <span className="text-gray-500 font-normal text-xs">poin menjadi <span className="text-orange-600 font-bold">{item.description}</span></span>
-                                                    </p>
-                                                )}
-                                                
-                                                {/* Optional: Show negative points for spending */}
-                                                {!item.is_earning && (
-                                                    <p className="text-xs text-gray-400">-{item.points} poin</p>
+                                                    <div className="flex items-center gap-1 w-full overflow-hidden">
+                                                        <span className="font-bold text-black flex-shrink-0">Tukar</span>
+                                                        <span className="text-gray-500 font-normal truncate">poin menjadi <span className="text-orange-600 font-bold">{item.description}</span></span>
+                                                    </div>
                                                 )}
                                             </div>
                                         </div>
-                                        <button className="text-black">
-                                            <Volume2 size={20} strokeWidth={2.5} />
-                                        </button>
+                                        <Volume2 size={18} className="text-black flex-shrink-0 ml-2" />
                                     </div>
                                 ))
                             )
@@ -179,22 +174,22 @@ const UserDashboard = () => {
 
                 {/* "Tentang Kami" Carousel Section */}
                 <div>
-                     <div className="flex justify-between items-center mb-3">
+                    <div className="flex justify-between items-center mb-3">
                         <h3 className="font-bold text-lg">Tentang Kami</h3>
                     </div>
-                    
+
                     <div className="w-full rounded-xl overflow-hidden border border-gray-200 relative aspect-[2.5/1]">
-                         {aboutUsImages.map((slide, index) => (
-                             <img 
+                        {aboutUsImages.map((slide, index) => (
+                            <img
                                 key={slide.id}
-                                src={slide.image} 
-                                alt="Tentang Kami" 
+                                src={slide.image}
+                                alt="Tentang Kami"
                                 className={cn(
                                     "w-full h-full object-cover absolute top-0 left-0 transition-opacity duration-500",
                                     index === currentSlide ? "opacity-100" : "opacity-0"
-                                )} 
-                             />
-                         ))}
+                                )}
+                            />
+                        ))}
                     </div>
                 </div>
 

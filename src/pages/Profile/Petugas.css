@@ -56,8 +56,8 @@
 
 .avatar-wrapper {
     position: relative;
-    width: 180px;
-    height: 180px;
+    width: 150px;
+    height: 150px;
 }
 
 .avatar-circle {
@@ -80,8 +80,8 @@
 /* Avatar Edit Overlay - Only visible in Edit Mode */
 .avatar-edit-overlay {
     position: absolute;
-    bottom: 33px;
-    right: 33px;
+    bottom: 0;
+    right: 0;
     /* Tucked effectively on the circle edge */
     background-color: #012E34;
     width: 40px;

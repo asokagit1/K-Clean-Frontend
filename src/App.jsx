@@ -16,14 +16,18 @@ import EditDataUMKM from './pages/EditPengguna/EditDataUMKM';
 import EditDataUser from './pages/EditPengguna/EditDataUser';
 import DashboardUMKM from './pages/Dashboard/Umkm';
 import CreateVoucher from './pages/Dashboard/CreateVoucher';
+import ListVoucher from './pages/Dashboard/ListVoucher';
 import UserProfile from './pages/Profile/UserProfile';
 import ProfileUMKM from './pages/Profile/ProfileUMKM';
 import TukarPoin from './pages/Redeem/TukarPoin';
 import DetailTukarPoin from './pages/Redeem/DetailTukarPoin';
 import VoucherKu from './pages/QR/VoucherKu';
 import QRprofileUser from './pages/QR/QRprofileUser';
+import PetugasScan from './pages/Scan/PetugasScan';
+import PetugasTimbangan from './pages/Scan/PetugasTimbangan';
+import UmkmScan from './pages/Scan/UmkmScan';
 
-// Protected Route Component
+
 const ProtectedRoute = () => {
   const { token } = useAuth();
   if (!token) {
@@ -67,12 +71,16 @@ function App() {
             <Route path="/edit-data-user" element={<EditDataUser />} />
             <Route path="/umkm-dashboard" element={<DashboardUMKM />} />
             <Route path="/create-voucher" element={<CreateVoucher />} />
+            <Route path="/list-voucher" element={<ListVoucher />} />
             <Route path="/profile" element={<UserProfile />} />
             <Route path="/profile-umkm" element={<ProfileUMKM />} />
             <Route path="/tukar-poin" element={<TukarPoin />} />
             <Route path="/voucher/:id" element={<DetailTukarPoin />} />
             <Route path="/voucher-ku" element={<VoucherKu />} />
             <Route path="/QRprofileUser" element={<QRprofileUser />} />
+            <Route path="/petugas-scan" element={<PetugasScan />} />
+            <Route path="/petugas-timbangan" element={<PetugasTimbangan />} />
+            <Route path="/umkm-scan" element={<UmkmScan />} />
 
           </Route>
 

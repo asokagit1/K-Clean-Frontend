@@ -280,10 +280,12 @@ const Petugas = () => {
                     </div>
                 </div>
 
-                <div className="flex flex-col items-center gap-1 cursor-pointer">
+                <div onClick={() => navigate('/petugas-scan')} className="flex flex-col items-center gap-1 cursor-pointer">
                     <div className={`p-2 rounded-xl transition-all duration-300 relative`}>
                         <Scan size={28} className="text-white" />
-                        {/* No active state for scan yet unless it's a route */}
+                        {isActive('/petugas-scan') && (
+                            <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-white rounded-full"></div>
+                        )}
                     </div>
                 </div>
 

@@ -1,10 +1,14 @@
 import React, { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
+import { Home, User, Scan } from 'lucide-react';
 import api from '../../api/axios';
 import './CreateVoucher.css';
 
 const CreateVoucher = () => {
     const navigate = useNavigate();
+    const location = useLocation();
+
+    const isActive = (path) => location.pathname === path;
 
     // State Form
     const [nama, setNama] = useState('');
@@ -170,17 +174,32 @@ const CreateVoucher = () => {
                 </button>
             </form>
 
-            <nav className="bottom-nav">
-                <div className="nav-item" onClick={() => navigate('/umkm-dashboard')}>
-                    <svg viewBox="0 0 24 24"><path d="M10 20v-6h4v6h5v-8h3L12 3 2 12h3v8z" /></svg>
+            {/* Bottom Navigation */}
+            <div className="fixed bottom-5 left-1/2 -translate-x-1/2 w-[90%] max-w-[440px] bg-[#012E34] h-[60px] rounded-xl flex justify-around items-center px-4 text-white shadow-xl z-50">
+                <div onClick={() => navigate('/umkm-dashboard')} className="flex flex-col items-center gap-1 cursor-pointer">
+                    <div className={`p-2 rounded-xl transition-all duration-300 relative`}>
+                        <Home size={28} className="text-white" />
+                        {isActive('/umkm-dashboard') && (
+                            <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-white rounded-full"></div>
+                        )}
+                    </div>
                 </div>
-                <div className="nav-item">
-                    <svg viewBox="0 0 24 24"><path d="M5 5h2v2H5V5zm0 12h2v2H5v-2zm12 0h2v2h-2v-2zm0-12h2v2h-2V5zM3 3v6h6V3H3zm12 0v6h6V3h-6zM3 15v6h6v-6H3zm10 2h2v2h-2v-2zm2-4h2v2h-2v-2zm-2 0h2v2h-2v-2zm-2 2h2v2h-2v-2zm0-2h2v2h-2v-2z" /></svg>
+
+                <div onClick={() => navigate('/umkm-scan')} className="flex flex-col items-center gap-1 cursor-pointer">
+                    <div className={`p-2 rounded-xl transition-all duration-300 relative`}>
+                        <Scan size={28} className="text-white" />
+                    </div>
                 </div>
-                <div className="nav-item">
-                    <svg viewBox="0 0 24 24"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z" /></svg>
+
+                <div onClick={() => navigate('/profile-umkm')} className="flex flex-col items-center gap-1 cursor-pointer">
+                    <div className={`p-2 rounded-xl transition-all duration-300 relative`}>
+                        <User size={28} className="text-white" />
+                        {isActive('/profile-umkm') && (
+                            <div className="absolute -bottom-1 left-1/2 -translate-x-1/2 w-1 h-1 bg-white rounded-full"></div>
+                        )}
+                    </div>
                 </div>
-            </nav>
+            </div>
 
             {/* POP-UP NOTIFIKASI SUKSES */}
             {showSuccessPopup && (

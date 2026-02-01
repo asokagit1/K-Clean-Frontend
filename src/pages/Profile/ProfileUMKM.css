@@ -1,15 +1,24 @@
 /* --- VARIABLES --- */
 :root {
-    --primary-dark: #003B46;
-    --primary-green: #4CAF50; /* Warna tombol Simpan/Lanjut */
-    --primary-red: #D32F2F;   /* Warna tombol Buang */
-    --bg-page: #FDFDFD;       
-    --input-bg: #003B46;      /* Background input gelap */
-    --input-text: #FFFFFF;    /* Teks input putih */
+    --primary-dark: #012E34;
+    /* Updated to match Petugas */
+    --primary-green: #4CAF50;
+    --primary-red: #E53935;
+    /* Updated to match Petugas */
+    --bg-page: #FDFDFD;
+    --input-bg: #012E34;
+    /* Updated to match Petugas */
+    --input-text: #FFFFFF;
 }
 
-* { box-sizing: border-box; font-family: 'Inter', sans-serif; }
-body { background-color: var(--bg-page); }
+* {
+    box-sizing: border-box;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: var(--bg-page);
+}
 
 /* --- CONTAINER --- */
 .profile-container {
@@ -20,6 +29,8 @@ body { background-color: var(--bg-page); }
     margin: 0 auto;
     position: relative;
     background-color: var(--bg-page);
+    display: flex;
+    flex-direction: column;
 }
 
 @media (min-width: 768px) {
@@ -28,165 +39,287 @@ body { background-color: var(--bg-page); }
         background-color: white;
         margin-top: 30px;
         border-radius: 20px;
-        box-shadow: 0 10px 30px rgba(0,0,0,0.05);
+        box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
     }
 }
 
 /* --- HEADER --- */
+/* Matches .profile-header in Petugas.css */
 .profile-header {
-    display: flex; align-items: center; justify-content: center;
-    position: relative; margin-bottom: 20px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: 24px;
+    position: relative;
+    width: 100%;
 }
+
 .btn-back {
-    position: absolute; left: 0;
-    width: 40px; height: 40px;
     background-color: var(--primary-dark);
-    border-radius: 8px;
-    display: flex; align-items: center; justify-content: center;
-    border: none; cursor: pointer; color: white;
+    color: white;
+    width: 44px;
+    height: 44px;
+    border-radius: 12px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    border: none;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+    transition: transform 0.1s;
 }
+
+.btn-back:active {
+    transform: scale(0.95);
+}
+
 .header-title {
-    font-size: 24px; font-weight: 900; letter-spacing: 1px; color: #000;
+    font-size: 20px;
+    font-weight: 800;
+    color: black;
+    flex: 1;
+    text-align: center;
 }
 
 /* --- AVATAR SECTION --- */
 .avatar-section {
-    display: flex; justify-content: center; margin-bottom: 30px; position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    margin-bottom: 0px;
+    flex-direction: column;
+    position: relative;
 }
+
 .avatar-circle {
-    width: 150px; height: 150px;
+    width: 150px;
+    /* Restored to 150px */
+    height: 150px;
     border-radius: 50%;
     overflow: hidden;
     background-color: #EAEAEA;
-    border: 3px solid #eee;
-}
-.avatar-img {
-    width: 100%; height: 100%; object-fit: cover;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-/* Tombol Edit Pensil (Hanya muncul saat mode edit) */
+.avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+/* Edit Avatar Button */
 .edit-avatar-btn {
     position: absolute;
-    bottom: 5px; right: 50%;
-    transform: translateX(60px); 
-    width: 40px; height: 40px;
+    bottom: 5px;
+    right: 50%;
+    transform: translateX(60px);
+    /* Restored to 60px offset */
+    width: 40px;
+    height: 40px;
     background-color: var(--primary-dark);
     border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
-    border: 2px solid white; cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border: 2px solid white;
+    cursor: pointer;
+    z-index: 10;
 }
 
 /* --- FORM INPUTS --- */
-.form-group { margin-bottom: 15px; }
-.form-label {
-    display: block; font-size: 14px; font-weight: 700; margin-bottom: 8px; color: #000;
+.form-group {
+    margin-bottom: 16px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
 }
+
+.form-label {
+    display: block;
+    font-size: 14px;
+    font-weight: 700;
+    color: black;
+}
+
 .profile-input {
     width: 100%;
-    padding: 12px 15px;
-    background-color: var(--input-bg);
-    color: var(--input-text);
+    padding: 12px 16px;
+    background-color: var(--primary-dark);
+    /* Dark background */
+    color: white;
     border: none;
     border-radius: 8px;
     font-size: 14px;
-    font-weight: 500;
+    font-weight: 600;
+    min-height: 48px;
+    outline: none;
 }
-/* Style saat tidak diedit (Read-only) */
+
+.profile-input:focus {
+    box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.5);
+}
+
 .profile-input:read-only {
-    opacity: 1; cursor: default;
+    opacity: 1;
+    cursor: default;
 }
 
 /* --- BUTTONS --- */
 .action-buttons {
-    margin-top: 30px;
-    display: flex; justify-content: flex-end; 
+    margin-top: 24px;
+    display: flex;
+    gap: 12px;
 }
 
 .edit-actions {
-    display: flex; gap: 10px; width: 100%;
+    display: flex;
+    gap: 12px;
+    width: 100%;
+}
+
+.edit-button-container {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 20px;
 }
 
 .btn-ubah {
-    background-color: #4CAF50; 
+    background-color: #4CAF50;
     color: white;
+    border: none;
     padding: 10px 20px;
     border-radius: 8px;
-    border: none;
-    font-weight: 600; font-size: 14px;
-    display: flex; align-items: center; gap: 8px;
+    font-size: 16px;
+    font-weight: 700;
+    display: flex;
+    align-items: center;
+    gap: 8px;
     cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    margin-left: auto;
+    /* Push to right */
 }
 
 .btn-simpan {
     flex: 1;
-    background-color: var(--primary-green);
+    background-color: #4CAF50;
     color: white;
-    padding: 12px;
-    border-radius: 8px; border: none;
-    font-weight: 700; cursor: pointer;
+    padding: 14px;
+    border-radius: 12px;
+    border: none;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
 }
 
 .btn-buang {
     flex: 1;
-    background-color: var(--primary-red);
+    background-color: #E53935;
     color: white;
-    padding: 12px;
-    border-radius: 8px; border: none;
-    font-weight: 700; cursor: pointer;
+    padding: 14px;
+    border-radius: 12px;
+    border: none;
+    font-size: 16px;
+    font-weight: 700;
+    cursor: pointer;
 }
 
 /* --- POP UP --- */
 .popup-overlay {
-    position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-    background: rgba(0,0,0,0.5); z-index: 1500;
-    display: flex; align-items: center; justify-content: center;
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1500;
 }
+
 .popup-card {
-    background: white; width: 300px; padding: 30px 20px;
-    border-radius: 20px; text-align: center;
-    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
-    animation: popIn 0.3s ease;
+    background-color: white;
+    width: 85%;
+    max-width: 320px;
+    border-radius: 16px;
+    padding: 30px 20px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
 }
-@keyframes popIn { from { transform: scale(0.8); opacity: 0; } to { transform: scale(1); opacity: 1; } }
 
 .popup-icon-red {
-    width: 60px; height: 60px; background: #FFEBEE;
-    border-radius: 50%; margin: 0 auto 15px;
-    display: flex; align-items: center; justify-content: center;
-}
-.popup-icon-green {
-    width: 60px; height: 60px; 
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: #E53935;
+    /* Red circle */
     margin: 0 auto 15px;
-    display: flex; align-items: center; justify-content: center;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
-.popup-title { font-weight: 800; font-size: 18px; margin-bottom: 5px; color: #000; }
-.popup-title.green { color: #4CAF50; }
-.popup-title.red { color: #D32F2F; }
+/* Adjust icon inside to be white if using bg color */
+.popup-icon-red svg {
+    stroke: white;
+}
 
-.popup-desc { font-size: 12px; color: #666; margin-bottom: 20px; }
+.popup-icon-green {
+    width: 60px;
+    height: 60px;
+    margin: 0 auto 15px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.popup-title {
+    font-size: 20px;
+    font-weight: 800;
+    margin-bottom: 8px;
+}
+
+.popup-title.green {
+    color: #4CAF50;
+}
+
+.popup-title.red {
+    color: #E53935;
+}
+
+.popup-desc {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 24px;
+    font-weight: 500;
+}
 
 .popup-btn-red {
-    width: 100%; background: #D32F2F; color: white; padding: 10px;
-    border-radius: 8px; border: none; font-weight: 700; cursor: pointer;
-}
-.popup-btn-green {
-    width: 100%; background: #4CAF50; color: white; padding: 10px;
-    border-radius: 8px; border: none; font-weight: 700; cursor: pointer;
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    border: none;
+    font-size: 16px;
+    font-weight: 700;
+    color: white;
+    cursor: pointer;
+    background-color: #E53935;
 }
 
-/* --- BOTTOM NAV --- */
-.bottom-nav {
-    position: fixed; bottom: 20px; left: 50%; transform: translateX(-50%);
-    width: 95%; max-width: 480px; height: 70px;
-    background-color: var(--primary-dark);
-    display: flex; justify-content: space-around; align-items: center;
-    border-radius: 20px; z-index: 999;
+.popup-btn-green {
+    width: 100%;
+    padding: 12px;
+    border-radius: 12px;
+    border: none;
+    font-size: 16px;
+    font-weight: 700;
+    color: white;
+    cursor: pointer;
+    background-color: #4CAF50;
 }
-.nav-item { opacity: 0.6; cursor: pointer; }
-.nav-item.active { opacity: 1; position: relative; }
-.nav-item.active::after {
-    content:''; position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%);
-    width: 4px; height: 4px; background: #FFC700; border-radius: 50%;
-}
-.nav-item svg { width: 28px; height: 28px; fill: white; }

@@ -118,7 +118,7 @@ const VoucherKu = () => {
                         {activeVouchers.map((voucher, index) => (
                             <div key={voucher.id} className="w-full flex-shrink-0 px-8 flex justify-center">
                                 {/* Voucher Card */}
-                                <div className="bg-[#012E34] rounded-l w-full max-w-[280px] aspect-[4/6] relative flex flex-col items-center shadow-2xl overflow-hidden pt-6">
+                                <div className="bg-[#012E34] rounded-l w-full max-w-[340px] aspect-[4/6] relative flex flex-col items-center shadow-2xl overflow-hidden pt-6">
 
                                     {/* Top Section: Info */}
                                     <div className="flex flex-row items-center w-full px-5 mb-4 gap-4 mt-2">
@@ -142,7 +142,7 @@ const VoucherKu = () => {
 
                                     {/* QR Code Section (Center) */}
                                     <div className="flex-1 flex items-center justify-center w-full bg-[#012E34] relative z-10 py-2">
-                                        <div className="bg-white p-3 rounded-xl w-48 h-48 flex items-center justify-center">
+                                        <div className="bg-white p-3 rounded-xl w-64 h-64 flex items-center justify-center">
                                             <img
                                                 src={`http://localhost:8000/storage/${voucher.user_voucher_qr_path}`}
                                                 alt="QR Code"

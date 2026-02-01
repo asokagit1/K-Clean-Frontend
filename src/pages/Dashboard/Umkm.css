@@ -2,23 +2,32 @@
 :root {
     --primary-dark: #003B46;
     --primary-yellow: #FFC700;
-    --primary-red: #FF5252; /* Warna untuk tombol close (opsional) */
+    --primary-red: #FF5252;
+    /* Warna untuk tombol close (opsional) */
     --bg-white: #FFFFFF;
     --bg-page: #F5F7FA;
 }
 
-* { box-sizing: border-box; margin: 0; padding: 0; font-family: 'Inter', sans-serif; }
-body { background-color: var(--bg-page); }
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: var(--bg-page);
+}
 
 /* --- RESPONSIVE CONTAINER --- */
 .responsive-container {
     width: 100%;
     min-height: 100vh;
     padding: 20px;
-    padding-bottom: 120px; 
+    padding-bottom: 120px;
     margin: 0 auto;
     /* Penting untuk posisi absolute anak-anaknya */
-    position: relative; 
+    position: relative;
 }
 
 /* Limit lebar di PC */
@@ -37,102 +46,139 @@ body { background-color: var(--bg-page); }
     padding: 10px 0;
 }
 
-.header-left { display: flex; align-items: center; gap: 15px; }
-.logo-text { font-size: 24px; font-weight: 900; letter-spacing: 1px; color: #000; }
-.notif-icon { width: 28px; height: 28px; cursor: pointer; transition: 0.2s; }
-.notif-icon:hover { transform: scale(1.1); }
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
 
-.user-text { text-align: right; }
-.user-name { font-weight: bold; font-size: 14px; color: var(--primary-dark); }
-.user-role { font-size: 11px; color: #666; }
+.logo-text {
+    font-size: 24px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    color: #000;
+}
+
+.notif-icon {
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.notif-icon:hover {
+    transform: scale(1.1);
+}
+
+.user-text {
+    text-align: right;
+}
+
+.user-name {
+    font-weight: bold;
+    font-size: 14px;
+    color: var(--primary-dark);
+}
+
+.user-role {
+    font-size: 11px;
+    color: #666;
+}
+
 .user-avatar {
-    width: 40px; height: 40px; background: #eee; border-radius: 50%;
-    display: flex; align-items: center; justify-content: center;
+    width: 40px;
+    height: 40px;
+    background: #eee;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
 }
 
 /* Greeting */
-.greeting { font-size: 20px; font-weight: 700; margin-bottom: 25px; color: #000; }
+.greeting {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: #000;
+}
 
 /* --- DASHBOARD GRID LAYOUT --- */
-.dashboard-grid {
-    display: grid;
-    gap: 20px;
-    grid-template-columns: 1fr; /* Default Mobile: 1 Kolom */
+.dashboard-grid-new {
+    /* Padding handled by wrapper */
 }
 
-/* Tablet (2 Kolom) */
-@media (min-width: 600px) {
-    .dashboard-grid { grid-template-columns: repeat(2, 1fr); }
-    .chart-card-wrapper { grid-column: span 2; }
-    .top-voucher-wrapper { grid-column: span 2; }
+/* --- PETUGAS STYLE CONSISTENCY --- */
+.petugas-card {
+    background: white;
+    border: 1px solid #000;
+    border-radius: 12px;
+    padding: 12px;
+    box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.1);
+    /* Hard shadow match */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
 }
 
-/* PC / Desktop (Layout Asimetris 4 Kolom) */
-@media (min-width: 1024px) {
-    .dashboard-grid {
-        grid-template-columns: repeat(4, 1fr);
-        grid-template-rows: auto auto;
-    }
-    .stat-card-wrapper { grid-column: span 1; }
-    .total-card-wrapper { grid-column: span 1; }
-    .chart-card-wrapper { grid-column: span 2; grid-row: 2; }
-    .top-voucher-wrapper { grid-column: span 2; grid-row: 2; height: 100%; }
+.petugas-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: #012E34;
 }
 
-/* --- COMPONENT STYLES --- */
-.stat-card {
-    border: 1.5px solid #000; border-radius: 12px; padding: 20px;
-    background: #fff; min-height: 120px;
-    display: flex; flex-direction: column; align-items: center; justify-content: center;
-    transition: transform 0.2s;
+.petugas-value {
+    font-size: 24px;
+    font-weight: 800;
+    color: #012E34;
 }
-.stat-card:hover { transform: translateY(-3px); box-shadow: 0 5px 15px rgba(0,0,0,0.05); }
 
-.card-title { font-size: 14px; font-weight: 700; color: var(--primary-dark); margin-bottom: 15px; text-align: center; }
-.card-content-row { display: flex; align-items: center; gap: 15px; }
-.big-number { font-size: 32px; font-weight: 800; color: #000; }
-.sub-text { font-size: 12px; font-weight: 600; color: var(--primary-dark); margin-top: -5px; }
+.petugas-sublabel {
+    font-size: 10px;
+    font-weight: 700;
+    color: #012E34;
+}
 
-.icon-box-yellow {
-    color: var(--primary-yellow); display: flex; align-items: center; justify-content: center;
+/* History Section */
+.history-card-style {
+    background: white;
+    border: 1px solid #000;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.1);
 }
-.stat-icon { width: 36px; height: 36px; }
 
-/* Chart Styles */
-.chart-card {
-    border: 1.5px solid #000; border-radius: 12px; padding: 20px; background: #fff; height: 100%;
+.icon-yellow-bg {
+    background-color: #FFC400;
+    /* Matching Petugas accent-yellow */
+    border-radius: 50%;
+    /* Or 8px if square */
 }
-.simple-bar-chart {
-    display: flex; align-items: flex-end; justify-content: space-around;
-    height: 150px; padding-bottom: 10px; border-bottom: 1px solid #eee;
-}
-.bar { width: 20px; background-color: var(--primary-yellow); border-radius: 4px 4px 0 0; transition: height 1s ease; }
-.bar-column { display: flex; flex-direction: column; align-items: center; height: 100%; justify-content: flex-end; }
-.bar-label { margin-top: 8px; font-size: 12px; font-weight: 600; }
 
-/* Top Voucher List */
-.top-voucher-section {
-    border: 1.5px solid #000; border-radius: 12px; padding: 25px; background: #fff; height: 100%;
+.text-dark-blue {
+    color: #012E34;
 }
-.section-title { font-size: 16px; font-weight: 800; text-align: center; margin-bottom: 25px; }
-.horizontal-chart-row { display: flex; align-items: center; margin-bottom: 15px; }
-.chart-label { width: 100px; font-size: 13px; font-weight: 600; }
-.chart-bar-container { flex-grow: 1; height: 16px; background: #f0f0f0; border-radius: 0 8px 8px 0; overflow: hidden; }
-.h-bar { height: 100%; background-color: var(--primary-yellow); border-radius: 0 8px 8px 0; }
 
 /* --- FLOATING ACTION BUTTON (FAB) & MENU --- */
 
 /* 1. Style Tombol Utama (+) */
 .fab-btn {
     position: fixed;
-    bottom: 100px; 
+    bottom: 100px;
     right: 20px;
-    width: 60px; height: 60px;
-    background-color: var(--primary-yellow); 
-    border-radius: 50%; border: none;
-    display: flex; align-items: center; justify-content: center;
-    color: #fff; box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-    cursor: pointer; z-index: 100;
+    width: 60px;
+    height: 60px;
+    background-color: var(--primary-yellow);
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    z-index: 100;
     /* Transisi halus untuk warna dan transform */
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
@@ -147,8 +193,9 @@ body { background-color: var(--bg-page); }
 
 /* 2. Style Saat Menu Terbuka (.open) */
 .fab-btn.open {
-    background-color: var(--primary-dark); /* Ganti warna jadi gelap saat jadi tombol close */
-    box-shadow: 0 8px 25px rgba(0,0,0,0.3);
+    background-color: var(--primary-dark);
+    /* Ganti warna jadi gelap saat jadi tombol close */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
 }
 
 /* Putar icon '+' 45 derajat agar jadi 'x' */
@@ -160,17 +207,19 @@ body { background-color: var(--bg-page); }
 /* 3. Container Menu Drop-up */
 .fab-menu-container {
     position: fixed;
-    bottom: 170px; /* Muncul di atas tombol FAB */
+    bottom: 170px;
+    /* Muncul di atas tombol FAB */
     right: 25px;
     display: flex;
     flex-direction: column;
     gap: 15px;
     z-index: 99;
-    
+
     /* Keadaan awal: tersembunyi, agak turun, transparan */
     opacity: 0;
     transform: translateY(20px);
-    pointer-events: none; /* Agar tidak bisa diklik saat tersembunyi */
+    pointer-events: none;
+    /* Agar tidak bisa diklik saat tersembunyi */
     transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
 }
 
@@ -186,17 +235,19 @@ body { background-color: var(--bg-page); }
     background-color: var(--bg-white);
     color: var(--primary-dark);
     padding: 12px 20px;
-    border-radius: 50px; /* Bentuk kapsul */
+    border-radius: 50px;
+    /* Bentuk kapsul */
     border: none;
     font-weight: 700;
     font-size: 14px;
     display: flex;
     align-items: center;
     gap: 10px;
-    box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
     cursor: pointer;
     transition: transform 0.2s;
-    white-space: nowrap; /* Agar teks tidak turun baris */
+    white-space: nowrap;
+    /* Agar teks tidak turun baris */
 }
 
 .fab-menu-item:hover {
@@ -208,23 +259,47 @@ body { background-color: var(--bg-page); }
 /* --- UNIVERSAL BOTTOM NAV --- */
 .bottom-nav {
     position: fixed;
-    bottom: 20px; 
+    bottom: 20px;
     left: 50%;
     transform: translateX(-50%);
     width: 95%;
     max-width: 480px;
     height: 70px;
     background-color: var(--primary-dark);
-    display: flex; justify-content: space-around; align-items: center;
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
     border-radius: 20px;
     z-index: 999;
-    box-shadow: 0 10px 25px rgba(0, 59, 70, 0.3); 
+    box-shadow: 0 10px 25px rgba(0, 59, 70, 0.3);
 }
 
-.nav-item { opacity: 0.6; cursor: pointer; transition: 0.2s; position: relative;}
-.nav-item.active { opacity: 1; transform: translateY(-3px); }
-.nav-item.active::after {
-    content: ''; position: absolute; bottom: -8px; left: 50%; transform: translateX(-50%);
-    width: 4px; height: 4px; background: var(--primary-yellow); border-radius: 50%;
+.nav-item {
+    opacity: 0.6;
+    cursor: pointer;
+    transition: 0.2s;
+    position: relative;
 }
-.nav-item svg { width: 28px; height: 28px; fill: white; }
+
+.nav-item.active {
+    opacity: 1;
+    transform: translateY(-3px);
+}
+
+.nav-item.active::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    background: var(--primary-yellow);
+    border-radius: 50%;
+}
+
+.nav-item svg {
+    width: 28px;
+    height: 28px;
+    fill: white;
+}

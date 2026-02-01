@@ -22,7 +22,7 @@ const DetailTukarPoin = () => {
             try {
                 const response = await api.get('/user-points');
                 if (response.data && response.data.User_Points && response.data.User_Points.length > 0) {
-                    setUserPoints(response.data.User_Points[0].points || 0);
+                    setUserPoints(parseFloat(response.data.User_Points[0].points) || 0);
                 }
             } catch (error) {
                 console.error("Failed to fetch points", error);
@@ -47,7 +47,11 @@ const DetailTukarPoin = () => {
 
     const handleRedeem = async () => {
         if (!voucher) return;
-        if (userPoints < voucher.points_required) {
+
+        const currentPoints = parseFloat(userPoints);
+        const requiredPoints = parseFloat(voucher.points_required);
+
+        if (currentPoints < requiredPoints) {
             alert("Poin anda tidak mencukupi!");
             return;
         }
@@ -58,7 +62,7 @@ const DetailTukarPoin = () => {
         setLoading(true);
 
         try {
-            await api.post(`/voucher-purchase/${voucher.id}`);
+            const response = await api.post(`/voucher-purchase/${voucher.id}`);
 
             // Wait a bit to show processing (optional UX)
             setTimeout(() => {
@@ -152,8 +156,8 @@ const DetailTukarPoin = () => {
                         <div className="mt-auto w-full flex justify-center pb-2">
                             <button
                                 onClick={handleRedeem}
-                                disabled={loading || userPoints < voucher.points_required}
-                                className={`w-4/5 py-3 rounded-xl font-bold text-lg shadow-md transition-all ${userPoints < voucher.points_required
+                                disabled={loading || parseFloat(userPoints) < parseFloat(voucher.points_required)}
+                                className={`w-4/5 py-3 rounded-xl font-bold text-lg shadow-md transition-all ${parseFloat(userPoints) < parseFloat(voucher.points_required)
                                     ? 'bg-gray-400 cursor-not-allowed text-gray-700'
                                     : 'bg-[#FFB800] text-white hover:bg-[#e0a200]'
                                     }`}

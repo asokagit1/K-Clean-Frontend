@@ -33,7 +33,8 @@ const TukarPoin = () => {
     const filteredVouchers = vouchers.filter(voucher => {
         const matchesSearch = voucher.title.toLowerCase().includes(searchTerm.toLowerCase());
         const matchesTab = activeTab === 'Semua' || (voucher.category && voucher.category.toLowerCase() === activeTab.toLowerCase());
-        return matchesSearch && matchesTab;
+        const unlimitedStock = parseFloat(voucher.limit) > 0;
+        return matchesSearch && matchesTab && unlimitedStock;
     });
 
     const categories = ['Semua', 'Makanan', 'Minuman'];
