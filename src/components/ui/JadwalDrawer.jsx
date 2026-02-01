@@ -22,14 +22,14 @@ const JadwalDrawer = ({ isOpen, onClose }) => {
                 <div className="w-12 h-1.5 bg-white/30 rounded-full mx-auto mb-6" />
 
                 <div className="text-center mb-8">
-                     <h2 className="text-xl font-bold">Jadwal transfer depo</h2>
+                     <h2 className="text-xl font-bold">Jadwal Transfer Depo</h2>
                 </div>
 
                 <div className="space-y-4 mb-20">
                     <h3 className="font-semibold text-lg">Jam Operasional</h3>
                     <div className="flex justify-between items-center text-sm font-medium">
-                        <span>Buka senin - minggu</span>
-                        <span>6 sore - 6 pagi</span>
+                        <span>Buka Senin - Minggu</span>
+                        <span>18.00 - 06.00</span>
                     </div>
                 </div>
             </div>

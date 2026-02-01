@@ -14,7 +14,7 @@ const UserProfile = () => {
         kk: '',
         email: '',
         phone: '',
-        avatarUrl: ''
+        avatarUrl: 'https://api.dicebear.com/9.x/avataaars/svg?seed=Default'
     });
 
     useEffect(() => {
@@ -84,8 +84,8 @@ const UserProfile = () => {
         try {
             await api.patch('/update-profile', {
                 name: tempUserInfo.name,
-                no_kk: tempUserInfo.kk,
-                email: tempUserInfo.email,
+                no_kk: tempUserInfo.kk || "", // Ensure string
+                email: tempUserInfo.email || "", // Ensure string
                 no_telp: tempUserInfo.phone,
                 avatar: tempUserInfo.avatar // Send avatar seed
             });
@@ -119,7 +119,7 @@ const UserProfile = () => {
         <div className="profile-container">
             {/* Header */}
             <div className="profile-header">
-                <button className="back-button" onClick={() => navigate(-1)}>
+                <button className="back-button" onClick={() => navigate('/dashboard')}>
                     <ChevronLeft size={28} color="white" strokeWidth={3} />
                 </button>
                 <div className="header-title">K-CLEAN</div>
@@ -146,7 +146,7 @@ const UserProfile = () => {
             </div>
 
             {/* Info Fields */}
-            <div className="profile-form" style={{ gap: '0px' }}>
+            <div className="profile-form" style={{ gap: '16px' }}>
                 <div className="form-group">
                     <label className="label">Nama Keluarga</label>
                     {isEditing ? (
@@ -155,37 +155,32 @@ const UserProfile = () => {
                             className="input-field"
                             value={tempUserInfo.name}
                             onChange={(e) => handleInputChange('name', e.target.value)}
+                            placeholder="-"
                         />
                     ) : (
-                        <div className="value-box">{userInfo.name}</div>
+                        <div className="value-text">{userInfo.name || '-'}</div>
                     )}
                 </div>
 
                 <div className="form-group">
                     <label className="label">Nomor KK</label>
                     {isEditing ? (
-                        <input
-                            type="text"
-                            className="input-field"
-                            value={tempUserInfo.kk}
-                            onChange={(e) => handleInputChange('kk', e.target.value)}
-                        />
+                        <div className="value-box" style={{ backgroundColor: '#f5f5f5', color: '#888' }}>
+                            {userInfo.kk || '-'}
+                        </div>
                     ) : (
-                        <div className="value-box">{userInfo.kk}</div>
+                        <div className="value-text">{userInfo.kk || '-'}</div>
                     )}
                 </div>
 
                 <div className="form-group">
                     <label className="label">Email</label>
                     {isEditing ? (
-                        <input
-                            type="email"
-                            className="input-field"
-                            value={tempUserInfo.email}
-                            onChange={(e) => handleInputChange('email', e.target.value)}
-                        />
+                        <div className="value-box" style={{ backgroundColor: '#f5f5f5', color: '#888' }}>
+                            {userInfo.email || '-'}
+                        </div>
                     ) : (
-                        <div className="value-box">{userInfo.email}</div>
+                        <div className="value-text">{userInfo.email || '-'}</div>
                     )}
                 </div>
 
@@ -197,9 +192,10 @@ const UserProfile = () => {
                             className="input-field"
                             value={tempUserInfo.phone}
                             onChange={(e) => handleInputChange('phone', e.target.value)}
+                            placeholder="-"
                         />
                     ) : (
-                        <div className="value-box">{userInfo.phone}</div>
+                        <div className="value-text">{userInfo.phone || '-'}</div>
                     )}
                 </div>
             </div>

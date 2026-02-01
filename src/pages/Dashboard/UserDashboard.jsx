@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { useAuth } from '../../context/AuthContext';
 import BottomNav from '../../components/ui/BottomNav';
 import JadwalDrawer from '../../components/ui/JadwalDrawer';
-import { Coins, CalendarClock, Repeat, Volume2, ChevronRight, History, LogOut, TicketPercent } from 'lucide-react';
+import { Coins, CalendarClock, Repeat, Volume2, ChevronRight, History, LogOut, TicketPercent, Store } from 'lucide-react';
 import api from '../../api/axios';
 import { cn } from '../../lib/utils';
 import { useNavigate } from 'react-router-dom';
@@ -124,8 +124,9 @@ const UserDashboard = () => {
 
                 {/* History Section */}
                 <h3 className="text-sm font-bold text-center mb-2 text-black">Riwayat Transaksi</h3>
-                <div className="bg-white border border-black rounded-lg p-0 mb-6 shadow-[2px_2px_0px_rgba(0,0,0,0.1)] overflow-hidden">
-                    <div className="flex flex-col">
+                {/* Fixed height container for scrolling */}
+                <div className="bg-white border border-black rounded-lg p-0 mb-6 shadow-[2px_2px_0px_rgba(0,0,0,0.1)] overflow-hidden flex flex-col h-[320px]">
+                    <div className="overflow-y-auto flex-1 custom-scrollbar">
                         {loading ? (
                             <div className="text-center py-4 text-xs text-gray-400">Loading...</div>
                         ) : (
@@ -140,9 +141,11 @@ const UserDashboard = () => {
                                             {/* Icon based on transaction type */}
                                             <div className={cn(
                                                 "w-8 h-8 rounded-full flex items-center justify-center flex-shrink-0",
-                                                item.is_earning ? "bg-primary" : "bg-orange-100"
+                                                item.type === 'usage' ? "bg-blue-100" : (item.is_earning ? "bg-primary" : "bg-orange-100")
                                             )}>
-                                                {item.is_earning ? (
+                                                {item.type === 'usage' ? (
+                                                    <Store size={14} className="text-blue-600" />
+                                                ) : item.is_earning ? (
                                                     <Coins size={14} className="text-secondary fill-secondary" />
                                                 ) : (
                                                     <TicketPercent size={14} className="text-orange-600" />
@@ -150,7 +153,12 @@ const UserDashboard = () => {
                                             </div>
 
                                             <div className="flex items-center text-xs w-full">
-                                                {item.is_earning ? (
+                                                {item.type === 'usage' ? (
+                                                    <div className="flex items-center gap-1 w-full overflow-hidden">
+                                                        <span className="font-bold text-black flex-shrink-0">Voucher</span>
+                                                        <span className="text-gray-500 font-normal truncate">Digunakan: <span className="text-blue-600 font-bold">{item.description}</span></span>
+                                                    </div>
+                                                ) : item.is_earning ? (
                                                     <div className="flex items-center gap-1 w-full">
                                                         <span className="font-bold text-black flex-shrink-0">eco</span>
                                                         <span className="text-gray-500 font-normal truncate">mendapatkan</span>
@@ -178,18 +186,37 @@ const UserDashboard = () => {
                         <h3 className="font-bold text-lg">Tentang Kami</h3>
                     </div>
 
-                    <div className="w-full rounded-xl overflow-hidden border border-gray-200 relative aspect-[2.5/1]">
-                        {aboutUsImages.map((slide, index) => (
-                            <img
-                                key={slide.id}
-                                src={slide.image}
-                                alt="Tentang Kami"
-                                className={cn(
-                                    "w-full h-full object-cover absolute top-0 left-0 transition-opacity duration-500",
-                                    index === currentSlide ? "opacity-100" : "opacity-0"
-                                )}
-                            />
-                        ))}
+                    <div className="w-full rounded-xl overflow-hidden border border-gray-200 relative aspect-[2.5/1] group">
+                        {/* Slide Container */}
+                        <div
+                            className="flex transition-transform duration-500 ease-out h-full"
+                            style={{ transform: `translateX(-${currentSlide * 100}%)` }}
+                        >
+                            {aboutUsImages.map((slide) => (
+                                <div key={slide.id} className="min-w-full h-full relative">
+                                    <img
+                                        src={slide.image}
+                                        alt="Tentang Kami"
+                                        className="w-full h-full object-cover"
+                                    />
+                                </div>
+                            ))}
+                        </div>
+
+                        {/* Navigation Dots */}
+                        <div className="absolute bottom-3 left-1/2 -translate-x-1/2 flex gap-2 z-10">
+                            {aboutUsImages.map((_, index) => (
+                                <button
+                                    key={index}
+                                    onClick={() => setCurrentSlide(index)}
+                                    className={cn(
+                                        "w-2 h-2 rounded-full transition-all duration-300 shadow-sm",
+                                        index === currentSlide ? "bg-white w-6" : "bg-white/50 hover:bg-white/80"
+                                    )}
+                                    aria-label={`Go to slide ${index + 1}`}
+                                />
+                            ))}
+                        </div>
                     </div>
                 </div>
 
