@@ -78,7 +78,7 @@ const ListVoucher = () => {
                                     <div className="w-32 h-full bg-gray-100 shrink-0 relative">
                                         {v.voucher_image ? (
                                             <img
-                                                src={`http://localhost:8000/storage/voucher/${v.voucher_image}`}
+                                                src={`${import.meta.env.VITE_API_BASE_URL}/storage/voucher/${v.voucher_image}`}
                                                 alt={v.title}
                                                 className="w-full h-full object-cover"
                                             />

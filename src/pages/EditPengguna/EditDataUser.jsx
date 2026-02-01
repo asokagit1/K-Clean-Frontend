@@ -73,7 +73,7 @@ const EditDataUser = () => {
                 <h1 className="page-title">Edit Data Pengguna</h1>
             </div>
 
-            <form className="form-card" onSubmit={handleSubmit}>
+            <form className="form-card" onSubmit={handleSubmit} style={{ gap: '0px' }}>
                 <div className="form-group">
                     <label className="form-label">Nama Lengkap</label>
                     <input

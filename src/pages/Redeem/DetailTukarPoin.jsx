@@ -127,7 +127,7 @@ const DetailTukarPoin = () => {
                         <div className="mb-6 mt-4">
                             <div className="w-24 h-24 rounded-full overflow-hidden border-4 border-white/20 mx-auto mb-4">
                                 <img
-                                    src={voucher.voucher_image ? `http://localhost:8000/storage/voucher/${voucher.voucher_image}` : 'https://placehold.co/100x100?text=Voucher'}
+                                    src={voucher.voucher_image ? `${import.meta.env.VITE_API_BASE_URL}/storage/voucher/${voucher.voucher_image}` : 'https://placehold.co/100x100?text=Voucher'}
                                     alt={voucher.title}
                                     className="w-full h-full object-cover"
                                 />

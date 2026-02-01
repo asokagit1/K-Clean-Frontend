@@ -49,7 +49,7 @@ const ProfileUMKM = () => {
                     avatarUrl: backendData.avatar
                         ? `https://api.dicebear.com/9.x/avataaars/svg?seed=${backendData.avatar}`
                         : (backendData.profile_qr_path
-                            ? `http://localhost:8000/storage/${backendData.profile_qr_path}`
+                            ? `${import.meta.env.VITE_API_BASE_URL}/storage/${backendData.profile_qr_path}`
                             : `https://api.dicebear.com/9.x/avataaars/svg?seed=${backendData.name}`)
                 };
 

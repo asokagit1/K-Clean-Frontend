@@ -35,7 +35,7 @@ const Admin = () => {
                         role: user.roles && user.roles.length > 0 ? user.roles[0].name : 'User', // roles is likely an array from Spatie
                         avatar: user.avatar
                             ? `https://api.dicebear.com/9.x/avataaars/svg?seed=${user.avatar}`
-                            : (user.profile_qr_path ? `http://localhost:8000/storage/${user.profile_qr_path}` : `https://api.dicebear.com/9.x/avataaars/svg?seed=${user.name}`)
+                            : (user.profile_qr_path ? `${import.meta.env.VITE_API_BASE_URL}/storage/${user.profile_qr_path}` : `https://api.dicebear.com/9.x/avataaars/svg?seed=${user.name}`)
                     }));
                     setUsers(mappedUsers);
                 }

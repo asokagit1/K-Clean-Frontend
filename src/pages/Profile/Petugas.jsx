@@ -31,7 +31,7 @@ const Petugas = () => {
                     avatarUrl: data.avatar
                         ? `https://api.dicebear.com/9.x/avataaars/svg?seed=${data.avatar}`
                         : (data.profile_qr_path
-                            ? `http://localhost:8000/storage/${data.profile_qr_path}`
+                            ? `${import.meta.env.VITE_API_BASE_URL}/storage/${data.profile_qr_path}`
                             : `https://api.dicebear.com/9.x/avataaars/svg?seed=${data.name}`)
                 });
             } catch (error) {

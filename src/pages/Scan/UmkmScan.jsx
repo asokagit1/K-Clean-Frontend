@@ -194,7 +194,7 @@ const UmkmScan = () => {
     // Helper for image URL
     const getVoucherImage = (imageName) => {
         if (!imageName) return "https://placehold.co/100x100?text=V";
-        return `http://localhost:8000/storage/voucher/${imageName}`;
+        return `${import.meta.env.VITE_API_BASE_URL}/storage/voucher/${imageName}`;
     };
 
     const formatDate = (dateString) => {
