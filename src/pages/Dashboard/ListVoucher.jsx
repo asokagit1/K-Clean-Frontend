@@ -100,6 +100,13 @@ const ListVoucher = () => {
                                                 <Calendar size={12} />
                                                 <span>Exp: {formatDate(v.expired_at)}</span>
                                             </div>
+                                            {/* Address Display */}
+                                            {v.umkm_address && (
+                                                <div className="text-xs text-gray-500 flex items-start gap-1 mb-2">
+                                                    <div className="mt-0.5"><svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round"><path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"></path><circle cx="12" cy="10" r="3"></circle></svg></div>
+                                                    <span className="line-clamp-1">{v.umkm_address}</span>
+                                                </div>
+                                            )}
                                         </div>
 
                                         <div className="flex items-end justify-between">

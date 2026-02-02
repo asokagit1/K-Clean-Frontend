@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { User, Home, Scan } from 'lucide-react';
 import api from '../../api/axios';
@@ -18,8 +18,36 @@ const PetugasTimbangan = () => {
     const [showProcessModal, setShowProcessModal] = useState(false);
     const [showSuccessModal, setShowSuccessModal] = useState(false);
 
-    // Logic: 0.1 kg = 1 point => 1 kg = 10 points
-    const estimatedPoints = weight ? Math.round(parseFloat(weight) * 10) : 0;
+    // Logic: 0.1 kg = 1 point => 1 kg = 1000g => 1000g * 0.05 = 50 points
+    const estimatedPoints = weight ? Math.round(parseFloat(weight) * 50) : 0;
+
+    // Real-time Weight Polling
+    useEffect(() => {
+        const fetchWeight = async () => {
+            try {
+                const response = await api.get('/weight/preview');
+                // Construct logic to extract weight based on expected response
+                // Assuming response.data is the value or contains a 'value'/'weight' field
+                const data = response.data;
+                const fetchedWeight = data?.value || data?.weight || data;
+
+                // Only update if valid number
+                if (fetchedWeight && !isNaN(fetchedWeight)) {
+                    setWeight(String(fetchedWeight));
+                }
+            } catch (error) {
+                console.error("Error fetching realtime weight:", error);
+            }
+        };
+
+        // Poll every 1 second
+        const intervalId = setInterval(fetchWeight, 1000);
+
+        // Immediate fetch on mount
+        fetchWeight();
+
+        return () => clearInterval(intervalId);
+    }, []);
 
     // Redirect if direct access without scan
     if (!scanResult) {

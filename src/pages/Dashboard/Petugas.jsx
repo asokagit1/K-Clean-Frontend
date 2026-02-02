@@ -136,7 +136,7 @@ const Petugas = () => {
 
             {/* Footer Info */}
             <div className="info-footer">
-                fyi: Setiap 0,1 kg sampah Organik atau Anorganik setara dengan 1 poin eco.
+                fyi: Setiap 1 gram sampah Organik atau Anorganik setara dengan 0,05 poin eco.
             </div>
 
             {/* Bottom Navigation */}

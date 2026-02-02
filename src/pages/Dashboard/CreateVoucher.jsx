@@ -12,6 +12,7 @@ const CreateVoucher = () => {
 
     // State Form
     const [nama, setNama] = useState('');
+    const [alamat, setAlamat] = useState(''); // New State
     const [kategori, setKategori] = useState('');
     const [diskon, setDiskon] = useState(0);
     const [tanggal, setTanggal] = useState('');
@@ -55,6 +56,7 @@ const CreateVoucher = () => {
         formData.append('voucher_image', image);
         formData.append('actives_at', today);
         formData.append('expired_at', tanggal);
+        formData.append('umkm_address', alamat); // Add Address
 
         // New Fields
         formData.append('limit', jumlah); // Send amount as limit
@@ -104,6 +106,11 @@ const CreateVoucher = () => {
             <form onSubmit={handleSubmit}>
                 <div className="form-group">
                     <input type="text" className="form-input" placeholder="Nama voucher" value={nama} onChange={(e) => setNama(e.target.value)} required />
+                </div>
+
+                {/* New Address Field */}
+                <div className="form-group">
+                    <input type="text" className="form-input" placeholder="Alamat UMKM" value={alamat} onChange={(e) => setAlamat(e.target.value)} required />
                 </div>
 
                 <div className="form-group">
