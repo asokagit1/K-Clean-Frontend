@@ -37,6 +37,8 @@ const Admin = () => {
                             ? `https://api.dicebear.com/9.x/avataaars/svg?seed=${user.avatar}`
                             : (user.profile_qr_path ? `${import.meta.env.VITE_API_BASE_URL}/storage/${user.profile_qr_path}` : `https://api.dicebear.com/9.x/avataaars/svg?seed=${user.name}`)
                     }));
+                    // Sort users by ID descending (newest first)
+                    mappedUsers.sort((a, b) => b.id - a.id);
                     setUsers(mappedUsers);
                 }
             } catch (error) {

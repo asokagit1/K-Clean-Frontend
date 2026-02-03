@@ -181,8 +181,8 @@ const PetugasScan = () => {
                         </div>
 
                         {/* Name & ID */}
-                        <h2 className="text-xl font-bold text-[#012E34] mb-1">@{userInfo.name}</h2>
-                        <p className="text-gray-500 font-medium mb-6">ID: {userInfo.id}</p>
+                        <h2 className="text-xl font-bold text-[#012E34] mb-6">@{userInfo.name}</h2>
+
 
                         {/* Action Button */}
                         <button

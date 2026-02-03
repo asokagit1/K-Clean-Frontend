@@ -51,6 +51,7 @@ const UserProfile = () => {
     const [tempUserInfo, setTempUserInfo] = useState(userInfo);
     const [showSaveModal, setShowSaveModal] = useState(false);
     const [showDiscardModal, setShowDiscardModal] = useState(false);
+    const [showWarningModal, setShowWarningModal] = useState(false);
 
     const [showAvatarModal, setShowAvatarModal] = useState(false);
 
@@ -81,6 +82,11 @@ const UserProfile = () => {
     };
 
     const handleSaveClick = async () => {
+        if (!tempUserInfo.phone || tempUserInfo.phone.trim() === '') {
+            setShowWarningModal(true);
+            return;
+        }
+
         try {
             await api.patch('/update-profile', {
                 name: tempUserInfo.name,
@@ -277,6 +283,29 @@ const UserProfile = () => {
                         <div className="modal-title text-red">Buang perubahan?</div>
                         <div className="modal-subtitle">Cek kembali data anda</div>
                         <button className="modal-button btn-red" onClick={confirmDiscard}>Buang</button>
+                    </div>
+                </div>
+            )}
+
+            {/* Warning Modal */}
+            {showWarningModal && (
+                <div className="modal-overlay">
+                    <div className="modal-content">
+                        <div className="modal-icon-container">
+                            <div style={{
+                                width: '80px',
+                                height: '80px',
+                                borderRadius: '50%',
+                                border: '4px solid #FF5252',
+                                display: 'flex',
+                                alignItems: 'center',
+                                justifyContent: 'center'
+                            }}>
+                                <span style={{ color: '#FF5252', fontSize: '40px', fontWeight: 'bold' }}>!</span>
+                            </div>
+                        </div>
+                        <div className="modal-title" style={{ color: '#000', marginTop: '15px' }}>Isi Nomor Telepon Terlebih Dahulu</div>
+                        <button className="modal-button" style={{ backgroundColor: '#012E34', color: 'white', marginTop: '20px' }} onClick={() => setShowWarningModal(false)}>Oke</button>
                     </div>
                 </div>
             )}

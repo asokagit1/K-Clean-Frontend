@@ -23,6 +23,7 @@ const ProfileUMKM = () => {
     const [showDiscardPopup, setShowDiscardPopup] = useState(false);
     const [showSuccessPopup, setShowSuccessPopup] = useState(false);
     const [showAvatarModal, setShowAvatarModal] = useState(false);
+    const [showWarningModal, setShowWarningModal] = useState(false);
 
     const avatarSeeds = [
         'Felix', 'Aneka', 'Zoe', 'Bob',
@@ -88,6 +89,11 @@ const ProfileUMKM = () => {
 
     // --- 2. UPDATE DATA (UPDATE) ---
     const handleSaveClick = async () => {
+        if (!tempUser.phone || tempUser.phone.trim() === '') {
+            setShowWarningModal(true);
+            return;
+        }
+
         try {
             // Persiapkan Payload sesuai nama kolom di Controller
             const payload = {
@@ -266,6 +272,28 @@ const ProfileUMKM = () => {
                             ))}
                         </div>
                         <button className="popup-btn-red" onClick={() => setShowAvatarModal(false)}>Batal</button>
+                    </div>
+                </div>
+            )}
+
+            {/* POP-UP 3: WARNING PHONE */}
+            {showWarningModal && (
+                <div className="popup-overlay">
+                    <div className="popup-card">
+                        <div style={{
+                            width: '80px',
+                            height: '80px',
+                            borderRadius: '50%',
+                            border: '4px solid #FF5252',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            margin: '0 auto'
+                        }}>
+                            <span style={{ color: '#FF5252', fontSize: '40px', fontWeight: 'bold' }}>!</span>
+                        </div>
+                        <h3 className="popup-title" style={{ marginTop: '15px', color: '#000' }}>Isi Nomor Telepon Terlebih Dahulu</h3>
+                        <button className="popup-btn-green" style={{ backgroundColor: '#012E34', marginTop: '20px' }} onClick={() => setShowWarningModal(false)}>Oke</button>
                     </div>
                 </div>
             )}

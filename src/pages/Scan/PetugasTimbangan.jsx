@@ -17,6 +17,7 @@ const PetugasTimbangan = () => {
     // Popup States
     const [showProcessModal, setShowProcessModal] = useState(false);
     const [showSuccessModal, setShowSuccessModal] = useState(false);
+    const [showWarningModal, setShowWarningModal] = useState(false);
 
     // Logic: 0.1 kg = 1 point => 1 kg = 1000g => 1000g * 0.05 = 50 points
     const estimatedPoints = weight ? Math.round(parseFloat(weight) * 50) : 0;
@@ -60,7 +61,7 @@ const PetugasTimbangan = () => {
 
     const handleSubmit = async () => {
         if (!weight || parseFloat(weight) <= 0) {
-            alert('Masukkan berat sampah yang valid');
+            setShowWarningModal(true);
             return;
         }
 
@@ -218,6 +219,24 @@ const PetugasTimbangan = () => {
                             </svg>
                         </div>
                         <h3 className="text-lg font-extrabold text-[#0D0D0D]">Point terkirim</h3>
+                    </div>
+                </div>
+            )}
+
+            {/* Warning Modal */}
+            {showWarningModal && (
+                <div className="fixed inset-0 bg-black/50 z-[60] flex items-center justify-center">
+                    <div className="bg-[#FFFFF0] rounded-3xl p-8 w-72 flex flex-col items-center justify-center text-center shadow-xl animate-in fade-in zoom-in duration-200">
+                        <div className="w-20 h-20 mb-4 rounded-full border-4 border-[#FF5252] flex items-center justify-center">
+                            <span className="text-5xl font-bold text-[#FF5252]">!</span>
+                        </div>
+                        <h3 className="text-xl font-bold text-[#0D0D0D] mb-6">Timbang Sampah Terlebih Dahulu</h3>
+                        <button
+                            onClick={() => setShowWarningModal(false)}
+                            className="w-full py-3 bg-[#012E34] text-white rounded-xl font-bold hover:bg-[#012429]"
+                        >
+                            Oke
+                        </button>
                     </div>
                 </div>
             )}

@@ -75,7 +75,14 @@ const VoucherKu = () => {
         return new Date(dateString).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
     };
 
-    if (loading) return <div className="min-h-screen flex items-center justify-center bg-white">Loading...</div>;
+    if (loading) {
+        return (
+            <div className="min-h-screen flex flex-col items-center justify-center bg-white z-50">
+                <div className="animate-spin rounded-full h-16 w-16 border-t-4 border-b-4 border-[#012E34]"></div>
+                <p className="mt-4 text-[#012E34] font-bold text-lg animate-pulse">Memuat Voucher...</p>
+            </div>
+        );
+    }
 
     if (activeVouchers.length === 0) {
         return (

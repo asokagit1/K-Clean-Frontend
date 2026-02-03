@@ -46,7 +46,11 @@ const Login = () => {
             }
 
         } catch (err) {
-            setError(err.response?.data?.message || 'Invalid Credentials');
+            let message = err.response?.data?.message || 'Invalid Credentials';
+            if (message.includes('Invalid Credentials')) {
+                message = 'Email dan Password tidak sesuai';
+            }
+            setError(message);
         } finally {
             setIsLoading(false); // Set loading OFF (selesai)
         }

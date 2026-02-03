@@ -26,6 +26,7 @@ const CreateVoucher = () => {
 
     // State Pop-up Notifikasi
     const [showSuccessPopup, setShowSuccessPopup] = useState(false);
+    const [showWarningModal, setShowWarningModal] = useState(false);
 
     // Handle File Upload
     const handleImageChange = (e) => {
@@ -41,7 +42,7 @@ const CreateVoucher = () => {
         e.preventDefault();
 
         if (!kategori || !diskon || !image) {
-            alert("Mohon lengkapi semua data (Kategori, Diskon, dan Gambar wajib diisi)");
+            setShowWarningModal(true);
             return;
         }
 
@@ -216,6 +217,66 @@ const CreateVoucher = () => {
                     </div>
                     <div style={{ textAlign: 'center' }}>
                         <div style={{ fontWeight: 'bold', fontSize: '16px' }}>Voucher dibuat</div>
+                    </div>
+                </div>
+            )}
+
+            {/* Warning Modal */}
+            {showWarningModal && (
+                <div style={{
+                    position: 'fixed',
+                    top: 0,
+                    left: 0,
+                    right: 0,
+                    bottom: 0,
+                    backgroundColor: 'rgba(0,0,0,0.5)',
+                    zIndex: 60,
+                    display: 'flex',
+                    alignItems: 'center',
+                    justifyContent: 'center'
+                }}>
+                    <div style={{
+                        backgroundColor: '#FFFFF0',
+                        borderRadius: '24px',
+                        padding: '32px',
+                        width: '320px',
+                        textAlign: 'center',
+                        boxShadow: '0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04)',
+                        display: 'flex',
+                        flexDirection: 'column',
+                        alignItems: 'center'
+                    }}>
+                        <div style={{
+                            width: '80px',
+                            height: '80px',
+                            borderRadius: '50%',
+                            border: '4px solid #FF5252',
+                            display: 'flex',
+                            alignItems: 'center',
+                            justifyContent: 'center',
+                            marginBottom: '16px'
+                        }}>
+                            <span style={{ color: '#FF5252', fontSize: '40px', fontWeight: 'bold' }}>!</span>
+                        </div>
+                        <h3 style={{ fontSize: '18px', fontWeight: 'bold', color: '#0D0D0D', marginBottom: '24px' }}>
+                            Mohon lengkapi semua data (Kategori, Diskon, dan Gambar wajib diisi)
+                        </h3>
+                        <button
+                            onClick={() => setShowWarningModal(false)}
+                            style={{
+                                width: '100%',
+                                padding: '12px',
+                                backgroundColor: '#012E34',
+                                color: 'white',
+                                borderRadius: '12px',
+                                fontWeight: 'bold',
+                                border: 'none',
+                                fontSize: '16px',
+                                cursor: 'pointer'
+                            }}
+                        >
+                            Oke
+                        </button>
                     </div>
                 </div>
             )}

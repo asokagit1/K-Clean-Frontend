@@ -26,7 +26,7 @@ const Register = () => {
         setError('');
 
         if (formData.password !== formData.password_confirmation) {
-            setError('Password conversion does not match');
+            setError('password tidak sama');
             return;
         }
 
@@ -36,8 +36,16 @@ const Register = () => {
             // Assuming backend sends verification email
             navigate('/email-verify');
         } catch (err) {
-            setError(err.response?.data?.message || 'Registration failed');
-        } 
+            let errorMessage = err.response?.data?.message || 'Registration failed';
+            if (errorMessage.includes('The no kk has already been taken')) {
+                errorMessage = 'Nomer kartu keluarga sudah pernah digunakan';
+            } else if (errorMessage.includes('The email has already been taken')) {
+                errorMessage = 'Email sudah pernah digunakan';
+            } else if (errorMessage.includes('The no kk field must not be greater than 16 characters')) {
+                errorMessage = 'Nomor kartu keluarga tidak boleh lebih dari 16 digit';
+            }
+            setError(errorMessage);
+        }
     };
 
     return (
@@ -49,57 +57,57 @@ const Register = () => {
                 </div>
 
                 <form onSubmit={handleSubmit} className="space-y-4">
-                     {error && (
+                    {error && (
                         <div className="bg-red-50 text-red-500 p-3 rounded-md text-sm text-center">
                             {error}
                         </div>
                     )}
-                    
-                    <Input 
+
+                    <Input
                         name="name"
-                        placeholder="Nama Keluarga" 
+                        placeholder="Nama Keluarga"
                         value={formData.name}
                         onChange={handleChange}
                         required
                     />
-                    <Input 
+                    <Input
                         name="email"
-                        type="email" 
-                        placeholder="Email" 
+                        type="email"
+                        placeholder="Email"
                         value={formData.email}
                         onChange={handleChange}
                         required
                     />
-                    <Input 
+                    <Input
                         name="no_kk"
-                        type="text" 
-                        placeholder="No. KK" 
+                        type="text"
+                        placeholder="No. KK"
                         value={formData.no_kk}
                         onChange={handleChange}
                         required
                     />
-                     {/* No. Telp removed as per instructions */}
-                    
-                    <Input 
+                    {/* No. Telp removed as per instructions */}
+
+                    <Input
                         name="password"
-                        type="password" 
-                        placeholder="Password" 
+                        type="password"
+                        placeholder="Password"
                         value={formData.password}
                         onChange={handleChange}
                         required
                     />
-                    <Input 
+                    <Input
                         name="password_confirmation"
-                        type="password" 
-                        placeholder="Ketik ulang password" 
+                        type="password"
+                        placeholder="Ketik ulang password"
                         value={formData.password_confirmation}
                         onChange={handleChange}
                         required
                     />
 
                     <div className="pt-4">
-                        <Button 
-                            type="submit" 
+                        <Button
+                            type="submit"
                             className="w-full rounded-full bg-primary py-6"
                             isLoading={isLoading}
                         >
