@@ -1,0 +1,538 @@
+/* Admin.css */
+:root {
+    --primary-dark: #012E34;
+    --accent-yellow: #FFC400;
+}
+
+.admin-container {
+    font-family: 'Inter', sans-serif;
+    padding: 20px;
+    padding-bottom: 80px;
+    min-height: 100vh;
+    background-color: #F8FDF9;
+}
+
+/* Header */
+.admin-header {
+    margin-bottom: 30px;
+    margin-top: 20px;
+}
+
+.header-content {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    width: 100%;
+}
+
+/* Greeting Container & Logout styles (Matched with Petugas) */
+.greeting-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 24px;
+    width: 100%;
+}
+
+.greeting {
+    font-size: 14px;
+    /* Adjusted to 14px as per Petugas/User preference */
+    font-weight: 700;
+    color: #000;
+}
+
+.logout-button {
+    background: white;
+    border: 1px solid #eee;
+    border-radius: 8px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 8px;
+    transition: transform 0.1s;
+    box-shadow: 0 2px 5px rgba(0, 0, 0, 0.05);
+    width: 40px;
+    height: 40px;
+}
+
+.logout-button:active {
+    transform: scale(0.95);
+}
+
+.app-title {
+    font-size: 24px;
+    font-weight: 800;
+    color: #000;
+    letter-spacing: 1px;
+}
+
+
+
+/* Action Buttons */
+.action-buttons-grid {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+    margin-bottom: 32px;
+}
+
+.action-card {
+    background-color: var(--primary-dark);
+    border-radius: 12px;
+    padding: 20px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    cursor: pointer;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.2s;
+    border: none;
+    width: 100%;
+}
+
+.action-card:hover {
+    transform: translateY(-2px);
+}
+
+.action-card:active {
+    transform: scale(0.98);
+}
+
+.action-icon {
+    color: var(--accent-yellow);
+    width: 28px;
+    height: 28px;
+}
+
+.action-label {
+    color: white;
+    font-size: 14px;
+    font-weight: 700;
+    text-align: left;
+    line-height: 1.2;
+}
+
+/* User List Section */
+.user-list-section {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+}
+
+.section-title {
+    font-size: 16px;
+    font-weight: 700;
+    color: #012E34;
+}
+
+.user-list {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    overflow-y: auto;
+    max-height: 400px;
+    /* Adjust as needed */
+    padding-right: 5px;
+    /* Prevent scrollbar from overlapping content */
+}
+
+.user-card {
+    background-color: var(--primary-dark);
+    border-radius: 12px;
+    padding: 12px 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.user-info {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    background-color: white;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+    border: 2px solid white;
+}
+
+.avatar-img {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.user-email {
+    color: white;
+    font-size: 14px;
+    font-weight: 500;
+}
+
+.detail-button {
+    background-color: white;
+    color: var(--accent-yellow);
+    border: none;
+    padding: 6px 16px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+    transition: opacity 0.2s;
+}
+
+.detail-button:hover {
+    opacity: 0.9;
+}
+
+/* MODAL STYLES */
+.modal-overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100vw;
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.5);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 1000;
+}
+
+.modal-content {
+    background-color: white;
+    width: 90%;
+    max-width: 400px;
+    /* Increased from 320px */
+    border-radius: 16px;
+    padding: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    position: relative;
+}
+
+.modal-avatar-large {
+    width: 100px;
+    height: 100px;
+    border-radius: 50%;
+    overflow: hidden;
+    margin-bottom: 20px;
+    border: 4px solid var(--primary-dark);
+}
+
+.modal-user-info {
+    text-align: center;
+    margin-bottom: 24px;
+}
+
+.modal-name {
+    font-size: 20px;
+    font-weight: 800;
+    color: black;
+    margin-bottom: 4px;
+}
+
+.modal-role {
+    font-size: 14px;
+    color: #666;
+    font-weight: 600;
+    margin-bottom: 8px;
+    text-transform: uppercase;
+    background-color: #eee;
+    padding: 2px 8px;
+    border-radius: 12px;
+    display: inline-block;
+}
+
+.modal-email {
+    font-size: 14px;
+    color: #444;
+}
+
+.modal-actions {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+}
+
+.btn-edit {
+    flex: 1;
+    background-color: var(--accent-yellow);
+    color: black;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+}
+
+.btn-delete {
+    flex: 1;
+    background-color: #E53935;
+    color: white;
+    border: none;
+    padding: 12px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+    text-align: center;
+}
+
+.close-modal-btn {
+    position: absolute;
+    top: 10px;
+    right: 15px;
+    font-size: 24px;
+    color: #aaa;
+    cursor: pointer;
+    background: none;
+    border: none;
+}
+
+/* Modal Details Grid */
+.modal-details-grid {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+    width: 100%;
+    margin-top: 16px;
+    background-color: #f8f9fa;
+    padding: 16px;
+    border-radius: 8px;
+    text-align: left;
+    /* Critical for rata kiri */
+    box-sizing: border-box;
+}
+
+.detail-item {
+    display: flex;
+    flex-direction: row;
+    /* Changed from column to row */
+    align-items: center;
+    /* Vertically center */
+    justify-content: flex-start;
+    /* Align to start */
+    gap: 8px;
+    /* Space between label and value */
+    border-bottom: 1px solid #eee;
+    padding-bottom: 8px;
+}
+
+.detail-item:last-child {
+    border-bottom: none;
+    padding-bottom: 0;
+}
+
+.detail-label {
+    font-size: 12px;
+    color: #666;
+    font-weight: 600;
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    min-width: 100px;
+    /* Optional: ensures labels align if desired, or remove for fluid */
+}
+
+.detail-value {
+    font-size: 14px;
+    color: #000;
+    font-weight: 500;
+    flex: 1;
+    /* Allow value to take remaining space */
+    text-align: left;
+}
+
+/* Password Reset Button */
+.password-display {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+}
+
+.btn-reset-password {
+    background-color: #012E34;
+    color: white;
+    border: none;
+    padding: 4px 10px;
+    border-radius: 6px;
+    font-size: 11px;
+    font-weight: 700;
+    cursor: pointer;
+    text-transform: uppercase;
+    transition: background-color 0.2s;
+}
+
+/* Inline Password Reset */
+.detail-item-column {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    border-bottom: 1px solid #eee;
+    padding-bottom: 8px;
+    width: 100%;
+}
+
+.detail-row {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    justify-content: flex-start;
+    gap: 8px;
+}
+
+.reset-password-container {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    padding-left: 0;
+    /* Align with left */
+    width: 100%;
+}
+
+.reset-password-input {
+    padding: 8px;
+    border: 1px solid #ddd;
+    border-radius: 6px;
+    font-size: 14px;
+    width: 100%;
+    box-sizing: border-box;
+}
+
+.reset-actions {
+    display: flex;
+    gap: 8px;
+}
+
+.btn-save-password {
+    background-color: var(--accent-yellow);
+    color: black;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.btn-cancel-password {
+    background-color: #ddd;
+    color: #333;
+    border: none;
+    padding: 6px 12px;
+    border-radius: 6px;
+    font-size: 12px;
+    font-weight: 600;
+    cursor: pointer;
+}
+
+/* Search Input */
+.section-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 2px;
+}
+
+.search-input {
+    padding: 8px 12px;
+    border-radius: 8px;
+    border: 1px solid #ddd;
+    font-size: 14px;
+    width: 200px;
+}
+
+.search-input:focus {
+    outline: none;
+    border-color: var(--primary-dark);
+}
+
+/* Delete Confirmation Modal */
+.delete-modal-content {
+    background-color: white;
+    padding: 30px;
+    border-radius: 12px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    text-align: center;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+    width: 280px;
+    height: 320px;
+    justify-content: center;
+    position: relative;
+}
+
+.delete-icon-container {
+    width: 100px;
+    height: 100px;
+    background-color: #ffebee;
+    /* Light red background */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    margin-bottom: 24px;
+}
+
+.delete-icon-circle {
+    width: 80px;
+    height: 80px;
+    background-color: #E53935;
+    /* Red circle */
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.delete-title {
+    font-size: 20px;
+    font-weight: 800;
+    color: #E53935;
+    margin-bottom: 8px;
+}
+
+.delete-subtitle {
+    font-size: 14px;
+    color: #666;
+    margin-bottom: 24px;
+}
+
+.delete-actions-row {
+    display: flex;
+    gap: 12px;
+    width: 100%;
+}
+
+.btn-confirm-delete {
+    flex: 1;
+    background-color: #E53935;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+}
+
+.btn-cancel-delete {
+    flex: 1;
+    background-color: #ccc;
+    color: black;
+    border: none;
+    padding: 10px;
+    border-radius: 8px;
+    font-weight: 700;
+    cursor: pointer;
+}

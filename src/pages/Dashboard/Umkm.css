@@ -1,0 +1,303 @@
+/* --- RESET & VARIABLES --- */
+:root {
+    --primary-dark: #003B46;
+    --primary-yellow: #FFC700;
+    --primary-red: #FF5252;
+    /* Warna untuk tombol close (opsional) */
+    --bg-white: #FFFFFF;
+    --bg-page: #F5F7FA;
+}
+
+* {
+    box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    font-family: 'Inter', sans-serif;
+}
+
+body {
+    background-color: var(--bg-page);
+}
+
+/* --- RESPONSIVE CONTAINER --- */
+.responsive-container {
+    width: 100%;
+    min-height: 100vh;
+    padding: 20px;
+    padding-bottom: 120px;
+    margin: 0 auto;
+    /* Penting untuk posisi absolute anak-anaknya */
+    position: relative;
+}
+
+/* Limit lebar di PC */
+@media (min-width: 1024px) {
+    .responsive-container {
+        max-width: 1200px;
+    }
+}
+
+/* --- HEADER SECTION --- */
+.header-section {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 30px;
+    padding: 10px 0;
+}
+
+.header-left {
+    display: flex;
+    align-items: center;
+    gap: 15px;
+}
+
+.logo-text {
+    font-size: 24px;
+    font-weight: 900;
+    letter-spacing: 1px;
+    color: #000;
+}
+
+.notif-icon {
+    width: 28px;
+    height: 28px;
+    cursor: pointer;
+    transition: 0.2s;
+}
+
+.notif-icon:hover {
+    transform: scale(1.1);
+}
+
+.user-text {
+    text-align: right;
+}
+
+.user-name {
+    font-weight: bold;
+    font-size: 14px;
+    color: var(--primary-dark);
+}
+
+.user-role {
+    font-size: 11px;
+    color: #666;
+}
+
+.user-avatar {
+    width: 40px;
+    height: 40px;
+    background: #eee;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+/* Greeting */
+.greeting {
+    font-size: 20px;
+    font-weight: 700;
+    margin-bottom: 25px;
+    color: #000;
+}
+
+/* --- DASHBOARD GRID LAYOUT --- */
+
+
+/* --- PETUGAS STYLE CONSISTENCY --- */
+.petugas-card {
+    background: white;
+    border: 1px solid #000;
+    border-radius: 12px;
+    padding: 12px;
+    box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.1);
+    /* Hard shadow match */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: space-between;
+}
+
+.petugas-title {
+    font-size: 16px;
+    font-weight: 800;
+    color: #012E34;
+}
+
+.petugas-value {
+    font-size: 24px;
+    font-weight: 800;
+    color: #012E34;
+}
+
+.petugas-sublabel {
+    font-size: 10px;
+    font-weight: 700;
+    color: #012E34;
+}
+
+/* History Section */
+.history-card-style {
+    background: white;
+    border: 1px solid #000;
+    border-radius: 12px;
+    padding: 16px;
+    box-shadow: 2px 2px 0px rgba(0, 0, 0, 0.1);
+}
+
+.icon-yellow-bg {
+    background-color: #FFC400;
+    /* Matching Petugas accent-yellow */
+    border-radius: 50%;
+    /* Or 8px if square */
+}
+
+.text-dark-blue {
+    color: #012E34;
+}
+
+/* --- FLOATING ACTION BUTTON (FAB) & MENU --- */
+
+/* 1. Style Tombol Utama (+) */
+.fab-btn {
+    position: fixed;
+    bottom: 100px;
+    right: 20px;
+    width: 60px;
+    height: 60px;
+    background-color: var(--primary-yellow);
+    border-radius: 50%;
+    border: none;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: #fff;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+    cursor: pointer;
+    z-index: 100;
+    /* Transisi halus untuk warna dan transform */
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Style khusus untuk icon di dalamnya agar bisa berputar */
+.fab-icon {
+    font-size: 32px;
+    display: block;
+    transition: transform 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+    line-height: 1;
+}
+
+/* 2. Style Saat Menu Terbuka (.open) */
+.fab-btn.open {
+    background-color: var(--primary-dark);
+    /* Ganti warna jadi gelap saat jadi tombol close */
+    box-shadow: 0 8px 25px rgba(0, 0, 0, 0.3);
+}
+
+/* Putar icon '+' 45 derajat agar jadi 'x' */
+.fab-btn.open .fab-icon {
+    transform: rotate(45deg);
+}
+
+
+/* 3. Container Menu Drop-up */
+.fab-menu-container {
+    position: fixed;
+    bottom: 170px;
+    /* Muncul di atas tombol FAB */
+    right: 25px;
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    z-index: 99;
+
+    /* Keadaan awal: tersembunyi, agak turun, transparan */
+    opacity: 0;
+    transform: translateY(20px);
+    pointer-events: none;
+    /* Agar tidak bisa diklik saat tersembunyi */
+    transition: all 0.3s cubic-bezier(0.25, 0.8, 0.25, 1);
+}
+
+/* Keadaan saat menu terbuka */
+.fab-menu-container.open {
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
+}
+
+/* 4. Style Item Menu (Tombol Buat Voucher) */
+.fab-menu-item {
+    background-color: var(--bg-white);
+    color: var(--primary-dark);
+    padding: 12px 20px;
+    border-radius: 50px;
+    /* Bentuk kapsul */
+    border: none;
+    font-weight: 700;
+    font-size: 14px;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transition: transform 0.2s;
+    white-space: nowrap;
+    /* Agar teks tidak turun baris */
+}
+
+.fab-menu-item:hover {
+    transform: scale(1.05);
+    color: var(--primary-yellow);
+}
+
+
+/* --- UNIVERSAL BOTTOM NAV --- */
+.bottom-nav {
+    position: fixed;
+    bottom: 20px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 95%;
+    max-width: 480px;
+    height: 70px;
+    background-color: var(--primary-dark);
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 20px;
+    z-index: 999;
+    box-shadow: 0 10px 25px rgba(0, 59, 70, 0.3);
+}
+
+.nav-item {
+    opacity: 0.6;
+    cursor: pointer;
+    transition: 0.2s;
+    position: relative;
+}
+
+.nav-item.active {
+    opacity: 1;
+    transform: translateY(-3px);
+}
+
+.nav-item.active::after {
+    content: '';
+    position: absolute;
+    bottom: -8px;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 4px;
+    height: 4px;
+    background: var(--primary-yellow);
+    border-radius: 50%;
+}
+
+.nav-item svg {
+    width: 28px;
+    height: 28px;
+    fill: white;
+}

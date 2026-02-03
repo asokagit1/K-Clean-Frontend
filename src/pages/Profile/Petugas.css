@@ -1,0 +1,351 @@
+/* Petugas.css */
+.profile-container {
+  font-family: "Inter", sans-serif;
+  /* Background and dimensions handled by global .mobile-wrapper */
+  padding: 20px;
+  padding-bottom: 120px;
+  /* Increased bottom padding to prevent content being hidden behind navbar */
+  display: flex;
+  flex-direction: column;
+}
+
+.profile-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 24px;
+  position: relative;
+  width: 100%;
+}
+
+.back-button {
+  background-color: var(--primary-dark, #012e34);
+  color: white;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: none;
+  box-shadow: 0 2px 5px rgba(0, 0, 0, 0.1);
+  transition: transform 0.1s;
+}
+
+.back-button:active {
+  transform: scale(0.95);
+}
+
+.header-title {
+  font-size: 20px;
+  font-weight: 800;
+  color: black;
+  flex: 1;
+  text-align: center;
+}
+
+.profile-avatar-section {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 0px;
+  flex-direction: column;
+}
+
+.avatar-wrapper {
+  position: relative;
+  width: 150px;
+  height: 150px;
+}
+
+.avatar-circle {
+  width: 100%;
+  height: 100%;
+  border-radius: 50%;
+  overflow: hidden;
+  background-color: #eaeaea;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+/* Avatar Edit Overlay - Only visible in Edit Mode */
+.avatar-edit-overlay {
+  position: absolute;
+  bottom: 0;
+  right: 0;
+  /* Tucked effectively on the circle edge */
+  background-color: #012e34;
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  border: 2px solid white;
+  z-index: 10;
+  /* Ensure it floats mainly on top of the circle edge */
+}
+
+/* Trigger Button ("Ubah") - Visible in View Mode */
+.edit-trigger-button {
+  display: none;
+}
+
+.profile-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.label {
+  font-size: 14px;
+  font-weight: 700;
+  color: black;
+}
+
+.value-box {
+  background-color: var(--primary-dark, #012e34);
+  color: white;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  min-height: 48px;
+  /* Fixed height to match populated fields */
+  display: flex;
+  align-items: center;
+  box-sizing: border-box;
+}
+
+.input-field {
+  background-color: var(--primary-dark, #012e34);
+  color: white;
+  padding: 12px 16px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  border: none;
+  outline: none;
+  width: 100%;
+  min-height: 48px;
+  /* Fixed height */
+  box-sizing: border-box;
+}
+
+.input-field:focus {
+  box-shadow: 0 0 0 2px rgba(76, 175, 80, 0.5);
+}
+
+.edit-button-container {
+  display: flex;
+  justify-content: flex-end;
+  margin-top: 20px;
+}
+
+.edit-button {
+  background-color: #4caf50;
+  /* Green from design */
+  color: white;
+  border: none;
+  padding: 10px 20px;
+  border-radius: 8px;
+  font-size: 16px;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  cursor: pointer;
+  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+}
+
+.edit-icon {
+  width: 18px;
+  height: 18px;
+}
+
+.action-buttons {
+  display: flex;
+  gap: 12px;
+  margin-top: 24px;
+}
+
+.save-button {
+  flex: 1;
+  background-color: #4caf50;
+  color: white;
+  padding: 14px;
+  border-radius: 12px;
+  border: none;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+}
+
+.cancel-button {
+  flex: 1;
+  background-color: #e53935;
+  color: white;
+  padding: 14px;
+  border-radius: 12px;
+  border: none;
+  font-size: 16px;
+  font-weight: 700;
+  cursor: pointer;
+  text-align: center;
+}
+
+/* Navbar Styles Restored and Fixed */
+.bottom-nav {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  height: 50px;
+  padding: 0;
+  background-color: #012e34;
+  position: fixed;
+  bottom: 20px;
+  /* Center fixed element reliably */
+  left: 50%;
+  transform: translateX(-50%);
+  width: calc(100% - 40px);
+  /* Full width minus margins */
+  max-width: 480px;
+  border-radius: 12px;
+  z-index: 100;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+}
+
+.nav-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  cursor: pointer;
+  transition: transform 0.2s;
+}
+
+.nav-item:active {
+  transform: scale(0.95);
+}
+
+.nav-item.active {
+  border-bottom: 5px solid white;
+  padding-bottom: 5px;
+  /* Adjust spacing immediately if needed, or rely on flex alignment */
+  border-radius: 5px;
+  /* Slight rounding for the line if desired, or 0 for sharp */
+}
+
+.nav-icon {
+  width: 28px;
+  height: 28px;
+}
+
+/* MODAL STYLES */
+.modal-overlay {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.5);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 1000;
+}
+
+.modal-content {
+  background-color: white;
+  width: 85%;
+  max-width: 320px;
+  border-radius: 16px;
+  padding: 30px 20px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.modal-icon-container {
+  margin-bottom: 20px;
+}
+
+.delete-circle-red {
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
+  background-color: #e53935;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-title {
+  font-size: 20px;
+  font-weight: 800;
+  margin-bottom: 8px;
+}
+
+.text-green {
+  color: #4caf50;
+}
+
+.text-red {
+  color: #e53935;
+}
+
+.modal-subtitle {
+  font-size: 14px;
+  color: #666;
+  margin-bottom: 24px;
+  font-weight: 500;
+}
+
+.modal-button {
+  width: 100%;
+  padding: 12px;
+  border-radius: 12px;
+  border: none;
+  font-size: 16px;
+  font-weight: 700;
+  color: white;
+  cursor: pointer;
+}
+
+.btn-green {
+  background-color: #4caf50;
+}
+
+.btn-red {
+  background-color: #e53935;
+}
+
+/* Added for Profile View Mode */
+.value-text {
+  font-size: 16px;
+  font-weight: 600;
+  color: #012e34;
+  padding: 12px 16px 12px 0; /* Align with input padding but 0 left */
+  min-height: 48px;
+  display: flex;
+  align-items: center;
+}
