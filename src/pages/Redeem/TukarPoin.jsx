@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { ArrowLeft, Search, Home, Ticket, User, ChevronLeft } from 'lucide-react';
+import { ArrowLeft, Search, Home, Ticket, User, ChevronLeft, MapPin } from 'lucide-react';
 import { useNavigate } from 'react-router-dom';
 import api from '../../api/axios';
 import BottomNav from '../../components/ui/BottomNav';
@@ -114,16 +114,22 @@ const TukarPoin = () => {
                                     <div className="flex-1 p-4 pl-6 flex flex-col justify-center text-white relative">
 
                                         {/* Points Badge (Top Right) */}
-                                        <div className="absolute top-3 right-8 text-[#FFB800] text-xs font-bold">
+                                        <div className="absolute top-3 right-3 text-[#FFB800] text-xs font-bold">
                                             {item.points_required} point
                                         </div>
 
-                                        <h3 className="font-bold text-lg leading-tight mb-1">{item.title}</h3>
+                                        <h3 className="font-bold text-lg leading-tight mb-1 truncate max-w-[180px]">{item.title}</h3>
                                         <div className="text-lg font-bold mb-1">
                                             Rp {item.discount_price ? new Intl.NumberFormat('id-ID').format(String(item.discount_price).replace(/\./g, '')) : '0'} <span className="text-sm font-normal">Diskon</span>
                                         </div>
                                         <div className="text-[10px] text-gray-300">
                                             Valid hingga {new Date(item.expired_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })}
+                                        </div>
+                                        <div className="flex items-center mt-1 max-w-[200px]">
+                                            <MapPin size={14} className="text-gray-300 mr-1 flex-shrink-0" />
+                                            <div className="text-xs text-gray-300 truncate font-medium">
+                                                {item.umkm_address}
+                                            </div>
                                         </div>
                                     </div>
 

@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate } from 'react-router-dom';
-import { ChevronLeft } from 'lucide-react';
+import { ChevronLeft, MapPin } from 'lucide-react';
 import api from '../../api/axios';
 import BottomNav from '../../components/ui/BottomNav';
 
@@ -30,13 +30,14 @@ const VoucherKu = () => {
 
                 // 3. Merge Data
                 const mergedVouchers = userVouchers.map(uv => {
-                    const details = systemVouchers.find(v => v.id === uv.voucher_id);
+                    const details = systemVouchers.find(v => v.id == uv.voucher_id);
                     return {
                         ...uv,
                         title: details?.title || "Voucher",
                         image: details?.voucher_image,
                         discount_price: details?.discount_price,
-                        valid_until: details?.expired_at
+                        valid_until: details?.expired_at,
+                        umkm_address: details?.umkm_address
                     };
                 });
 
@@ -144,6 +145,12 @@ const VoucherKu = () => {
                                             <p className="text-gray-300 text-[10px] mt-1">
                                                 Valid hingga {formatDate(voucher.valid_until)}
                                             </p>
+                                            <div className="flex items-center mt-1">
+                                                <MapPin size={12} className="text-gray-300 mr-1 flex-shrink-0" />
+                                                <div className="text-[10px] text-gray-300 truncate max-w-[120px] font-medium">
+                                                    {voucher.umkm_address || 'Alamat tidak tersedia'}
+                                                </div>
+                                            </div>
                                         </div>
                                     </div>
 

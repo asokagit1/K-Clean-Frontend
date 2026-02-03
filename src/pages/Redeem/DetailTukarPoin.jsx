@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useLocation, useNavigate, useParams } from 'react-router-dom';
-import { ChevronLeft } from 'lucide-react';
+import { ChevronLeft, MapPin } from 'lucide-react';
 import api from '../../api/axios';
 import BottomNav from '../../components/ui/BottomNav';
 
@@ -139,6 +139,12 @@ const DetailTukarPoin = () => {
                             <p className="text-xs text-gray-300">
                                 Valid hingga {new Date(voucher.expired_at).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' })}
                             </p>
+                            <div className="flex items-center justify-center mt-2 w-full px-4">
+                                <MapPin size={14} className="text-gray-300 mr-1 flex-shrink-0" />
+                                <div className="text-xs text-gray-300 font-medium truncate max-w-[240px]">
+                                    {voucher.umkm_address}
+                                </div>
+                            </div>
                         </div>
 
                         <div className="mb-8 px-4">
