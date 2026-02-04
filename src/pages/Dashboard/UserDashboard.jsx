@@ -50,9 +50,9 @@ const UserDashboard = () => {
     // Carousel State
     const [currentSlide, setCurrentSlide] = useState(0);
     const aboutUsImages = [
-        { id: 1, image: 'https://placehold.co/600x240/012E34/FFFFFF?text=Tentang+Kami+1' },
-        { id: 2, image: 'https://placehold.co/600x240/4CAF50/FFFFFF?text=Tentang+Kami+2' },
-        { id: 3, image: 'https://placehold.co/600x240/E53935/FFFFFF?text=Tentang+Kami+3' },
+        { id: 1, image: '/assets/images/about-us-1.jpg' },
+        { id: 2, image: '/assets/images/about-us-2.jpg' },
+        { id: 3, image: '/assets/images/about-us-3.jpg' },
     ];
 
     // Carousel Auto-slide
@@ -91,7 +91,7 @@ const UserDashboard = () => {
                     <div className="flex flex-col">
                         <div className="flex items-center gap-2 mb-1">
                             <span className="font-extrabold text-lg">Point Anda</span>
-                            <span className="text-xl">👉</span> {/* Using emoji as placeholder for the hand icon in design */}
+                            <Coins className="text-secondary fill-secondary" size={24} />
                         </div>
                         <div className="text-4xl font-black text-secondary tracking-tight">
                             {points} eco
@@ -100,7 +100,7 @@ const UserDashboard = () => {
                 </div>
 
                 {/* Action Buttons */}
-                <div className="grid grid-cols-2 gap-4 mb-8">
+                <div className="grid grid-cols-2 gap-4 mb-4">
                     <button
                         onClick={() => setIsJadwalOpen(true)}
                         className="border-2 border-gray-800 rounded-xl p-4 flex flex-col items-center justify-center gap-2 hover:bg-gray-50 transition-colors"
@@ -125,7 +125,7 @@ const UserDashboard = () => {
                 {/* History Section */}
                 <h3 className="text-sm font-bold text-center mb-2 text-black">Riwayat Transaksi</h3>
                 {/* Fixed height container for scrolling */}
-                <div className="bg-white border border-black rounded-lg p-0 mb-6 shadow-[2px_2px_0px_rgba(0,0,0,0.1)] overflow-hidden flex flex-col h-[320px]">
+                <div className="bg-white border border-black rounded-xl p-0 mb-6 overflow-hidden flex flex-col h-auto max-h-[182px]">
                     <div className="overflow-y-auto flex-1 custom-scrollbar">
                         {loading ? (
                             <div className="text-center py-4 text-xs text-gray-400">Loading...</div>

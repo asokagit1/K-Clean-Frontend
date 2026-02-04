@@ -344,8 +344,11 @@
   font-size: 16px;
   font-weight: 600;
   color: #012e34;
-  padding: 12px 16px 12px 0; /* Align with input padding but 0 left */
+  padding: 12px 16px;
   min-height: 48px;
   display: flex;
   align-items: center;
+  background-color: #F5F5F5;
+  border-radius: 8px;
+  width: 100%;
 }
