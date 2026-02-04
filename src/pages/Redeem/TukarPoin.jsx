@@ -100,7 +100,7 @@ const TukarPoin = () => {
                                     <div className="w-[30%] h-full flex items-center justify-center p-3">
                                         <div className="w-20 h-20 rounded-full overflow-hidden border-2 border-white/20">
                                             <img
-                                                src={item.voucher_image ? `${import.meta.env.VITE_API_BASE_URL}/storage/voucher/${item.voucher_image}` : 'https://placehold.co/100x100?text=Voucher'}
+                                                src={item.voucher_image ? `${import.meta.env.VITE_API_BASE_URL}/public/storage/voucher/${item.voucher_image}` : 'https://placehold.co/100x100?text=Voucher'}
                                                 alt={item.title}
                                                 className="w-full h-full object-cover"
                                             />

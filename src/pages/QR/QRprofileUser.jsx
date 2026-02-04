@@ -41,7 +41,7 @@ const QRprofileUser = () => {
     const getQrUrl = (data) => {
         // Prefer transaction QR for operations, fall back to profile QR
         if (data?.transaction_qr_path) {
-            return `${import.meta.env.VITE_API_BASE_URL}/storage/${data.transaction_qr_path}`;
+            return `${import.meta.env.VITE_API_BASE_URL}/public/storage/trash_transaction_qr/users/${data.transaction_qr_path}`;
         }
         return null;
     };

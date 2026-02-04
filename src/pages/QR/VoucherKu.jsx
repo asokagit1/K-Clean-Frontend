@@ -132,7 +132,7 @@ const VoucherKu = () => {
                                     <div className="flex flex-row items-center w-full px-5 mb-4 gap-4 mt-2">
                                         <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-white/20 flex-shrink-0 bg-gray-200">
                                             <img
-                                                src={voucher.image ? `${import.meta.env.VITE_API_BASE_URL}/storage/voucher/${voucher.image}` : 'https://placehold.co/100x100?text=V'}
+                                                src={voucher.image ? `${import.meta.env.VITE_API_BASE_URL}/public/storage/voucher/${voucher.image}` : 'https://placehold.co/100x100?text=V'}
                                                 alt={voucher.title}
                                                 className="w-full h-full object-cover"
                                             />
@@ -158,7 +158,7 @@ const VoucherKu = () => {
                                     <div className="flex-1 flex items-center justify-center w-full bg-[#012E34] relative z-10 py-2">
                                         <div className="bg-white p-3 rounded-xl w-64 h-64 flex items-center justify-center">
                                             <img
-                                                src={`${import.meta.env.VITE_API_BASE_URL}/storage/${voucher.user_voucher_qr_path}`}
+                                                src={`${import.meta.env.VITE_API_BASE_URL}/public/storage/voucher_qr/users/${voucher.user_voucher_qr_path}`}
                                                 alt="QR Code"
                                                 className="w-full h-full object-contain"
                                             />
