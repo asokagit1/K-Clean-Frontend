@@ -22,12 +22,12 @@ const EmailVerification = () => {
 
     return (
         <div className="min-h-screen bg-white flex flex-col items-center justify-center p-6 text-center">
-             <div className="max-w-md space-y-6">
+            <div className="max-w-md space-y-6">
                 <h1 className="text-2xl font-bold text-primary">Verify Your Email</h1>
                 <p className="text-gray-600">
                     Before proceeding, please check your email for a verification link.
                 </p>
-                
+
                 {message && (
                     <div className="bg-green-50 text-green-600 p-3 rounded-md text-sm">
                         {message}
@@ -35,22 +35,22 @@ const EmailVerification = () => {
                 )}
 
                 <div className="space-y-4">
-                    <Button 
-                        onClick={handleResend} 
+                    <Button
+                        onClick={handleResend}
                         className="w-full bg-primary"
                         isLoading={isLoading}
                     >
                         Resend Verification Email
                     </Button>
-                    
-                    <button 
+
+                    <button
                         onClick={logout}
                         className="text-sm text-gray-500 hover:text-gray-700 underline"
                     >
-                        Log Out
+                        Login
                     </button>
                 </div>
-             </div>
+            </div>
         </div>
     );
 };
