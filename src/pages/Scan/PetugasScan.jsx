@@ -51,16 +51,9 @@ const PetugasScan = () => {
                     // aspectRatio removed to fix iOS scaling issues
                 };
 
-                const videoConstraints = {
-                    facingMode: "environment",
-                    focusMode: "continuous", // Enable continuous focus
-                    width: { min: 640, ideal: 1280, max: 1920 },
-                    height: { min: 480, ideal: 720, max: 1080 },
-                };
-
                 try {
                     await html5QrCodeRef.current.start(
-                        videoConstraints,
+                        { facingMode: "environment" },
                         config,
                         (decodedText) => {
                             handleScanSuccess(decodedText);
