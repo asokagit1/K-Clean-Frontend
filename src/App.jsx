@@ -29,7 +29,12 @@ import UmkmScan from './pages/Scan/UmkmScan';
 
 
 const ProtectedRoute = ({ allowedRoles }) => {
-  const { token, user } = useAuth();
+  const { token, user, isInitialized } = useAuth();
+
+  // Wait for auth to initialize before checking token/roles
+  if (!isInitialized) {
+    return null; // Or a specific loading spinner
+  }
 
   if (!token) {
     return <Navigate to="/login" replace />;
