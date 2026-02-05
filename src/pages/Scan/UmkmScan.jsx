@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Html5Qrcode } from 'html5-qrcode';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { User, X, Home, Scan } from 'lucide-react';
+import { User, X, Home, Scan, Keyboard } from 'lucide-react';
 import api from '../../api/axios';
 
 const UmkmScan = () => {
@@ -14,6 +14,8 @@ const UmkmScan = () => {
     const [redemptionResult, setRedemptionResult] = useState(null);
     const [showResultSheet, setShowResultSheet] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [showManualInput, setShowManualInput] = useState(false);
+    const [manualId, setManualId] = useState('');
 
     const scannerRef = useRef(null);
     const html5QrCodeRef = useRef(null);
@@ -44,9 +46,10 @@ const UmkmScan = () => {
 
             try {
                 await html5QrCodeRef.current.start(
-                    { facingMode: "environment",
+                    {
+                        facingMode: "environment",
                         // focusMode: "continuous"
-                     },
+                    },
                     config,
                     (decodedText) => {
                         handleScanSuccess(decodedText);
@@ -71,11 +74,15 @@ const UmkmScan = () => {
                 clearTimeout(timer);
                 if (html5QrCodeRef.current) {
                     try {
-                        html5QrCodeRef.current.stop().then(() => {
+                        if (html5QrCodeRef.current.isScanning) {
+                            html5QrCodeRef.current.stop().then(() => {
+                                html5QrCodeRef.current.clear();
+                            }).catch(err => {
+                                console.warn("Stop failed", err);
+                            });
+                        } else {
                             html5QrCodeRef.current.clear();
-                        }).catch(err => {
-                            console.warn("Stop failed", err);
-                        });
+                        }
                     } catch (err) {
                         console.warn("Cleanup error", err);
                     }
@@ -199,6 +206,15 @@ const UmkmScan = () => {
         return `${import.meta.env.VITE_API_BASE_URL}/public/storage/voucher/${imageName}`;
     };
 
+    const handleManualSubmit = (e) => {
+        e.preventDefault();
+        if (manualId.trim()) {
+            setShowManualInput(false);
+            handleScanSuccess(manualId.trim());
+            setManualId('');
+        }
+    };
+
     const formatDate = (dateString) => {
         if (!dateString) return '-';
         return new Date(dateString).toLocaleDateString('id-ID', { day: 'numeric', month: 'short', year: 'numeric' });
@@ -214,10 +230,20 @@ const UmkmScan = () => {
     return (
         <div className="relative h-screen w-full bg-black overflow-hidden flex flex-col">
             {/* Header / Instructions */}
-            <div className="absolute top-20 left-0 right-0 z-20 flex flex-col items-center">
+            <div className="absolute top-20 left-0 right-0 z-20 flex flex-col items-center gap-4">
                 <div className="bg-[#012E34]/80 backdrop-blur-sm px-6 py-3 rounded-full">
                     <span className="text-white text-base font-medium">Scan QR Voucher</span>
                 </div>
+                <button
+                    onClick={() => {
+                        setIsScanning(false);
+                        setShowManualInput(true);
+                    }}
+                    className="flex items-center gap-2 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full text-[#012E34] font-bold shadow-lg active:scale-95 transition-all"
+                >
+                    <Keyboard size={20} />
+                    <span>Input ID Manual</span>
+                </button>
             </div>
 
             {/* Scanner Area */}
@@ -291,6 +317,53 @@ const UmkmScan = () => {
                             </button>
                         </div>
                     )}
+                </div>
+            )}
+
+            {/* Manual Input Modal */}
+            {showManualInput && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-in fade-in duration-200">
+                    <div className="bg-white rounded-2xl w-full max-w-sm p-6 shadow-xl scale-100 transition-all">
+                        <div className="flex justify-between items-center mb-6">
+                            <h3 className="text-xl font-bold text-[#012E34]">Input ID Voucher</h3>
+                            <button
+                                onClick={() => {
+                                    setShowManualInput(false);
+                                    setIsScanning(true);
+                                }}
+                                className="p-1 rounded-full hover:bg-gray-100"
+                            >
+                                <X size={24} className="text-gray-500" />
+                            </button>
+                        </div>
+
+                        <form onSubmit={handleManualSubmit} className="flex flex-col gap-4">
+                            <div>
+                                <label className="block text-sm font-medium text-gray-700 mb-2">
+                                    Masukkan ID Voucher
+                                </label>
+                                <input
+                                    type="text" // number input can be annoyingly restrictive sometimes
+                                    value={manualId}
+                                    onChange={(e) => setManualId(e.target.value)}
+                                    placeholder="Contoh: 15"
+                                    className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:border-[#012E34] focus:ring-1 focus:ring-[#012E34] outline-none transition-all font-mono text-lg text-center"
+                                    autoFocus
+                                />
+                                <p className="text-xs text-gray-400 mt-2 text-center">
+                                    Masukkan ID numeric yang tertera pada voucher user
+                                </p>
+                            </div>
+
+                            <button
+                                type="submit"
+                                disabled={!manualId.trim()}
+                                className="w-full py-3.5 bg-[#012E34] disabled:opacity-50 disabled:cursor-not-allowed hover:bg-[#012429] text-white rounded-xl font-bold shadow-lg active:scale-[0.98] transition-all"
+                            >
+                                Cek Voucher
+                            </button>
+                        </form>
+                    </div>
                 </div>
             )}
 

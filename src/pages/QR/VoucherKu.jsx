@@ -116,7 +116,7 @@ const VoucherKu = () => {
                 </div>
 
                 {/* Slider Container */}
-                <div className="flex-1 flex flex-col items-center justify-center relative w-full overflow-hidden">
+                <div className="flex-1 flex flex-col items-center justify-end relative w-full overflow-x-hidden overflow-y-auto pb-24">
 
                     {/* Cards Track */}
                     <div
@@ -124,9 +124,9 @@ const VoucherKu = () => {
                         style={{ transform: `translateX(-${currentIndex * 100}%)` }}
                     >
                         {activeVouchers.map((voucher, index) => (
-                            <div key={voucher.id} className="w-full flex-shrink-0 px-8 flex justify-center">
+                            <div key={voucher.id} className="w-full flex-shrink-0 px-8 flex justify-center py-8">
                                 {/* Voucher Card */}
-                                <div className="bg-[#012E34] rounded-l w-full max-w-[340px] aspect-[4/6] relative flex flex-col items-center shadow-2xl overflow-hidden pt-6">
+                                <div className="bg-[#012E34] rounded-2xl w-full max-w-[340px] h-auto relative flex flex-col items-center shadow-2xl overflow-hidden pt-6 pb-8">
 
                                     {/* Top Section: Info */}
                                     <div className="flex flex-row items-center w-full px-5 mb-4 gap-4 mt-2">
@@ -165,6 +165,7 @@ const VoucherKu = () => {
                                             />
                                         </div>
                                     </div>
+                                    <div className="text-white text-lg font-mono font-bold tracking-widest mt-2">ID Voucher: {voucher.id}</div>
 
                                     {/* Separator Line */}
                                     <div className="w-full px-6 my-4 relative">
@@ -176,7 +177,7 @@ const VoucherKu = () => {
 
 
                                     {/* Bottom Branding */}
-                                    <div className="mb-12 mt-auto">
+                                    <div className="mb-6 mt-auto">
                                         <span className="text-white font-black tracking-widest text-xl">K-CLEAN</span>
                                     </div>
 
@@ -186,7 +187,7 @@ const VoucherKu = () => {
                     </div>
 
                     {/* Pagination Dots */}
-                    <div className="flex gap-2 mt-8 justify-center">
+                    <div className="flex gap-2 mt-2 justify-center">
                         {activeVouchers.map((_, idx) => (
                             <button
                                 key={idx}
