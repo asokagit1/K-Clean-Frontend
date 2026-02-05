@@ -43,13 +43,27 @@ const PetugasScan = () => {
                     } catch (e) { }
                 }
 
-                html5QrCodeRef.current = new Html5Qrcode("reader", { formatsToSupport: [Html5QrcodeSupportedFormats.QR_CODE] });
+                // Use experimental features for better performance (native barcode detector)
+                html5QrCodeRef.current = new Html5Qrcode("reader", {
+                    formatsToSupport: [Html5QrcodeSupportedFormats.QR_CODE],
+                    experimentalFeatures: {
+                        useBarCodeDetectorIfSupported: true
+                    }
+                });
 
                 const config = {
-                    fps: 6,
-                    qrbox: { width: 340, height: 340 },
+                    fps: 10, // Increased FPS for faster scanning
+                    // Qrbox must be smaller than the viewfinder to avoid errors
+                    qrbox: (viewfinderWidth, viewfinderHeight) => {
+                        const size = Math.min(viewfinderWidth, viewfinderHeight) * 0.8; // 80% of screen
+                        // Cap at 340px if user wants large box, but ensure it fits small screens
+                        const finalSize = Math.min(size, 340);
+                        return {
+                            width: finalSize,
+                            height: finalSize
+                        };
+                    },
                     disableFlip: true
-                    // aspectRatio removed to let library handle it based on video feed
                 };
 
                 try {
