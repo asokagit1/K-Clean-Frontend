@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Html5Qrcode } from 'html5-qrcode';
+import { Html5Qrcode, Html5QrcodeSupportedFormats } from 'html5-qrcode';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { User, X, Home, Scan } from 'lucide-react';
 import api from '../../api/axios';
@@ -43,17 +43,20 @@ const PetugasScan = () => {
                     } catch (e) { }
                 }
 
-                html5QrCodeRef.current = new Html5Qrcode("reader");
+                html5QrCodeRef.current = new Html5Qrcode("reader", { formatsToSupport: [Html5QrcodeSupportedFormats.QR_CODE] });
 
                 const config = {
-                    fps: 10,
+                    fps: 5,
                     qrbox: { width: 250, height: 250 },
-                    aspectRatio: window.innerWidth / window.innerHeight
+                    // aspectRatio removed to fix iOS scaling issues
                 };
 
                 try {
                     await html5QrCodeRef.current.start(
-                        { facingMode: "environment" },
+                        {
+                            facingMode: "environment",
+                            // focusMode: "continuous"
+                        },
                         config,
                         (decodedText) => {
                             handleScanSuccess(decodedText);
