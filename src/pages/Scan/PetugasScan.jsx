@@ -46,17 +46,21 @@ const PetugasScan = () => {
                 html5QrCodeRef.current = new Html5Qrcode("reader", { formatsToSupport: [Html5QrcodeSupportedFormats.QR_CODE] });
 
                 const config = {
-                    fps: 5,
+                    fps: 10,
                     qrbox: { width: 250, height: 250 },
                     // aspectRatio removed to fix iOS scaling issues
                 };
 
+                const videoConstraints = {
+                    facingMode: "environment",
+                    focusMode: "continuous", // Enable continuous focus
+                    width: { min: 640, ideal: 1280, max: 1920 },
+                    height: { min: 480, ideal: 720, max: 1080 },
+                };
+
                 try {
                     await html5QrCodeRef.current.start(
-                        {
-                            facingMode: "environment",
-                            // focusMode: "continuous"
-                        },
+                        videoConstraints,
                         config,
                         (decodedText) => {
                             handleScanSuccess(decodedText);
