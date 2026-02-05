@@ -6,15 +6,15 @@ const AuthContext = createContext(null);
 export const AuthProvider = ({ children }) => {
     const [user, setUser] = useState(null);
     const [token, setToken] = useState(localStorage.getItem('token'));
-    const [isLoading, setIsLoading] = useState(false);
-    const [isInitialized, setIsInitialized] = useState(false); // New state to track if we've checked storage
+    const [isLoading, setIsLoading] = useState(false); // Initial load check could be added here
 
     useEffect(() => {
         if (token) {
+            // Optional: Validate token or fetch user details on load
+            // For now, we assume if token exists, we might still have user data in local storage or fetch it
             const storedUser = localStorage.getItem('user');
             if (storedUser) setUser(JSON.parse(storedUser));
         }
-        setIsInitialized(true); // Mark as initialized after check
     }, []);
 
     const login = async (email, password) => {
@@ -64,7 +64,7 @@ export const AuthProvider = ({ children }) => {
     };
 
     return (
-        <AuthContext.Provider value={{ user, token, login, register, logout, isLoading, isInitialized }}>
+        <AuthContext.Provider value={{ user, token, login, register, logout, isLoading }}>
             {children}
         </AuthContext.Provider>
     );
