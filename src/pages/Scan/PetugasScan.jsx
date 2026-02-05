@@ -46,17 +46,9 @@ const PetugasScan = () => {
                 html5QrCodeRef.current = new Html5Qrcode("reader", { formatsToSupport: [Html5QrcodeSupportedFormats.QR_CODE] });
 
                 const config = {
-                    fps: 10,
-                    // Dynamic qrbox calculation for better responsiveness
-                    qrbox: (viewfinderWidth, viewfinderHeight) => {
-                        const minEdgePercentage = 0.7; // 70%
-                        const minEdgeSize = Math.min(viewfinderWidth, viewfinderHeight);
-                        const qrboxSize = Math.floor(minEdgeSize * minEdgePercentage);
-                        return {
-                            width: qrboxSize,
-                            height: qrboxSize
-                        };
-                    },
+                    fps: 6,
+                    qrbox: { width: 340, height: 340 },
+                    disableFlip: true
                     // aspectRatio removed to let library handle it based on video feed
                 };
 
@@ -161,7 +153,7 @@ const PetugasScan = () => {
                 <style>
                     {`
                         #reader video {
-                            object-fit: cover !important;
+                            object-fit: contain !important;
                             width: 100% !important;
                             height: 100% !important;
                         }
