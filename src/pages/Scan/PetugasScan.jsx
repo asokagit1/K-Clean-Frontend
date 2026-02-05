@@ -1,5 +1,5 @@
 import React, { useEffect, useState, useRef } from 'react';
-import { Html5Qrcode, Html5QrcodeSupportedFormats } from 'html5-qrcode';
+import { Html5Qrcode } from 'html5-qrcode';
 import { useNavigate, useLocation } from 'react-router-dom';
 import { User, X, Home, Scan } from 'lucide-react';
 import api from '../../api/axios';
@@ -43,32 +43,20 @@ const PetugasScan = () => {
                     } catch (e) { }
                 }
 
-                // Use experimental features for better performance (native barcode detector)
-                html5QrCodeRef.current = new Html5Qrcode("reader", {
-                    formatsToSupport: [Html5QrcodeSupportedFormats.QR_CODE],
-                    experimentalFeatures: {
-                        useBarCodeDetectorIfSupported: true
-                    }
-                });
+                html5QrCodeRef.current = new Html5Qrcode("reader");
 
                 const config = {
-                    fps: 10, // Increased FPS for faster scanning
-                    // Qrbox must be smaller than the viewfinder to avoid errors
-                    qrbox: (viewfinderWidth, viewfinderHeight) => {
-                        const size = Math.min(viewfinderWidth, viewfinderHeight) * 0.8; // 80% of screen
-                        // Cap at 340px if user wants large box, but ensure it fits small screens
-                        const finalSize = Math.min(size, 340);
-                        return {
-                            width: finalSize,
-                            height: finalSize
-                        };
-                    },
-                    disableFlip: true
+                    fps: 5,
+                    qrbox: { width: 250, height: 250 },
+                    aspectRatio: window.innerWidth / window.innerHeight
                 };
 
                 try {
                     await html5QrCodeRef.current.start(
-                        { facingMode: "environment" },
+                        {
+                            facingMode: "environment",
+                            // focusMode: "continuous"
+                        },
                         config,
                         (decodedText) => {
                             handleScanSuccess(decodedText);
@@ -167,7 +155,7 @@ const PetugasScan = () => {
                 <style>
                     {`
                         #reader video {
-                            object-fit: contain !important;
+                            object-fit: cover !important;
                             width: 100% !important;
                             height: 100% !important;
                         }
