@@ -37,14 +37,16 @@ const UmkmScan = () => {
             html5QrCodeRef.current = new Html5Qrcode("reader");
 
             const config = {
-                fps: 10,
+                fps: 5,
                 qrbox: { width: 250, height: 250 },
                 aspectRatio: window.innerWidth / window.innerHeight
             };
 
             try {
                 await html5QrCodeRef.current.start(
-                    { facingMode: "environment" },
+                    { facingMode: "environment",
+                        // focusMode: "continuous"
+                     },
                     config,
                     (decodedText) => {
                         handleScanSuccess(decodedText);
@@ -194,7 +196,7 @@ const UmkmScan = () => {
     // Helper for image URL
     const getVoucherImage = (imageName) => {
         if (!imageName) return "https://placehold.co/100x100?text=V";
-        return `${import.meta.env.VITE_API_BASE_URL}/storage/voucher/${imageName}`;
+        return `${import.meta.env.VITE_API_BASE_URL}/public/storage/voucher/${imageName}`;
     };
 
     const formatDate = (dateString) => {
