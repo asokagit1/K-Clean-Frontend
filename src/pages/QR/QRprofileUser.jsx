@@ -49,7 +49,7 @@ const QRprofileUser = () => {
 
     return (
         <div className="min-h-screen bg-[#E8EBF2] flex justify-center font-sans overflow-hidden">
-            {/* Background decoration (Abstract curves simulation) */}  
+            {/* Background decoration (Abstract curves simulation) */}
             <div className="fixed inset-0 pointer-events-none z-0">
                 <div className="absolute top-[-10%] left-[-10%] w-[300px] h-[300px] rounded-full border-[40px] border-[#CED4E0]/50 transform rotate-45"></div>
                 <div className="absolute top-[20%] right-[-20%] w-[400px] h-[400px] rounded-full border-[60px] border-[#CED4E0]/50"></div>
@@ -96,7 +96,7 @@ const QRprofileUser = () => {
                         <p className="text-gray-500 text-sm font-medium mb-6">Scan QR pada tempat terang</p>
 
                         {/* QR Code */}
-                        <div className="border border-gray-200 rounded-xl p-4 w-full aspect-square flex items-center justify-center bg-white shadow-sm">
+                        <div className="border border-gray-200 rounded-xl p-4 w-full aspect-square flex items-center justify-center bg-white shadow-sm mb-4">
                             {loading ? (
                                 <div className="text-gray-400">Loading QR...</div>
                             ) : (
@@ -107,6 +107,14 @@ const QRprofileUser = () => {
                                 )
                             )}
                         </div>
+
+                        {/* Display User ID for Manual Input */}
+                        {userData && (
+                            <div className="bg-gray-100 rounded-lg px-4 py-2 flex flex-col items-center">
+                                <span className="text-xs text-gray-500 font-medium">ID Pengguna</span>
+                                <span className="text-[#012E34] font-mono font-bold text-lg tracking-wider select-all">{userData.id}</span>
+                            </div>
+                        )}
 
                     </div>
                 </div>

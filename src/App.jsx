@@ -28,21 +28,30 @@ import PetugasTimbangan from './pages/Scan/PetugasTimbangan';
 import UmkmScan from './pages/Scan/UmkmScan';
 
 
-const ProtectedRoute = () => {
-  const { token } = useAuth();
+const ProtectedRoute = ({ allowedRoles }) => {
+  const { token, user } = useAuth();
+
   if (!token) {
     return <Navigate to="/login" replace />;
   }
+
+  if (allowedRoles && user && !allowedRoles.includes(user.role)) {
+    // Redirect based on role if trying to access unauthorized page
+    // or just send to their respective dashboard
+    if (user.role === 'admin') return <Navigate to="/admin-dashboard" replace />;
+    if (user.role === 'petugas') return <Navigate to="/petugas-dashboard" replace />;
+    if (user.role === 'umkm') return <Navigate to="/umkm-dashboard" replace />;
+    if (user.role === 'user') return <Navigate to="/dashboard" replace />;
+
+    return <Navigate to="/" replace />;
+  }
+
   return <Outlet />;
 };
 
 // Public Route (redirect to dashboard if already logged in)
 const PublicRoute = () => {
   const { token } = useAuth();
-  // Ideally we should know which dashboard to redirect to, 
-  // but for now let's just let the Login page handle standard redirection
-  // or if we really want to prevent access to login when auth, we can implement that.
-  // For simplicity, we allow access but Onboarding usually shouldn't show if logged in.
   return <Outlet />;
 }
 
@@ -57,31 +66,46 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/register" element={<Register />} />
 
-          {/* Protected Routes */}
+          {/* Protected Routes - All Authenticated Users */}
           <Route element={<ProtectedRoute />}>
             <Route path="/email-verify" element={<EmailVerification />} />
-            <Route path="/dashboard" element={<UserDashboard />} />
-            <Route path="/petugas-dashboard" element={<PetugasDashboard />} />
+          </Route>
+
+          {/* ADMIN Routes */}
+          <Route element={<ProtectedRoute allowedRoles={['admin']} />}>
             <Route path="/admin-dashboard" element={<AdminDashboard />} />
             <Route path="/create-petugas" element={<CreatePetugas />} />
             <Route path="/create-umkm" element={<CreateUMKM />} />
-            <Route path="/petugas-profile" element={<PetugasProfile />} />
             <Route path="/edit-data-petugas" element={<EditDataPetugas />} />
             <Route path="/edit-data-umkm" element={<EditDataUMKM />} />
             <Route path="/edit-data-user" element={<EditDataUser />} />
+          </Route>
+
+          {/* PETUGAS Routes */}
+          <Route element={<ProtectedRoute allowedRoles={['petugas']} />}>
+            <Route path="/petugas-dashboard" element={<PetugasDashboard />} />
+            <Route path="/petugas-profile" element={<PetugasProfile />} />
+            <Route path="/petugas-scan" element={<PetugasScan />} />
+            <Route path="/petugas-timbangan" element={<PetugasTimbangan />} />
+          </Route>
+
+          {/* UMKM Routes */}
+          <Route element={<ProtectedRoute allowedRoles={['umkm']} />}>
             <Route path="/umkm-dashboard" element={<DashboardUMKM />} />
             <Route path="/create-voucher" element={<CreateVoucher />} />
             <Route path="/list-voucher" element={<ListVoucher />} />
-            <Route path="/profile" element={<UserProfile />} />
             <Route path="/profile-umkm" element={<ProfileUMKM />} />
+            <Route path="/umkm-scan" element={<UmkmScan />} />
+          </Route>
+
+          {/* USER Routes */}
+          <Route element={<ProtectedRoute allowedRoles={['user']} />}>
+            <Route path="/dashboard" element={<UserDashboard />} />
+            <Route path="/profile" element={<UserProfile />} />
             <Route path="/tukar-poin" element={<TukarPoin />} />
             <Route path="/voucher/:id" element={<DetailTukarPoin />} />
             <Route path="/voucher-ku" element={<VoucherKu />} />
             <Route path="/QRprofileUser" element={<QRprofileUser />} />
-            <Route path="/petugas-scan" element={<PetugasScan />} />
-            <Route path="/petugas-timbangan" element={<PetugasTimbangan />} />
-            <Route path="/umkm-scan" element={<UmkmScan />} />
-
           </Route>
 
           {/* Fallback */}

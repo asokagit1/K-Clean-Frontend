@@ -1,7 +1,7 @@
 import React, { useEffect, useState, useRef } from 'react';
 import { Html5Qrcode } from 'html5-qrcode';
 import { useNavigate, useLocation } from 'react-router-dom';
-import { User, X, Home, Scan } from 'lucide-react';
+import { User, X, Home, Scan, Keyboard } from 'lucide-react';
 import api from '../../api/axios';
 
 const PetugasScan = () => {
@@ -15,6 +15,8 @@ const PetugasScan = () => {
     const [showUserSheet, setShowUserSheet] = useState(false);
     const [showTransactionModal, setShowTransactionModal] = useState(false);
     const [loading, setLoading] = useState(false);
+    const [showManualInput, setShowManualInput] = useState(false);
+    const [manualId, setManualId] = useState('');
 
     const [formData, setFormData] = useState({
         trash_type: 'Plastik',
@@ -141,13 +143,33 @@ const PetugasScan = () => {
         setIsScanning(true);
     };
 
+    const handleManualSubmit = (e) => {
+        e.preventDefault();
+        if (manualId.trim()) {
+            setShowManualInput(false);
+            handleScanSuccess(manualId.trim());
+            setManualId('');
+        }
+    };
+
     return (
         <div className="relative h-screen w-full bg-black overflow-hidden flex flex-col">
             {/* Header / Instructions */}
-            <div className="absolute top-20 left-0 right-0 z-20 flex flex-col items-center">
+            <div className="absolute top-20 left-0 right-0 z-20 flex flex-col items-center gap-4">
                 <div className="bg-[#52635B]/80 backdrop-blur-sm px-6 py-3 rounded-full">
                     <span className="text-white text-base font-medium">Dekatkan QR code</span>
                 </div>
+
+                <button
+                    onClick={() => {
+                        setIsScanning(false);
+                        setShowManualInput(true);
+                    }}
+                    className="flex items-center gap-2 bg-white/90 backdrop-blur-sm px-4 py-2 rounded-full text-[#012E34] font-bold shadow-lg active:scale-95 transition-all"
+                >
+                    <Keyboard size={20} />
+                    <span>Input ID Manual</span>
+                </button>
             </div>
 
             {/* Scanner Area */}
@@ -198,9 +220,48 @@ const PetugasScan = () => {
                 </div>
             )}
 
+            {/* Manual Input Modal */}
+            {showManualInput && (
+                <div className="fixed inset-0 z-50 flex items-center justify-center p-4 bg-black/50 backdrop-blur-sm animate-in fade-in duration-200">
+                    <div className="bg-white rounded-2xl w-full max-w-sm p-6 shadow-xl scale-100 transition-all">
+                        <div className="flex justify-between items-center mb-6">
+                            <h3 className="text-xl font-bold text-[#012E34]">Input ID User</h3>
+                            <button
+                                onClick={() => {
+                                    setShowManualInput(false);
+                                    setIsScanning(true);
+                                }}
+                                className="p-1 rounded-full hover:bg-gray-100"
+                            >
+                                <X size={24} className="text-gray-500" />
+                            </button>
+                        </div>
 
+                        <form onSubmit={handleManualSubmit}>
+                            <div className="mb-6">
+                                <label className="block text-sm font-medium text-gray-700 mb-2">ID Pengguna (UUID)</label>
+                                <input
+                                    type="text"
+                                    value={manualId}
+                                    onChange={(e) => setManualId(e.target.value)}
+                                    placeholder="Tempel atau ketik ID disini..."
+                                    className="w-full px-4 py-3 rounded-xl border border-gray-300 focus:ring-2 focus:ring-[#012E34] focus:border-transparent outline-none transition-all font-mono"
+                                    autoFocus
+                                />
+                                <p className="text-xs text-gray-500 mt-2">ID dapat dilihat di halaman profil user (dibawah QR code).</p>
+                            </div>
 
-            {/* Navbar */}
+                            <button
+                                type="submit"
+                                disabled={!manualId.trim()}
+                                className="w-full py-3.5 bg-[#012E34] hover:bg-[#012429] text-white rounded-xl font-bold shadow-lg active:scale-[0.98] transition-all disabled:opacity-50 disabled:cursor-not-allowed"
+                            >
+                                Cari User
+                            </button>
+                        </form>
+                    </div>
+                </div>
+            )}
             <div className="fixed bottom-5 left-1/2 -translate-x-1/2 w-[90%] max-w-[440px] bg-[#012E34] h-[60px] rounded-xl flex justify-around items-center px-4 text-white shadow-xl z-50">
                 <div onClick={() => navigate('/petugas-dashboard')} className="flex flex-col items-center gap-1 cursor-pointer">
                     <div className={`p-2 rounded-xl transition-all duration-300 relative`}>
