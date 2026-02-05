@@ -158,7 +158,8 @@ const VoucherKu = () => {
                                     <div className="flex-1 flex items-center justify-center w-full bg-[#012E34] relative z-10 py-2">
                                         <div className="bg-white p-3 rounded-xl w-64 h-64 flex items-center justify-center">
                                             <img
-                                                src={`${import.meta.env.VITE_API_BASE_URL}/public/storage/voucher_qr/users/${voucher.user_voucher_qr_path}`}
+                                                // src={`${import.meta.env.VITE_API_BASE_URL}/public/storage/voucher_qr/users/${voucher.user_voucher_qr_path}`}
+                                                src={`${import.meta.env.VITE_API_BASE_URL}/public/storage/${voucher.user_voucher_qr_path}`}
                                                 alt="QR Code"
                                                 className="w-full h-full object-contain"
                                             />

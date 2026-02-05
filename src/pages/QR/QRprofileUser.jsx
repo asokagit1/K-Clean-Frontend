@@ -41,14 +41,15 @@ const QRprofileUser = () => {
     const getQrUrl = (data) => {
         // Prefer transaction QR for operations, fall back to profile QR
         if (data?.transaction_qr_path) {
-            return `${import.meta.env.VITE_API_BASE_URL}/public/storage/trash_transaction_qr/users/${data.transaction_qr_path}`;
+            // return `${import.meta.env.VITE_API_BASE_URL}/public/storage/trash_transaction_qr/users/${data.transaction_qr_path}`;
+            return `${import.meta.env.VITE_API_BASE_URL}/public/storage/${data.transaction_qr_path}`;
         }
         return null;
     };
 
     return (
         <div className="min-h-screen bg-[#E8EBF2] flex justify-center font-sans overflow-hidden">
-            {/* Background decoration (Abstract curves simulation) */}
+            {/* Background decoration (Abstract curves simulation) */}  
             <div className="fixed inset-0 pointer-events-none z-0">
                 <div className="absolute top-[-10%] left-[-10%] w-[300px] h-[300px] rounded-full border-[40px] border-[#CED4E0]/50 transform rotate-45"></div>
                 <div className="absolute top-[20%] right-[-20%] w-[400px] h-[400px] rounded-full border-[60px] border-[#CED4E0]/50"></div>

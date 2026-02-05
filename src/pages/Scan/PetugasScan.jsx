@@ -46,14 +46,16 @@ const PetugasScan = () => {
                 html5QrCodeRef.current = new Html5Qrcode("reader");
 
                 const config = {
-                    fps: 10,
+                    fps: 5,
                     qrbox: { width: 250, height: 250 },
                     aspectRatio: window.innerWidth / window.innerHeight
                 };
 
                 try {
                     await html5QrCodeRef.current.start(
-                        { facingMode: "environment" },
+                        { facingMode: "environment",
+                            // focusMode: "continuous"
+                         },
                         config,
                         (decodedText) => {
                             handleScanSuccess(decodedText);
