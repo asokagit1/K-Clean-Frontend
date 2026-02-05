@@ -111,8 +111,10 @@ const QRprofileUser = () => {
                         {/* Display User ID for Manual Input */}
                         {userData && (
                             <div className="bg-gray-100 rounded-lg px-4 py-2 flex flex-col items-center">
-                                <span className="text-xs text-gray-500 font-medium">ID Pengguna</span>
-                                <span className="text-[#012E34] font-mono font-bold text-lg tracking-wider select-all">{userData.id}</span>
+                                <span className="text-xs text-gray-500 font-medium">ID Pengguna (UUID)</span>
+                                <span className="text-[#012E34] font-mono font-bold text-xs tracking-wider select-all break-all text-center max-w-[200px]">
+                                    {userData.uuid || userData.id}
+                                </span>
                             </div>
                         )}
 

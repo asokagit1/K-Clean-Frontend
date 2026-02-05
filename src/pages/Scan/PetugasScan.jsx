@@ -79,13 +79,18 @@ const PetugasScan = () => {
             if (timer) clearTimeout(timer);
             if (html5QrCodeRef.current) {
                 try {
-                    html5QrCodeRef.current.stop().then(() => {
+                    // Check if scanning before trying to stop
+                    if (html5QrCodeRef.current.isScanning) {
+                        html5QrCodeRef.current.stop().then(() => {
+                            html5QrCodeRef.current.clear();
+                        }).catch(err => {
+                            console.warn("Failed to stop scanner", err);
+                        });
+                    } else {
                         html5QrCodeRef.current.clear();
-                    }).catch(err => {
-                        console.error("Failed to stop scanner", err);
-                    });
+                    }
                 } catch (err) {
-                    console.error("Cleanup error", err);
+                    console.warn("Cleanup error", err);
                 }
             }
         };
