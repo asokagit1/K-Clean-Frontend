@@ -93,7 +93,14 @@ const PetugasScan = () => {
 
     const handleScanSuccess = async (decodedText) => {
         if (html5QrCodeRef.current) {
-            await html5QrCodeRef.current.stop();
+            try {
+                // Only stop if it's actually running to avoid errors when coming from manual input
+                if (html5QrCodeRef.current.isScanning) {
+                    await html5QrCodeRef.current.stop();
+                }
+            } catch (err) {
+                console.warn("Scanner stop error:", err);
+            }
         }
         setIsScanning(false);
 
