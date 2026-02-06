@@ -189,7 +189,7 @@ const PetugasScan = () => {
                 <style>
                     {`
                         #reader video {
-                            object-fit: cover !important;
+                            object-fit: fill !important;
                             width: 100% !important;
                             height: 100% !important;
                         }
