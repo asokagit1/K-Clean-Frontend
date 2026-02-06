@@ -39,9 +39,8 @@ const UmkmScan = () => {
             html5QrCodeRef.current = new Html5Qrcode("reader");
 
             const config = {
-                fps: 5,
-                qrbox: { width: 250, height: 250 },
-                aspectRatio: window.innerWidth / window.innerHeight
+                fps: 6,
+                qrbox: { width: 250, height: 250 }
             };
 
             try {
@@ -251,7 +250,7 @@ const UmkmScan = () => {
                 <style>
                     {`
                         #reader video {
-                            object-fit: fill !important;
+                            object-fit: cover !important;
                             width: 100% !important;
                             height: 100% !important;
                         }
