@@ -24,7 +24,7 @@ const ListVoucher = () => {
     }, []);
 
     const filteredVouchers = vouchers
-        .filter(v => v.title.toLowerCase().includes(searchTerm.toLowerCase()) && v.limit > 0)
+        .filter(v => v.title.toLowerCase().includes(searchTerm.toLowerCase()))
         .sort((a, b) => new Date(b.created_at) - new Date(a.created_at));
 
     const isActive = (v) => {
